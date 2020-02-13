@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-import { BaasicApp } from 'baasic-sdk-angular';
+// import { BaasicApp } from 'baasic-sdk-angular';
 
 import { LandingComponent } from './route-components/landing/landing.component';
 import { DashboardComponent } from './route-components/dashboard/dashboard.component';
@@ -35,10 +35,10 @@ import { WarningComponent } from './components/warning/warning.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    BaasicApp.forRoot('daily-report-app', {
-      apiRootUrl: "api.baasic.com",
-      apiVersion: "1.0.8.233"
-    })
+    // BaasicApp.forRoot('daily-report-app', {
+    //   apiRootUrl: "api.baasic.com",
+    //   apiVersion: "1.0.8.233"
+    // })
   ],
   providers: [],
   bootstrap: [AppComponent]
