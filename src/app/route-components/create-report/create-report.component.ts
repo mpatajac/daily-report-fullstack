@@ -6,6 +6,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./create-report.component.scss']
 })
 export class CreateReportComponent implements OnInit {
+  labels: string[] = [
+    "done",
+    "in progress",
+    "scheduled",
+    "problems"
+  ];
 
   constructor() { }
 

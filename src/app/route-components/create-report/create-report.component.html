@@ -1,4 +1,5 @@
-<!-- TODO: report components -->
+<h2>Name</h2>
+<input type="text">
 
-<app-report-element></app-report-element>
+<app-report-element *ngFor="let label of labels" [label]="label"></app-report-element>
 <app-warning></app-warning>
