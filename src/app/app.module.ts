@@ -35,7 +35,7 @@ import { WarningComponent } from './components/warning/warning.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    BaasicApp.forRoot('<daily-report-app>', {
+    BaasicApp.forRoot('daily-report-app', {
       apiRootUrl: "api.baasic.com",
       apiVersion: "1.0.8.233"
     })
