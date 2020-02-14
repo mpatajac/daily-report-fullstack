@@ -1,1 +1,27 @@
-<p>warning works!</p>
+<div [className]="'wrap'">
+	<p [className]="'warning-first'">
+		<span>Caution</span> - there are some fields you left empty
+	</p>
+
+	<div [className]="'horizontal-bar'"></div>
+
+	<p [className]="'warning-second'">
+		If you decide to continue, we will automatically fill them with "None"
+	</p>
+
+	<div [className]="'warning-checkbox'">
+		<input type="checkbox" name="dont-warn-again" id="dont-warn-again">
+		<label for="dont-warn-again">Don't warn me about this again</label>
+	</div>
+
+	<div [className]="'button-row'">
+		<button id="back-btn">
+			Back
+		</button>
+		<button id="cont-btn">
+			Continue
+		</button>
+	</div>
+</div>
+
+<div [className]="'shadow-bg'"></div>

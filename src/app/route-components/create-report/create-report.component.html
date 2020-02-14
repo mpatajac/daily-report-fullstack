@@ -1,5 +1,16 @@
-<h2>Name</h2>
-<input type="text">
+<div [className]="'report-wrapper'">
+	<div [className]="'name-input'">
+		<h2>
+			Name
+		</h2>
+		<div contenteditable="true"></div>
+	</div>
 
-<app-report-element *ngFor="let label of labels" [label]="label"></app-report-element>
-<app-warning></app-warning>
+	<app-report-element *ngFor="let label of labels" [label]="label"></app-report-element>
+
+	<button>
+		Submit report
+	</button>
+</div>
+
+<app-warning *ngIf="showWarning"></app-warning>

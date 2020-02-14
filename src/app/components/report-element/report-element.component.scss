@@ -1,21 +1,32 @@
+@import "src/styles";
+
+h2 {
+	margin-left: 5.5em;
+	margin-bottom: .1em;
+	font-size: 1.2em;
+}
+
 div {
-	border: 1px solid grey;
+	border: 1px solid $asbestos;
 	border-radius: 1em;
-	width: 30%;
-	height: auto;
-	margin-left: 1em;
+	background-color: $white;
+	width: 65%;
+	margin: 0 0 3em 5em;
+	overflow-x: auto;
 }
 
 ul {
 	padding: .5em 2em;
 	font-size: 1.2rem;
+	list-style-type: disc;
 }
 
 li {
 	margin: .5em 0;
-}
+	overflow-wrap: normal;
 
-h2 {
-	margin-left: 1.2em;
-	margin-bottom: -.05em;
+		&::marker {
+		background-color: $wetasphalt;
+		size: 2em;
+	}
 }

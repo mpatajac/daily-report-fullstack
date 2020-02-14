@@ -1,0 +1,32 @@
+@import "src/styles";
+
+.name-input {
+	margin: 5em 0 3em 5em;
+
+	h2 {
+		font-size: 1.2em;
+		margin-left: 1.3em;
+	}
+
+	div {
+		border: 1px solid $asbestos;
+		border-radius: .7em;
+		background-color: $white;
+		width: 62.5%;
+		height: 1em;
+		font-size: 1.2rem;
+		padding: .5em 2em;
+		overflow-x: auto;
+	}
+}
+
+button {
+	border: 1px solid $wetasphalt;
+	border-radius: 20px;
+	margin: 2em 0 7em 7em;
+	font-size: 1.2rem;
+	letter-spacing: .05em;
+	padding: .7em 1.5em;
+	background-color: $wetasphalt;
+	color: $white;
+}

@@ -1,0 +1,86 @@
+@import "src/styles";
+
+.wrap {
+	position: fixed;
+	z-index: 3;
+	left: 27vw;
+	top: 13vh;
+	width: 40vw;
+	height: 60vh;
+	border: 1px solid $white;
+	border-radius: 2em;
+	background-color: $white;
+	padding: 3em 3em;
+	text-align: center;
+
+	.warning-first {
+		font-size: 2.8rem;
+
+		span {
+			font-weight: bold;
+		}
+	}
+
+	.horizontal-bar {
+		margin: 1.5em 3em;
+		height: .2em;
+		background-color: $wetasphalt;
+	}
+
+	.warning-second {
+		font-size: 2.2rem;
+		padding: 0 2em;
+	}
+
+	.warning-checkbox {
+		margin: 2em 0 2em 0;
+		color: $asbestos;
+		font-size: 1.3rem;
+
+		* {
+			cursor: pointer;
+		}
+
+		label {
+			margin-left: .5em;
+		}
+
+		// TODO: add custom checkbox
+	}
+
+	button {
+		border: 3px solid $wetasphalt;
+		border-radius: 20px;
+		width: 7em;
+		padding: .5em 1em;
+		font-size: 1.7rem;
+		font-family: 'Aleo', serif;
+		letter-spacing: .03em;
+		cursor: pointer;
+	}
+
+	.button-row {
+		display: flex;
+		justify-content: space-around;
+	}
+
+	#back-btn {
+		background-color: white;
+		color: $wetasphalt;
+	}
+
+	#cont-btn {
+		background-color: $wetasphalt;
+		color: $white;
+	}
+}
+
+.shadow-bg {
+	position: fixed;
+	z-index: 2;
+	left: 0;
+	top: 0;
+	height: 100vh;
+	width: 100vw;
+	background-color: rgba(0, 0, 0, 0.7);
+}
