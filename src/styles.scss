@@ -1,1 +1,22 @@
-/* You can add global styles to this file, and also import other style files */
+// colors
+$white: #fafafa;
+$clouds: #ecf0f1;
+$wetasphalt: #34495e;
+$asbestos: #7f8c8d;
+$orange: #ffa500;
+$baasic: #00C2E8;
+$mono: #EB544E;
+
+// font
+@import url('https://fonts.googleapis.com/css?family=Aleo:400,700&display=swap&subset=latin-ext');
+
+// style
+body {
+	background-color: $clouds;
+	font-family: 'Aleo', serif;
+	color: $wetasphalt;
+}
+
+a {
+	text-decoration: none;
+}
