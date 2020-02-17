@@ -1,0 +1,60 @@
+@import "src/styles";
+
+.header-wrapper {
+	width: 100vw;
+	height: 10vh;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	background-color: $wetasphalt;
+
+	h1 {
+		color: $white;
+		font-size: 2.3em;
+		letter-spacing: .05em;
+	}
+
+	.header-menu {
+		background: url("../../../assets/img/dashboard/menu.svg") $asbestos;
+		background-size: 60% 75%;
+		background-repeat: no-repeat;
+		background-position: center;
+		height: 3em;
+		width: 3em;
+		border: none;
+		border-radius: .7em;
+		margin-left: 3em;
+	}
+
+	.header-new {
+		background-color: $asbestos;
+		color: $white;
+		height: 1.4em;
+		width: 1.4em;
+		border: none;
+		border-radius: 3em;
+		margin-right: 1.5em;
+		font-size: 2rem;
+	}
+}
+
+@media (max-width: 500px) {
+	.header-wrapper {
+		h1 {
+			font-size: 1.8rem;
+		}
+
+		.header-menu {
+			margin-left: 2em;
+			height: 2.75em;
+			width: 2.75em;
+		}
+
+		.header-new {
+			margin-right: 1em;
+			height: 1.2em;
+			width: 1.2em;
+		}
+	}
+}
