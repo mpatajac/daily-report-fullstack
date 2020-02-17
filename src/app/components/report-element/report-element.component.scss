@@ -1,7 +1,7 @@
 @import "src/styles";
 
 h2 {
-	margin-left: 5.5em;
+	margin-left: 1em;
 	margin-bottom: .1em;
 	font-size: 1.2em;
 }
@@ -10,15 +10,20 @@ div {
 	border: 1px solid $asbestos;
 	border-radius: 1em;
 	background-color: $white;
-	width: 65%;
-	margin: 0 0 3em 5em;
+	box-sizing: border-box;
+	margin-bottom: 3em;
 	overflow-x: auto;
+
+	&:focus-within {
+		border: 3px solid $wetasphalt;
+	}
 }
 
 ul {
 	padding: .5em 2em;
 	font-size: 1.2rem;
 	list-style-type: disc;
+	line-height: 1.2em;
 }
 
 li {

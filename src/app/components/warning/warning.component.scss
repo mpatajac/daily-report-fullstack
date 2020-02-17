@@ -74,13 +74,3 @@
 		color: $white;
 	}
 }
-
-.shadow-bg {
-	position: fixed;
-	z-index: 2;
-	left: 0;
-	top: 0;
-	height: 100vh;
-	width: 100vw;
-	background-color: rgba(0, 0, 0, 0.7);
-}
