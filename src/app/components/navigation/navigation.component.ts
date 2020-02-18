@@ -6,6 +6,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./navigation.component.scss']
 })
 export class NavigationComponent implements OnInit {
+  // TODO: get user from base
+  user = {
+    name: "matija"
+  }
 
   constructor() { }
 

@@ -1,1 +1,34 @@
-<p>navigation works!</p>
+<div [className]="'navigation-wrapper'">
+	<div [className]="'navigation-top'">
+		<div id="navigation-username" [className]="'field'">
+			<img src="../../../assets/img/dashboard/username.svg">
+			<span>{{user.name}}</span>
+		</div>
+	</div>
+
+	<div [className]="'navigation-horizontal-bar'"></div>
+
+	<div [className]="'navigation-middle'">
+		<div id="navigation-home" [className]="'field'">
+			<img src="../../../assets/img/dashboard/home.svg">
+			<span>Home</span>
+		</div>
+		<div id="navigation-theme" [className]="'field'">
+			<img src="../../../assets/img/dashboard/theme.svg">
+			<span>Switch theme</span>
+		</div>
+		<div id="navigation-password" [className]="'field'">
+			<img src="../../../assets/img/dashboard/pass-reset.svg">
+			<span>Reset password</span>
+		</div>
+	</div>
+
+	<div [className]="'navigation-horizontal-bar'"></div>
+
+	<div [className]="'navigation-bottom'">
+		<div id="navigation-logout" [className]="'field'">
+			<img src="../../../assets/img/dashboard/logout.svg">
+			<span>Logout</span>
+		</div>
+	</div>
+</div>

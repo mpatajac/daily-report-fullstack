@@ -1,0 +1,56 @@
+@import "src/styles.scss";
+
+.navigation-wrapper {
+	background-color: $asbestos;
+	color: $white;
+	position: fixed;
+	height: 100%;
+	width: 25vw;
+	max-width: 400px;
+	font-size: 1.6rem;
+	padding: 1em 1.5em 0;
+
+	.navigation-horizontal-bar {
+		width: 110%;
+		height: 2px;
+		background-color: $white;
+		border: none;
+		border-radius: .1em;
+		margin: .5em 0 .5em -.5em;
+	}
+
+	.field {
+		display: inline-flex;
+		align-items: center;
+		margin: 1.1em 0;
+		height: 1.05em;
+		width: 10em;
+		cursor: pointer;
+	}
+
+	img {
+		margin-right: .7em;
+		height: 100%;
+		width: 15%;
+	}
+
+	#navigation-logout {
+		position: absolute;
+		bottom: 10%;
+	}
+
+}
+
+@media (max-width: 1250px) {
+	.navigation-wrapper {
+		max-width: initial;
+		width: 50vw;
+	}
+}
+
+@media (max-width: 650px) {
+	.navigation-wrapper {
+		max-width: initial;
+		width: 100%;
+	}
+}
