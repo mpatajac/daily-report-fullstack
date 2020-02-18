@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MessengerService } from '../../common/services/messenger.service';
 
 @Component({
   selector: 'app-navigation',
@@ -11,7 +12,7 @@ export class NavigationComponent implements OnInit {
     name: "matija"
   }
 
-  constructor() { }
+  constructor(private messenger: MessengerService) { }
 
   ngOnInit() {
   }
