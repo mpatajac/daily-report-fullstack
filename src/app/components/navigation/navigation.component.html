@@ -1,3 +1,4 @@
+<!-- TODO: add animation to show/hide -->
 <div [className]="'navigation-wrapper'" *ngIf="this.messenger.showNavigation">
 	<div [className]="'navigation-top'">
 		<div id="navigation-username" [className]="'field'">
@@ -17,7 +18,7 @@
 			<img src="../../../assets/img/dashboard/theme.svg">
 			<span>Switch theme</span>
 		</div>
-		<div id="navigation-password" [className]="'field clickable'">
+		<div id="navigation-password" [className]="'field clickable'" routerLink="/app/passreset">
 			<img src="../../../assets/img/dashboard/pass-reset.svg">
 			<span>Reset password</span>
 		</div>
