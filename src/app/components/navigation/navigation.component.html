@@ -10,7 +10,7 @@
 	<div [className]="'navigation-horizontal-bar'"></div>
 
 	<div [className]="'navigation-middle'">
-		<div id="navigation-home" [className]="'field clickable'">
+		<div id="navigation-home" [className]="'field clickable'" (click)="hideNavigation()">
 			<img src="../../../assets/img/dashboard/home.svg">
 			<span>Home</span>
 		</div>
@@ -18,7 +18,8 @@
 			<img src="../../../assets/img/dashboard/theme.svg">
 			<span>Switch theme</span>
 		</div>
-		<div id="navigation-password" [className]="'field clickable'" routerLink="/app/passreset">
+		<div id="navigation-password" [className]="'field clickable'" routerLink="/app/passreset"
+			(click)="hideNavigation()">
 			<img src="../../../assets/img/dashboard/pass-reset.svg">
 			<span>Reset password</span>
 		</div>
@@ -27,7 +28,7 @@
 	<div [className]="'navigation-horizontal-bar'"></div>
 
 	<div [className]="'navigation-bottom'">
-		<div id="navigation-logout" [className]="'field clickable'">
+		<div id="navigation-logout" [className]="'field clickable'" routerLink="/login">
 			<img src="../../../assets/img/dashboard/logout.svg">
 			<span>Logout</span>
 		</div>

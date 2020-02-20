@@ -2,7 +2,7 @@
 	<button [className]="'header-menu'" (click)="switchNavigationVisibility()"></button>
 	<h1>Daily Report</h1>
 	<button [className]="'header-new'" data-toggle="tooltip" data-placement="bottom" title="Create new report"
-		routerLink="/app/new">
+		routerLink="/app/new" (click)="hideNavigation()">
 		+
 	</button>
 </div>

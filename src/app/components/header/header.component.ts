@@ -17,4 +17,8 @@ export class HeaderComponent implements OnInit {
     this.messenger.showNavigation = !this.messenger.showNavigation;
   }
 
+  hideNavigation() {
+    this.messenger.showNavigation = false;
+  }
+
 }

@@ -7,7 +7,9 @@ import { CreateReportComponent } from './route-components/create-report/create-r
 import { PasswordResetComponent } from './route-components/password-reset/password-reset.component';
 
 const routes: Routes = [
-  { path: '', component: LoginComponent },
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: 'login', component: LoginComponent },
+  { path: 'app', redirectTo: '/app/dashboard', pathMatch: 'full' },
   { path: 'app/dashboard', component: DashboardComponent },
   { path: 'app/dashboard/:page', component: DashboardComponent },
   { path: 'app/new', component: CreateReportComponent },
