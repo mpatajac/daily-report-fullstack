@@ -2,7 +2,7 @@
 
 .report-wrapper {
 	margin: 5em 0 0 5em;
-	width: 60%;
+	width: 80%;
 }
 
 .name-input {
@@ -24,7 +24,7 @@
 		overflow-x: auto;
 
 		&:focus {
-			border: 3px solid $wetasphalt;
+			border: 2px solid $wetasphalt;
 			outline: none;
 		}
 	}
@@ -54,7 +54,13 @@ button {
 
 @media (max-width: 450px) {
 	.report-wrapper {
-		margin-left: 3em;
+		margin-left: 2em;
 		margin-top: 3em;
+	}
+}
+
+@media (min-width: 1100px) {
+	.report-wrapper {
+		margin-left: 7em;
 	}
 }
