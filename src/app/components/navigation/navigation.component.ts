@@ -16,9 +16,4 @@ export class NavigationComponent implements OnInit {
 
   ngOnInit() {
   }
-
-  hideNavigation() {
-    this.messenger.showNavigation = false;
-  }
-
 }

@@ -1,5 +1,7 @@
 <!-- TODO: add animation to show/hide -->
 <div [className]="'navigation-wrapper'" *ngIf="this.messenger.showNavigation">
+	<div [className]="'navigation-background-shadow'" (click)="this.messenger.hideNavigation()"></div>
+
 	<div [className]="'navigation-top'">
 		<div id="navigation-username" [className]="'field'">
 			<img src="../../../assets/img/dashboard/username.svg">
@@ -10,7 +12,7 @@
 	<div [className]="'navigation-horizontal-bar'"></div>
 
 	<div [className]="'navigation-middle'">
-		<div id="navigation-home" [className]="'field clickable'" (click)="hideNavigation()">
+		<div id="navigation-home" [className]="'field clickable'" (click)="this.messenger.hideNavigation()">
 			<img src="../../../assets/img/dashboard/home.svg">
 			<span>Home</span>
 		</div>
@@ -19,7 +21,7 @@
 			<span>Switch theme</span>
 		</div>
 		<div id="navigation-password" [className]="'field clickable'" routerLink="/app/passreset"
-			(click)="hideNavigation()">
+			(click)="this.messenger.hideNavigation()">
 			<img src="../../../assets/img/dashboard/pass-reset.svg">
 			<span>Reset password</span>
 		</div>
@@ -28,7 +30,8 @@
 	<div [className]="'navigation-horizontal-bar'"></div>
 
 	<div [className]="'navigation-bottom'">
-		<div id="navigation-logout" [className]="'field clickable'" routerLink="/login">
+		<div id="navigation-logout" [className]="'field clickable'" routerLink="/login"
+			(click)="this.messenger.hideNavigation()">
 			<img src="../../../assets/img/dashboard/logout.svg">
 			<span>Logout</span>
 		</div>

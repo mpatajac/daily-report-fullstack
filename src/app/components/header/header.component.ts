@@ -12,13 +12,4 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit() {
   }
-
-  switchNavigationVisibility() {
-    this.messenger.showNavigation = !this.messenger.showNavigation;
-  }
-
-  hideNavigation() {
-    this.messenger.showNavigation = false;
-  }
-
 }

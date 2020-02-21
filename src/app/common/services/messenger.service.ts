@@ -7,4 +7,12 @@ export class MessengerService {
   showNavigation: boolean = false;
 
   constructor() { }
+
+  hideNavigation() {
+    this.showNavigation = false;
+  }
+
+  switchNavigationVisibility() {
+    this.showNavigation = !this.showNavigation;
+  }
 }
