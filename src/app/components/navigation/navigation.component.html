@@ -1,39 +1,41 @@
-<!-- TODO: add animation to show/hide -->
 <div [className]="'navigation-wrapper'" *ngIf="this.messenger.showNavigation">
 	<div [className]="'navigation-background-shadow'" (click)="this.messenger.hideNavigation()"></div>
 
-	<div [className]="'navigation-top'">
-		<div id="navigation-username" [className]="'field'">
-			<img src="../../../assets/img/dashboard/username.svg">
-			<span>{{user.name}}</span>
+	<!-- TODO: add animation to show/hide -->
+	<div [className]="'navigation-sidepanel'">
+		<div [className]="'navigation-top'">
+			<div id="navigation-username" [className]="'field'">
+				<img src="../../../assets/img/dashboard/username.svg">
+				<span>{{user.name}}</span>
+			</div>
 		</div>
-	</div>
 
-	<div [className]="'navigation-horizontal-bar'"></div>
+		<div [className]="'navigation-horizontal-bar'"></div>
 
-	<div [className]="'navigation-middle'">
-		<div id="navigation-home" [className]="'field clickable'" (click)="this.messenger.hideNavigation()">
-			<img src="../../../assets/img/dashboard/home.svg">
-			<span>Home</span>
+		<div [className]="'navigation-middle'">
+			<div id="navigation-home" [className]="'field clickable'" (click)="this.messenger.hideNavigation()">
+				<img src="../../../assets/img/dashboard/home.svg">
+				<span>Home</span>
+			</div>
+			<div id="navigation-theme" [className]="'field clickable'">
+				<img src="../../../assets/img/dashboard/theme.svg">
+				<span>Switch theme</span>
+			</div>
+			<div id="navigation-password" [className]="'field clickable'" routerLink="/app/passreset"
+				(click)="this.messenger.hideNavigation()">
+				<img src="../../../assets/img/dashboard/pass-reset.svg">
+				<span>Reset password</span>
+			</div>
 		</div>
-		<div id="navigation-theme" [className]="'field clickable'">
-			<img src="../../../assets/img/dashboard/theme.svg">
-			<span>Switch theme</span>
-		</div>
-		<div id="navigation-password" [className]="'field clickable'" routerLink="/app/passreset"
-			(click)="this.messenger.hideNavigation()">
-			<img src="../../../assets/img/dashboard/pass-reset.svg">
-			<span>Reset password</span>
-		</div>
-	</div>
 
-	<div [className]="'navigation-horizontal-bar'"></div>
+		<div [className]="'navigation-horizontal-bar'"></div>
 
-	<div [className]="'navigation-bottom'">
-		<div id="navigation-logout" [className]="'field clickable'" routerLink="/login"
-			(click)="this.messenger.hideNavigation()">
-			<img src="../../../assets/img/dashboard/logout.svg">
-			<span>Logout</span>
+		<div [className]="'navigation-bottom'">
+			<div id="navigation-logout" [className]="'field clickable'" routerLink="/login"
+				(click)="this.messenger.hideNavigation()">
+				<img src="../../../assets/img/dashboard/logout.svg">
+				<span>Logout</span>
+			</div>
 		</div>
 	</div>
 </div>

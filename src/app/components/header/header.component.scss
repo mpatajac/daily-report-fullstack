@@ -10,6 +10,7 @@
 	align-items: center;
 	background-color: $wetasphalt;
 	box-shadow: 0 .2em .2em rgba(0, 0, 0, 0.3);
+	z-index: 5;
 
 	h1 {
 		color: $white;
