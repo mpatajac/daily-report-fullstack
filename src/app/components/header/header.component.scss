@@ -3,11 +3,13 @@
 .header-wrapper {
 	width: 100vw;
 	height: 10vh;
+	position: fixed;
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
 	align-items: center;
 	background-color: $wetasphalt;
+	box-shadow: 0 .2em .2em rgba(0, 0, 0, 0.3);
 
 	h1 {
 		color: $white;
