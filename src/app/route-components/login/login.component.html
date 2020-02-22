@@ -1,1 +1,14 @@
-<button routerLink="/app/dashboard">Login</button>
+<div [className]="'login-body'">
+	<div [className]="'login-img'"></div>
+
+	<div [className]="'login-wrapper'">
+		<h1>Login</h1>
+		<form>
+			<label for="login-username">Username</label>
+			<input type="text" id="login-username">
+			<label for="login-password">Password</label>
+			<input type="password" id="login-password">
+		</form>
+		<button routerLink="/app/dashboard">Login</button>
+	</div>
+</div>
