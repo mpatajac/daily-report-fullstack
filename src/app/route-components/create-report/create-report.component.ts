@@ -13,8 +13,6 @@ export class CreateReportComponent implements OnInit {
     "problems"
   ];
 
-  showWarning: boolean = false;
-
   constructor() { }
 
   ngOnInit() {
