@@ -14,6 +14,7 @@
 
 			<div [className]="'warning-checkbox'">
 				<input type="checkbox" name="dont-warn-again" id="dont-warn-again">
+				<div [className]="'checkbox-box'"></div>
 				<label for="dont-warn-again">Don't warn me about this again</label>
 			</div>
 
@@ -21,7 +22,7 @@
 				<button id="back-btn" data-dismiss="modal">
 					Back
 				</button>
-				<button id="cont-btn">
+				<button id="cont-btn" data-dismiss="modal" routerLink="/app/dashboard">
 					Continue
 				</button>
 			</div>

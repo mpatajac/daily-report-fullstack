@@ -28,9 +28,21 @@
 }
 
 .warning-checkbox {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
 	margin: 1.5em 0;
 	color: $asbestos;
 	font-size: 1.7rem;
+
+	&:hover input ~ .checkbox-box {
+		background-color: rgba(0, 0, 0, .1);
+	}
+
+	input:checked ~ .checkbox-box {
+		background: $asbestos url(../../../assets/img/check.svg) 3px 3px no-repeat;
+		background-size: .5em;
+	}
 
 	* {
 		cursor: pointer;
@@ -40,7 +52,20 @@
 		margin-left: .5em;
 	}
 
-	// TODO: add custom checkbox
+	input[type="checkbox"] {
+		opacity: 0;
+		height: 0;
+		width: 0;
+	}
+
+	.checkbox-box {
+		width: 23px;
+		height: 23px;
+		border: 2px solid $asbestos;
+		border-radius: 3px;
+		box-shadow: .1em .1em .1em rgba(0, 0, 0, .3);
+		margin: .15em 0 0 0;
+	}
 }
 
 button {
@@ -90,11 +115,22 @@ button {
 
 	.warning-checkbox {
 		font-size: 1.2rem;
+
+		.checkbox-box {
+			width: 17px;
+			height: 17px;
+			margin-top: .1em;
+		}
+	}
+
+	input[type="checkbox"]:checked ~ .checkbox-box {
+		background-position: 1px 1px;
 	}
 
 	button {
 		font-size: 1.2rem;
 		border-width: 2px;
+		border-radius: 15px;
 	}
 }
 
@@ -114,6 +150,17 @@ button {
 
 	.warning-checkbox {
 		font-size: 1rem;
+
+		.checkbox-box {
+			width: 13px;
+			height: 13px;
+			margin-top: .08em;
+		}
+	}
+
+	input[type="checkbox"]:checked ~ .checkbox-box {
+		background-position: initial;
+		background-size: cover;
 	}
 
 	button {
