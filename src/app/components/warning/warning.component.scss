@@ -1,76 +1,123 @@
 @import "src/styles";
 
-.wrap {
-	position: fixed;
-	z-index: 3;
-	left: 27vw;
-	top: 13vh;
-	width: 40vw;
-	height: 60vh;
-	border: 1px solid $white;
-	border-radius: 2em;
-	background-color: $white;
-	padding: 3em 3em;
+.modal-content {
+	border-radius: 3em;
 	text-align: center;
+	padding: 3.5em 5em;
+	line-height: 1.2;
+}
 
-	.warning-first {
-		font-size: 2.8rem;
+.warning-first {
+	font-size: 3rem;
+	margin-bottom: 0;
 
-		span {
-			font-weight: bold;
-		}
+	span {
+		font-weight: bold;
 	}
+}
 
-	.horizontal-bar {
-		margin: 1.5em 3em;
-		height: .2em;
-		background-color: $wetasphalt;
-	}
+.horizontal-bar {
+	margin: 1.5em 3em;
+	height: .2em;
+	background-color: $wetasphalt;
+}
 
-	.warning-second {
-		font-size: 2.2rem;
-		padding: 0 2em;
-	}
+.warning-second {
+	font-size: 2.5rem;
+	padding: 0 2em;
+}
 
-	.warning-checkbox {
-		margin: 2em 0 2em 0;
-		color: $asbestos;
-		font-size: 1.3rem;
+.warning-checkbox {
+	margin: 1.5em 0;
+	color: $asbestos;
+	font-size: 1.7rem;
 
-		* {
-			cursor: pointer;
-		}
-
-		label {
-			margin-left: .5em;
-		}
-
-		// TODO: add custom checkbox
-	}
-
-	button {
-		border: 3px solid $wetasphalt;
-		border-radius: 20px;
-		width: 7em;
-		padding: .5em 1em;
-		font-size: 1.7rem;
-		font-family: 'Aleo', serif;
-		letter-spacing: .03em;
+	* {
 		cursor: pointer;
 	}
 
-	.button-row {
-		display: flex;
-		justify-content: space-around;
+	label {
+		margin-left: .5em;
 	}
 
-	#back-btn {
-		background-color: white;
-		color: $wetasphalt;
+	// TODO: add custom checkbox
+}
+
+button {
+	border: 3px solid $wetasphalt;
+	border-radius: 20px;
+	width: 7em;
+	padding: .5em 1em;
+	font-size: 1.7rem;
+	font-family: 'Aleo', serif;
+	letter-spacing: .03em;
+	cursor: pointer;
+}
+
+.button-row {
+	display: flex;
+	justify-content: space-around;
+}
+
+#back-btn {
+	background-color: white;
+	color: $wetasphalt;
+}
+
+#cont-btn {
+	background-color: $wetasphalt;
+	color: $white;
+}
+
+@media (max-width: 990px) {
+	.modal-content {
+		padding: 3em;
+
+		* {
+			margin-left: 0;
+			margin-right: 0;
+			padding-left: 0;
+			padding-right: 0;
+		}
+	}
+	.warning-first {
+		font-size: 2rem;
 	}
 
-	#cont-btn {
-		background-color: $wetasphalt;
-		color: $white;
+	.warning-second {
+		font-size: 1.5rem;
+	}
+
+	.warning-checkbox {
+		font-size: 1.2rem;
+	}
+
+	button {
+		font-size: 1.2rem;
+		border-width: 2px;
+	}
+}
+
+@media (max-width: 500px) {
+	.modal-content {
+		border-radius: 2em;
+		padding: 2em;
+	}
+
+	.warning-first {
+		font-size: 1.8rem;
+	}
+
+	.warning-second {
+		font-size: 1.3rem;
+	}
+
+	.warning-checkbox {
+		font-size: 1rem;
+	}
+
+	button {
+		font-size: 1rem;
+		border-width: 1px;
 	}
 }
