@@ -1,1 +1,7 @@
-<p>reports-table works!</p>
+<div [className]="'dashboard-no-reports container jumbotron'" *ngIf="this.reports.length === 0">
+	<h2>There are no reports to display.</h2>
+	<h4>Try adjusting your filters or create a new report by pressing the '+' button in the top-right corner.</h4>
+</div>
+<div *ngIf="this.reports.length > 0">
+	<p>There are some reports.</p>
+</div>

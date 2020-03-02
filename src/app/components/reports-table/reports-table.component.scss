@@ -1,0 +1,19 @@
+@import "src/styles";
+
+.dashboard-no-reports {
+	margin-top: 200px;
+	max-width: 650px;
+	text-align: center;
+	letter-spacing: .03em;
+	opacity: .75;
+	border-radius: 1em;
+
+	h2 {
+		margin-bottom: .75em;
+	}
+
+	h4 {
+		color: $asbestos;
+		line-height: 1.2em;
+	}
+}
