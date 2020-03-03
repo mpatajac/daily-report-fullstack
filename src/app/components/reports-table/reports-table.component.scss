@@ -17,3 +17,73 @@
 		line-height: 1.2em;
 	}
 }
+
+.dashboard-table {
+	display: block;
+	margin: 0 auto;
+	margin-top: 200px;
+	width: 90vw;
+
+	.table-bg {
+		padding: 2px;
+		background-color: $white;
+		border-radius: 1em;
+	}
+
+	table {
+		width: 100%;
+		background-color: white;
+		border-radius: 1em;
+
+		thead {
+			box-shadow: 0 .2em rgba(0, 0, 0, .2);
+
+			td {
+				font-size: 2rem;
+				padding: .2em;
+				position: relative;
+				transition: all 0.2s ease-in-out;
+
+				&:first-child {
+					padding-left: 2rem;
+				}
+
+			}
+
+			img {
+				width: 1.5em;
+				height: 1.5em;
+			}
+		}
+
+		tbody tr {
+			box-shadow: 0 .1em rgba(0, 0, 0, .2);
+			&:last-child {
+				box-shadow: none;
+			}
+
+			td {
+				font-size: 1.5rem;
+				padding: 1em .2em;
+
+				&:first-child {
+					padding-left: 2rem;
+				}
+			}
+
+			img {
+				width: 1.5em;
+				height: 1.5em;
+				margin-left: .25em;
+			}
+
+			&:hover {
+				background-color: $wetasphalt;
+				color: $white;
+				cursor: pointer;
+			}
+		}
+
+
+	}
+}

@@ -2,6 +2,26 @@
 	<h2>There are no reports to display.</h2>
 	<h4>Try adjusting your filters or create a new report by pressing the '+' button in the top-right corner.</h4>
 </div>
-<div *ngIf="this.reports.length > 0">
-	<p>There are some reports.</p>
+
+<div [className]="'dashboard-table container'" *ngIf="this.reports.length > 0">
+	<div [className]="'table-bg'">
+		<table>
+			<thead>
+				<tr>
+					<td>Name</td>
+					<td>User</td>
+					<td>Date</td>
+					<td><img src="../../../assets/img/dashboard/problem-header.svg"></td>
+				</tr>
+			</thead>
+			<tbody>
+				<tr *ngFor="let report of reports">
+					<td>{{report.name}}</td>
+					<td>{{report.user.name}}</td>
+					<td>{{report.date | date}}</td>
+					<td><img src="../../../assets/img/dashboard/problem.svg" *ngIf="report.problems.length > 0"></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
 </div>
