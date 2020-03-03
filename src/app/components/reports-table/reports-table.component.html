@@ -3,7 +3,38 @@
 	<h4>Try adjusting your filters or create a new report by pressing the '+' button in the top-right corner.</h4>
 </div>
 
-<div [className]="'dashboard-table container'" *ngIf="this.reports.length > 0">
+<div [className]="'dashboard-table'" *ngIf="this.reports.length > 0">
+	<div [className]="'dashboard-saf'">
+		<div [className]="'dashboard-saf-top'">
+			<input type="text" placeholder="Search ...">
+
+			<button data-toggle="tooltip" data-placenemt="top" title="Filter"
+				(click)="this.showSearchAndFilterFields = !this.showSearchAndFilterFields">
+				<img src="../../../assets/img/dashboard/filter.svg">
+			</button>
+		</div>
+
+		<div [className]="'dashboard-saf-bottom'" *ngIf="this.showSearchAndFilterFields">
+			<input type="text" placeholder="filter by report name">
+			<input type="text" placeholder="filter by user">
+			<div [className]="'dashboard-filter-date'">
+				<input type="date" id="start-date">
+				<input type="date" id="end-date">
+			</div>
+			<div [className]="dropdown">
+				<button [className]="'dropdown-toggle'" data-toggle="dropdown">Problems?</button>
+				<div [className]="'dropdown-menu'">
+					<a [className]="'dropdown-item'">With problems</a>
+					<div [className]="'dropdown-divider'"></div>
+					<a [className]="'dropdown-item'">Without problems</a>
+					<div [className]="'dropdown-divider'"></div>
+					<a [className]="'dropdown-item'">All</a>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
 	<div [className]="'table-bg'">
 		<table>
 			<thead>
