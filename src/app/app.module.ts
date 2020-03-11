@@ -25,6 +25,7 @@ import { WarningComponent } from './components/warning/warning.component';
     AppComponent,
     LoginComponent,
     DashboardComponent,
+    DisplayReportComponent,
     CreateReportComponent,
     PasswordResetComponent,
     NotFoundComponent,
@@ -32,8 +33,7 @@ import { WarningComponent } from './components/warning/warning.component';
     NavigationComponent,
     ReportsTableComponent,
     ReportElementComponent,
-    WarningComponent,
-    DisplayReportComponent
+    WarningComponent
   ],
   imports: [
     BrowserModule,

@@ -1,1 +1,43 @@
-<p>display-report works!</p>
+<button data-toggle="tooltip" data-placement="bottom" title="Go back" routerLink="/app/dashboard">&lt;</button>
+
+<div [className]="'display-report-wrapper container'">
+	<h1>{{report.name}}</h1>
+	<div [className]="'display-report-row'">
+		<h2>User:</h2>
+		<h3>{{report.user.name}}</h3>
+	</div>
+	<div [className]="'display-report-border'"></div>
+	<div [className]="'display-report-row'">
+		<h2>Date:</h2>
+		<h3>{{date || date}}</h3> 
+	</div>
+	<div [className]="'display-report-border'"></div>
+	<div [className]="'display-report-row report-element'">
+		<h2>Done:</h2>
+		<ul>
+			<li *ngFor="let done of report.done">{{done}}</li>
+		</ul>
+	</div>
+	<div [className]="'display-report-border'"></div>
+	<div [className]="'display-report-row report-element'">
+		<h2>In progress:</h2>
+		<ul>
+			<li *ngFor="let inProgress of report.inProgress">{{inProgress}}</li>
+		</ul>
+	</div>
+	<div [className]="'display-report-border'"></div>
+	<div [className]="'display-report-row report-element'">
+		<h2>Scheduled:</h2>
+		<ul>
+			<li *ngFor="let scheduled of report.scheduled">{{scheduled}}</li>
+		</ul>
+	</div>
+	<div [className]="'display-report-border'"></div>
+	<div [className]="'display-report-row report-element'">
+		<h2>Problems:</h2>
+		<h3 *ngIf="report.problems.length === 0">No problems</h3>
+		<ul *ngIf="report.problems.length > 0">
+			<li *ngFor="let problems of report.problems">{{problems}}</li>
+		</ul>
+	</div>
+</div>

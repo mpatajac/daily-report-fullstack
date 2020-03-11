@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { LoginComponent } from './route-components/login/login.component';
 import { DashboardComponent } from './route-components/dashboard/dashboard.component';
+import { DisplayReportComponent } from './route-components/display-report/display-report.component';
 import { CreateReportComponent } from './route-components/create-report/create-report.component';
 import { PasswordResetComponent } from './route-components/password-reset/password-reset.component';
 import { NotFoundComponent } from './route-components/not-found/not-found.component';
@@ -13,6 +14,7 @@ const routes: Routes = [
   { path: 'app', redirectTo: '/app/dashboard', pathMatch: 'full' },
   { path: 'app/dashboard', component: DashboardComponent },
   { path: 'app/dashboard/:page', component: DashboardComponent },
+  { path: 'app/report', component: DisplayReportComponent },
   { path: 'app/new', component: CreateReportComponent },
   { path: 'app/passreset', component: PasswordResetComponent },
   { path: '**', component: NotFoundComponent },
