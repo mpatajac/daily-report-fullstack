@@ -41,6 +41,7 @@ button {
 	letter-spacing: .05em;
 	background-color: $wetasphalt;
 	color: $white;
+	@include button_hover;
 }
 
 .shadow-bg {

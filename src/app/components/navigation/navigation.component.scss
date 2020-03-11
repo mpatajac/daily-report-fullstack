@@ -37,6 +37,11 @@
 
 	.clickable {
 		cursor: pointer;
+		transition: transform .2s;
+
+		&:hover {
+			transform: translateX(10px) scaleX(1.1);
+		}
 	}
 
 	img {

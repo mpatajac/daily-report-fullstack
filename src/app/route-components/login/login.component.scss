@@ -74,6 +74,7 @@ $login-width: 100% - $img-width;
 		border-radius: .5em;
 		font-size: 1.5rem;
 		padding: .5em 1.3em;
+		@include button-hover;
 	}
 }
 
