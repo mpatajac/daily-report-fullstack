@@ -208,13 +208,72 @@
 	}
 }
 
-// TODO: fix media queries
-@media (max-width: 1100px) {
-	.dashboard-saf {
-		height: auto;
-	}
 
-	.dashboard-saf-bottom {
-		flex-direction: column;
+@media (max-width: 1100px) {
+	.dashboard-table {
+		.dashboard-saf {
+			.dashboard-saf-bottom {
+				flex-direction: column;
+				margin-bottom: 0;
+				height: auto;
+
+				* {
+					width: 100%;
+					padding: .5em 0;
+				}
+
+				input[type="text"], .dropdown-toggle {
+					margin: .5em 0;
+				}
+
+				input[type="date"] {
+					margin: 0;
+					background-position: 1em;
+					padding-left: 3.5em;
+
+					&#start-date {
+						margin-right: .25em;
+					}
+
+					&#end-date {
+						margin-left: .25em;
+					}
+				}
+			}
+		}
+	}
+}
+
+
+@media(max-width: 768px) {
+	.dashboard-table table {
+		thead td {
+			font-size: 1.75rem;
+		}
+
+		tbody tr td {
+			font-size: 1.25rem;
+		}
+	}
+}
+
+
+@media(max-width: 576px) {
+	.dashboard-table table {
+		thead td {
+			font-size: 1.25rem;
+
+			&:first-child {
+				padding-left: 1rem;
+			}
+		}
+
+		tbody tr td {
+			font-size: .8rem;
+
+			&:first-child {
+				padding-left: 1rem;
+			}
+		}
 	}
 }
