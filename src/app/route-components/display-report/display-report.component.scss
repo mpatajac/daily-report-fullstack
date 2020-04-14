@@ -9,8 +9,8 @@ button {
 	left: 50px;
 	height: 2em;
 	width: 4em;
-	background-color: white;
-	color: $asbestos;
+	background-color: var(--table-bg);
+	color: var(--text-gray);
 	font-size: 2rem;
 	box-shadow: .3em .3em .3em rgba(0, 0, 0, .1);
 	@include button_hover;
@@ -20,7 +20,7 @@ button {
 .display-report-wrapper {
 	margin: 4em auto;
 	padding: 3em;
-	background-color: white;
+	background-color: var(--table-bg);
 	border: none;
 	border-radius: 1em;
 }
@@ -35,7 +35,7 @@ h1 {
 	width: 100%;
 	height: 1px;
 	margin: 2em auto;
-	background-color: $asbestos;
+	background-color: var(--text);
 	border: none;
 	border-radius: 5px;
 }

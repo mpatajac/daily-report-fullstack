@@ -7,15 +7,15 @@ h2 {
 }
 
 div {
-	border: 1px solid $asbestos;
+	border: 1px solid var(--pass-border);
 	border-radius: 1em;
-	background-color: $white;
+	background-color: var(--bg);
 	box-sizing: border-box;
 	margin-bottom: 3em;
 	overflow-x: auto;
 
 	&:focus-within {
-		border: 2px solid $wetasphalt;
+		border: var(--border-size) solid var(--wetasphalt);
 	}
 }
 
@@ -31,7 +31,7 @@ li {
 	overflow-wrap: normal;
 
 		&::marker {
-		background-color: $wetasphalt;
+		background-color: var(--text);
 		size: 2em;
 	}
 }

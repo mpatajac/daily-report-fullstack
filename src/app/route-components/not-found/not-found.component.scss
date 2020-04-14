@@ -12,15 +12,15 @@ div {
 
 h1 {
 	text-align: center;
-	color: $asbestos;
+	color: var(--text-gray);
 	font-size: 3rem;
 	letter-spacing: .05em;
 	margin-bottom: 1em;
 }
 
 button {
-	background-color: $wetasphalt;
-	color: $white;
+	background-color: var(--wetasphalt);
+	color: var(--text-white);
 	font-size: 2rem;
 	margin-top: 1em;
 	padding: 1em 2em;

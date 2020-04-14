@@ -1,20 +1,23 @@
-// neutral colors
-$orange: #ffa500;
-$baasic: #00C2E8;
-$mono: #EB544E;
+:root {
+	// neutral colors
+	--orange: #ffa500;
+	--baasic: #00C2E8;
+	--mono: #EB544E;
 
-// used in both
-$wetasphalt: #34495e;
-$asbestos: #7f8c8d;
+	// used in both
+	--wetasphalt: #34495e;
+	--asbestos: #7f8c8d;
 
-// light colors
-$white: #fafafa;
-$clouds: #ecf0f1;
+	// light colors
+	--white: #fafafa;
+	--clouds: #ecf0f1;
 
-// dark colors
-$dark-text: #ddd;
-$dark-body-bg: #333;
-$dark-bg: #434343;
+
+	// dark colors
+	--dark-body-bg: #333;
+	--dark-text: #ddd;
+	--dark-bg: #434343;
+}
 
 
 // font
@@ -33,16 +36,8 @@ $dark-bg: #434343;
 // style
 body {
 	font-family: 'Aleo', serif;
-
-	&.light {
-		color: $wetasphalt;
-		background-color: $clouds;
-	}
-
-	&.dark {
-		color: $dark-text;
-		background-color: $dark-body-bg;
-	}
+	background-color: var(--body-bg);
+	color: var(--text);
 }
 
 a {
@@ -57,4 +52,32 @@ button {
 
 ul, h1 {
 	margin-bottom: 0;
+}
+
+
+// themes
+.light {
+	--body-bg: var(--clouds);
+	--text: var(--wetasphalt);
+	--bg: var(--white);
+	--table-bg: white;
+	--text-gray: var(--asbestos);
+	--text-white: var(--white);
+	--pass-border: var(--asbestos);
+	--back-btn: white;
+
+	--border-size: 2px;
+}
+
+.dark {
+	--body-bg: var(--dark-body-bg);
+	--text: var(--dark-text);
+	--bg: var(--dark-bg);
+	--table-bg: var(--dark-bg);
+	--text-gray: var(--dark-text);
+	--text-white: var(--dark-text);
+	--pass-border: var(--dark-bg);
+	--back-btn: var(--dark-text);
+
+	--border-size: 5px;
 }

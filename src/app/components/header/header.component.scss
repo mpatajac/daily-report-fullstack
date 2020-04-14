@@ -10,18 +10,18 @@
 	flex-direction: row;
 	justify-content: space-between;
 	align-items: center;
-	background-color: $wetasphalt;
+	background-color: var(--wetasphalt);
 	box-shadow: 0 .2em .2em rgba(0, 0, 0, 0.3);
 	z-index: 5;
 
 	h1 {
-		color: $white;
+		color: var(--white);
 		font-size: 2.3em;
 		letter-spacing: .05em;
 	}
 
 	.header-menu {
-		background: url("../../../assets/img/dashboard/menu.svg") $asbestos;
+		background: url("../../../assets/img/dashboard/menu.svg") var(--asbestos);
 		background-size: 60% 75%;
 		background-repeat: no-repeat;
 		background-position: center;
@@ -35,9 +35,9 @@
 	}
 
 	.header-new {
-		background-color: $asbestos;
+		background-color: var(--asbestos);
 		outline: none;
-		color: $white;
+		color: var(--white);
 		height: 1.4em;
 		width: 1.4em;
 		border: none;

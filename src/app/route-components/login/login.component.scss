@@ -8,9 +8,9 @@ $login-width: 100% - $img-width;
 	margin: 15vh auto;
 	width: 70vw;
 	height: 70vh;
-	background-color: $white;
-	color: $wetasphalt;
-	border: 1px solid $white;
+	background-color: var(--white);
+	color: var(--wetasphalt);
+	border: 1px solid var(--white);
 	border-radius: 1em;
 	box-shadow:
 		0 .5em .5em rgba(0, 0, 0, .1),
@@ -21,7 +21,7 @@ $login-width: 100% - $img-width;
 	.login-img {
 		width: $img-width;
 		height: 100%;
-		background-color: $orange;
+		background-color: var(--orange);
 		border-top-left-radius: 1em;
 		border-bottom-left-radius: 1em;
 		margin-right: .1em;
@@ -55,22 +55,22 @@ $login-width: 100% - $img-width;
 
 		input {
 			margin-bottom: 2em;
-			border: 1px solid $asbestos;
+			border: 1px solid var(--asbestos);
 			border-radius: .5em;
 			font-size: 1.5rem;
 			padding: .3em 1em;
 			letter-spacing: .05em;
 
 			&:focus {
-				border: .08em solid $wetasphalt;
+				border: .08em solid var(--wetasphalt);
 			}
 		}
 	}
 
 
 	button {
-		background-color: $wetasphalt;
-		color: $white;
+		background-color: var(--wetasphalt);
+		color: var(--white);
 		border: none;
 		border-radius: .5em;
 		font-size: 1.5rem;
@@ -82,7 +82,7 @@ $login-width: 100% - $img-width;
 @media (max-width: 1024px) {
 	.login-body{
 		padding: 2em 0;
-		background-color: $orange;
+		background-color: var(--orange);
 
 
 		.login-img {
@@ -93,7 +93,7 @@ $login-width: 100% - $img-width;
 			z-index: 2;
 			justify-content: center;
 			margin: 15% auto;
-			background-color: $white;
+			background-color: var(--white);
 			width: 100%;
 			height: 65%;
 

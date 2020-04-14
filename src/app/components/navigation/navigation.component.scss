@@ -6,8 +6,8 @@
 }
 
 .navigation-sidepanel {
-	background-color: $asbestos;
-	color: $white;
+	background-color: var(--asbestos);
+	color: var(--white);
 	position: fixed;
 	height: 90vh;
 	width: 25vw;
@@ -21,7 +21,7 @@
 	.navigation-horizontal-bar {
 		width: 110%;
 		height: 2px;
-		background-color: $white;
+		background-color: var(--white);
 		border: none;
 		border-radius: .1em;
 		margin: .5em 0 .5em -.5em;

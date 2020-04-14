@@ -5,6 +5,7 @@
 	text-align: center;
 	padding: 3.5em 5em;
 	line-height: 1.2;
+	background-color: var(--table-bg);
 }
 
 .warning-first {
@@ -19,7 +20,7 @@
 .horizontal-bar {
 	margin: 1.5em 3em;
 	height: .2em;
-	background-color: $wetasphalt;
+	background-color: var(--text);
 }
 
 .warning-second {
@@ -32,7 +33,7 @@
 	flex-direction: row;
 	justify-content: center;
 	margin: 1.5em 0;
-	color: $asbestos;
+	color: var(--asbestos);
 	font-size: 1.7rem;
 
 	&:hover input ~ .checkbox-box {
@@ -40,7 +41,7 @@
 	}
 
 	input:checked ~ .checkbox-box {
-		background: $asbestos url(../../../assets/img/check.svg) 3px 3px no-repeat;
+		background: var(--asbestos) url(../../../assets/img/check.svg) 3px 3px no-repeat;
 		background-size: .5em;
 	}
 
@@ -61,7 +62,7 @@
 	.checkbox-box {
 		width: 23px;
 		height: 23px;
-		border: 2px solid $asbestos;
+		border: 2px solid var(--asbestos);
 		border-radius: 3px;
 		box-shadow: .1em .1em .1em rgba(0, 0, 0, .3);
 		margin: .15em 0 0 0;
@@ -69,7 +70,7 @@
 }
 
 button {
-	border: 3px solid $wetasphalt;
+	border: 3px solid var(--wetasphalt);
 	border-radius: 20px;
 	width: 7em;
 	padding: .5em 1em;
@@ -86,13 +87,13 @@ button {
 }
 
 #back-btn {
-	background-color: white;
-	color: $wetasphalt;
+	background-color: var(--back-btn);
+	color: var(--wetasphalt);
 }
 
 #cont-btn {
-	background-color: $wetasphalt;
-	color: $white;
+	background-color: var(--wetasphalt);
+	color: var(--text-white);
 }
 
 @media (max-width: 990px) {
