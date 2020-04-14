@@ -38,6 +38,8 @@ body {
 	font-family: 'Aleo', serif;
 	background-color: var(--body-bg);
 	color: var(--text);
+
+	transition: background 250ms ease-in-out, color 500ms ease-in-out;
 }
 
 a {
