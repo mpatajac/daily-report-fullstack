@@ -1,11 +1,21 @@
-// colors
-$white: #fafafa;
-$clouds: #ecf0f1;
-$wetasphalt: #34495e;
-$asbestos: #7f8c8d;
+// neutral colors
 $orange: #ffa500;
 $baasic: #00C2E8;
 $mono: #EB544E;
+
+// used in both
+$wetasphalt: #34495e;
+$asbestos: #7f8c8d;
+
+// light colors
+$white: #fafafa;
+$clouds: #ecf0f1;
+
+// dark colors
+$dark-text: #ddd;
+$dark-body-bg: #333;
+$dark-bg: #434343;
+
 
 // font
 @import url('https://fonts.googleapis.com/css?family=Aleo:400,700&display=swap&subset=latin-ext');
@@ -22,9 +32,17 @@ $mono: #EB544E;
 
 // style
 body {
-	background-color: $clouds;
 	font-family: 'Aleo', serif;
-	color: $wetasphalt;
+
+	&.light {
+		color: $wetasphalt;
+		background-color: $clouds;
+	}
+
+	&.dark {
+		color: $dark-text;
+		background-color: $dark-body-bg;
+	}
 }
 
 a {
