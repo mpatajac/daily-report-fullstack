@@ -16,4 +16,12 @@ export class NavigationComponent implements OnInit {
 
   ngOnInit() {
   }
+
+  swapTheme() {
+    const toggle = document.getElementById("navigation-theme");
+    const body = document.body;
+
+    body.classList.toggle("dark");
+    body.classList.toggle("light");
+  }
 }
