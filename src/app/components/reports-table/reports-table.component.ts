@@ -7,7 +7,7 @@ import { Report } from '../../common/models/report';
   styleUrls: ['./reports-table.component.scss']
 })
 export class ReportsTableComponent implements OnInit {
-  showSearchAndFilterFields: boolean = true;
+  showSearchAndFilterFields: boolean = false;
 
   reports: Report[] = [
     {
