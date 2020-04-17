@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from "@angular/router";
 import { User } from "../../common/models/user";
 import { UserService } from "../../common/services/user.service";
 
@@ -11,20 +12,29 @@ export class WarningComponent implements OnInit {
   user: User;
   showWarning: boolean;
 
-  constructor(private userService: UserService) { }
+  constructor(
+    private userService: UserService,
+    private router: Router
+  ) { }
 
   ngOnInit() {
     this.user = this.userService.getUser();
   }
 
   onChange(e) {
-    this.showWarning = !e.target.checked;    
+    this.showWarning = !e.target.checked;
+    console.log(this.showWarning);
+     
   }
 
   submitChange() {
     if (this.user.showWarning !== this.showWarning) {
       this.userService.updateWarning(this.showWarning);
     }
+
+    // TODO: collect data from input
+
+    this.router.navigateByUrl("/app/dashboard");
   }
 
 }
