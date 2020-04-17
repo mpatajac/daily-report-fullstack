@@ -24,6 +24,10 @@ export class UserService {
     this.user.darkTheme = !this.user.darkTheme;
   }
 
+  updateWarning(warning: boolean) {
+    this.user.showWarning = warning;
+  }
+
   updatePassword(pass: string) {
     this.user.password = pass;
     // TODO: update DB
