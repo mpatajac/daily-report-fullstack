@@ -9,8 +9,8 @@
 	<app-report-element *ngFor="let label of labels" [label]="label"></app-report-element>
 </div>
 
-<button data-toggle="modal" data-target="#exampleModal">
+<button data-toggle="modal" data-target="#warningModal">
 	Submit report
 </button>
 
-<app-warning></app-warning>
+<app-warning *ngIf="this.user.showWarning"></app-warning>

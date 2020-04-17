@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { User } from "../../common/models/user";
+import { UserService } from "../../common/services/user.service";
 
 @Component({
   selector: 'app-create-report',
@@ -13,9 +15,12 @@ export class CreateReportComponent implements OnInit {
     "problems"
   ];
 
-  constructor() { }
+  user: User;
+
+  constructor(private userService: UserService) { }
 
   ngOnInit() {
+    this.user = this.userService.getUser();
   }
 
 }

@@ -1,4 +1,4 @@
-<div [className]="'modal fade'" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+<div [className]="'modal fade'" id="warningModal" tabindex="-1" role="dialog" aria-labelledby="warningModalLabel"
 	aria-hidden="true">
 	<div [className]="'modal-dialog modal-lg'" role="document">
 		<div [className]="'modal-content'">
@@ -13,7 +13,7 @@
 			</p>
 
 			<div [className]="'warning-checkbox'">
-				<input type="checkbox" name="dont-warn-again" id="dont-warn-again">
+				<input type="checkbox" name="dont-warn-again" id="dont-warn-again" (change)="onChange($event)">
 				<div [className]="'checkbox-box'"></div>
 				<label for="dont-warn-again">Don't warn me about this again</label>
 			</div>
@@ -22,7 +22,7 @@
 				<button id="back-btn" data-dismiss="modal">
 					Back
 				</button>
-				<button id="cont-btn" data-dismiss="modal" routerLink="/app/dashboard">
+				<button id="cont-btn" data-dismiss="modal" (click)="submitChange()" routerLink="/app/dashboard">
 					Continue
 				</button>
 			</div>
