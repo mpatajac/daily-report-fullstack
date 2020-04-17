@@ -20,6 +20,10 @@ export class UserService {
     return this.user;
   }
 
+  toggleTheme() {
+    this.user.darkTheme = !this.user.darkTheme;
+  }
+
   updatePassword(pass: string) {
     this.user.password = pass;
     // TODO: update DB

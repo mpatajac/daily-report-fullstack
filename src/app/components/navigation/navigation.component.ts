@@ -31,11 +31,11 @@ export class NavigationComponent implements OnInit {
     }
   }
 
-  swapTheme() {
+  toggleTheme() {
     const body = document.body;
 
     body.classList.toggle("dark");
     body.classList.toggle("light");
-    this.user.darkTheme = !this.user.darkTheme;
+    this.userService.toggleTheme();
   }
 }
