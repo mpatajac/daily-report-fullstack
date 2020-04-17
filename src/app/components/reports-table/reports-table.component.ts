@@ -16,7 +16,8 @@ export class ReportsTableComponent implements OnInit {
         name: "matija",
         id: 17,
         password: "hehe",
-        darkTheme: false
+        darkTheme: false,
+        showWarning: false
       },
       name: "Test report",
       done: [""],
@@ -31,7 +32,8 @@ export class ReportsTableComponent implements OnInit {
         name: "matija",
         id: 17,
         password: "hehe",
-        darkTheme: false
+        darkTheme: false,
+        showWarning: false
       },
       name: "Test report",
       done: [""],
@@ -46,7 +48,8 @@ export class ReportsTableComponent implements OnInit {
         name: "matija",
         id: 17,
         password: "hehe",
-        darkTheme: false
+        darkTheme: false,
+        showWarning: false
       },
       name: "Test report",
       done: [""],

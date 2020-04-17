@@ -13,7 +13,8 @@ export class NavigationComponent implements OnInit {
     id: 1,
     name: "matija",
     password: "1234",
-    darkTheme: true
+    darkTheme: true,
+    showWarning: false
   }
 
   constructor(private messenger: MessengerService) { }

@@ -13,7 +13,8 @@ export class DisplayReportComponent implements OnInit {
       name: "matija",
       id: 17,
       password: "hehe",
-      darkTheme: false
+      darkTheme: false,
+      showWarning: false
     },
     name: "Test report",
     done: [
