@@ -19,4 +19,9 @@ export class UserService {
   getUser(): User {
     return this.user;
   }
+
+  updatePassword(pass: string) {
+    this.user.password = pass;
+    // TODO: update DB
+  }
 }

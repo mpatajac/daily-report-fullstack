@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule } from "@angular/forms";
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -38,6 +39,7 @@ import { WarningComponent } from './components/warning/warning.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    FormsModule,
     // BaasicApp.forRoot('daily-report-app', {
     //   apiRootUrl: "api.baasic.com",
     //   apiVersion: "1.0.8.233"
