@@ -23,8 +23,6 @@ export class WarningComponent implements OnInit {
 
   onChange(e) {
     this.showWarning = !e.target.checked;
-    console.log(this.showWarning);
-     
   }
 
   submitChange() {
