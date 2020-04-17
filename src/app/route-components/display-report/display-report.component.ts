@@ -1,5 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Report } from 'src/app/common/models/report';
+import { Report } from '../../common/models/report';
+import { ReportService } from '../../common/services/report.service';
+
 
 @Component({
   selector: 'app-display-report',
@@ -7,41 +9,15 @@ import { Report } from 'src/app/common/models/report';
   styleUrls: ['./display-report.component.scss']
 })
 export class DisplayReportComponent implements OnInit {
-  report: Report = {
-    id: 1,
-    user: {
-      name: "matija",
-      id: 17,
-      password: "hehe",
-      darkTheme: false,
-      showWarning: false
-    },
-    name: "Test report",
-    done: [
-      "Something that is done",
-      "Another thing that is done",
-      "Oh wow, we've been productive today"
-    ],
-    inProgress: ["Not so much"],
-    scheduled: ["There are some things that are scheduled", "Actually here is a veeeeeeery looooooong thing that we have scheduled for some time in the near (or not so near) future"],
-    problems: [
-      "Problem",
-      "Another one",
-      "Another one",
-      "Another one",
-      "Another one",
-      "Another one",
-      "Another one",
-      "Another one",
-    ],
-    date: new Date()
-  };
+  report: Report;
 
-  date: string = this.report.date.toDateString();
+  date: string;
 
-  constructor() { }
+  constructor(private reportService: ReportService) { }
 
   ngOnInit() {
+    this.report = this.reportService.getReport();
+    this.date = this.report.date.toDateString();
   }
 
 }

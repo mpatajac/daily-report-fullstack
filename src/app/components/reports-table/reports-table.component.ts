@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { User } from "../../common/models/user";
 import { Report } from '../../common/models/report';
+import { ReportService } from '../../common/services/report.service';
 
 @Component({
   selector: 'app-reports-table',
@@ -8,61 +10,13 @@ import { Report } from '../../common/models/report';
 })
 export class ReportsTableComponent implements OnInit {
   showSearchAndFilterFields: boolean = false;
+  reports: Report[];
+  
 
-  reports: Report[] = [
-    {
-      id: 1,
-      user: {
-        name: "matija",
-        id: 17,
-        password: "hehe",
-        darkTheme: false,
-        showWarning: false
-      },
-      name: "Test report",
-      done: [""],
-      inProgress: [""],
-      scheduled: [""],
-      problems: [],
-      date: new Date()
-    },
-    {
-      id: 2,
-      user: {
-        name: "matija",
-        id: 17,
-        password: "hehe",
-        darkTheme: false,
-        showWarning: false
-      },
-      name: "Test report",
-      done: [""],
-      inProgress: [""],
-      scheduled: [""],
-      problems: [""],
-      date: new Date()
-    },
-    {
-      id: 3,
-      user: {
-        name: "matija",
-        id: 17,
-        password: "hehe",
-        darkTheme: false,
-        showWarning: false
-      },
-      name: "Test report",
-      done: [""],
-      inProgress: [""],
-      scheduled: [""],
-      problems: [],
-      date: new Date()
-    }
-  ];
-
-  constructor() { }
+  constructor(private reportService: ReportService) { }
 
   ngOnInit() {
+    this.reports = this.reportService.getReports();
   }
 
 }
