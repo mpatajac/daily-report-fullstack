@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { MessengerService } from '../../common/services/messenger.service';
-import { User } from '../../common/models/user';
+
+import { User } from "../../common/models/user";
+
+import { UserService } from "../../common/services/user.service";
+import { MessengerService } from "../../common/services/messenger.service";
 
 @Component({
   selector: 'app-navigation',
@@ -8,19 +11,19 @@ import { User } from '../../common/models/user';
   styleUrls: ['./navigation.component.scss']
 })
 export class NavigationComponent implements OnInit {
-  // TODO: get user from base
-  user: User = {
-    id: 1,
-    name: "matija",
-    password: "1234",
-    darkTheme: true,
-    showWarning: false
-  }
-
-  constructor(private messenger: MessengerService) { }
+  
+  user: User;
+  
+  constructor(
+    private userService: UserService,
+    private messenger: MessengerService,
+  ) { }
 
   ngOnInit() {
-    // change theme (if needed)
+    // get user
+    this.user = this.userService.getUser();
+
+    // change UI theme (if needed)
     if (this.user.darkTheme) {
         const body = document.body;
         body.classList.remove("light");
