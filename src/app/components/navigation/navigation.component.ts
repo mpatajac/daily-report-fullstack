@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MessengerService } from '../../common/services/messenger.service';
+import { User } from '../../common/models/user';
 
 @Component({
   selector: 'app-navigation',
@@ -8,20 +9,29 @@ import { MessengerService } from '../../common/services/messenger.service';
 })
 export class NavigationComponent implements OnInit {
   // TODO: get user from base
-  user = {
-    name: "matija"
+  user: User = {
+    id: 1,
+    name: "matija",
+    password: "1234",
+    darkTheme: true
   }
 
   constructor(private messenger: MessengerService) { }
 
   ngOnInit() {
+    // change theme (if needed)
+    if (this.user.darkTheme) {
+        const body = document.body;
+        body.classList.remove("light");
+        body.classList.add("dark");
+    }
   }
 
   swapTheme() {
-    const toggle = document.getElementById("navigation-theme");
     const body = document.body;
 
     body.classList.toggle("dark");
     body.classList.toggle("light");
+    this.user.darkTheme = !this.user.darkTheme;
   }
 }
