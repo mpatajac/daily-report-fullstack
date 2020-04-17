@@ -28,7 +28,7 @@ export class WarningComponent implements OnInit {
   }
 
   submitChange() {
-    if (this.user.showWarning !== this.showWarning) {
+    if (this.showWarning !== undefined && this.user.showWarning !== this.showWarning) {
       this.userService.updateWarning(this.showWarning);
     }
 
