@@ -14,7 +14,7 @@ const routes: Routes = [
   { path: 'app', redirectTo: '/app/dashboard', pathMatch: 'full' },
   { path: 'app/dashboard', component: DashboardComponent },
   { path: 'app/dashboard/:page', component: DashboardComponent },
-  { path: 'app/report', component: DisplayReportComponent },
+  { path: 'app/report/:id', component: DisplayReportComponent },
   { path: 'app/new', component: CreateReportComponent },
   { path: 'app/passreset', component: PasswordResetComponent },
   { path: '**', component: NotFoundComponent },

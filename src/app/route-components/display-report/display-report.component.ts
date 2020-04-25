@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Report } from '../../common/models/report';
-import { ReportService } from '../../common/services/report.service';
+import { ReportService } from 'src/app/common/services/report.service';
 
 
 @Component({
@@ -9,15 +10,24 @@ import { ReportService } from '../../common/services/report.service';
   styleUrls: ['./display-report.component.scss']
 })
 export class DisplayReportComponent implements OnInit {
-  report: Report;
+  @Input() report: Report;
 
   date: string;
 
-  constructor(private reportService: ReportService) { }
+  constructor(
+    private route: ActivatedRoute,
+    private reportService: ReportService
+  ) { }
 
   ngOnInit() {
-    this.report = this.reportService.getReport();
+    this.getReport();
     this.date = this.report.date.toDateString();
   }
 
+
+  getReport(): void {
+    const id = +this.route.snapshot.paramMap.get('id');
+    // TODO: change to subscription
+    this.report = this.reportService.getReport(id);
+  }
 }

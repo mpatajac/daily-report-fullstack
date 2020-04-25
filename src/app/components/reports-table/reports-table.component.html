@@ -47,7 +47,7 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr *ngFor="let report of reports" routerLink="/app/report">
+				<tr *ngFor="let report of reports" routerLink="/app/report/{{report.id}}">
 					<td>{{report.name}}</td>
 					<td>{{report.user.name}}</td>
 					<td>{{report.date | date}}</td>

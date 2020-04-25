@@ -72,7 +72,7 @@ export class ReportService {
     return this.reports;
   }
 
-  getReport(): Report {
-    return this.reports[0];
+  getReport(id: number): Report {
+    return this.reports.find(report => report.id === id);
   }
 }
