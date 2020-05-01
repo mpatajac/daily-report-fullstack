@@ -1,6 +1,6 @@
 import { User } from './user';
 
-export interface Report {
+export class Report {
 	id: number;
 	user: User;
 	name: string;
@@ -9,4 +9,8 @@ export interface Report {
 	scheduled: string[];
 	problems: string[];
 	date: Date;
+
+	constructor(user?: User) {
+		this.user = user;
+	}
 }
