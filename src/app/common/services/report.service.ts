@@ -75,4 +75,20 @@ export class ReportService {
   getReport(id: number): Report {
     return this.reports.find(report => report.id === id);
   }
+
+  addReport(report: Report): void {
+    // Fix potentialy empty fields
+    report = this.fixReport(report);
+
+    // TODO: insert report into DB
+    this.reports.push(report);
+  }
+
+  fixReport(report: Report) {
+    if (report.done === undefined) report.done = [];
+    if (report.inProgress === undefined) report.inProgress = [];
+    if (report.scheduled === undefined) report.scheduled = [];
+    if (report.problems === undefined) report.problems = [];
+    return report;
+  }
 }
