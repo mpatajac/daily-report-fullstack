@@ -3,12 +3,13 @@
 
 	<div [className]="'login-wrapper'">
 		<h1>Login</h1>
+		<!-- TODO: add validation/unsuccessful login visualization -->
 		<form>
 			<label for="login-username">Username</label>
-			<input type="text" id="login-username">
+			<input type="text" id="login-username" name="username" [(ngModel)]="username">
 			<label for="login-password">Password</label>
-			<input type="password" id="login-password">
+			<input type="password" id="login-password" name="password" [(ngModel)]="password">
+			<button (click)="validateUser()">Login</button>
 		</form>
-		<button routerLink="/app/dashboard">Login</button>
 	</div>
 </div>
