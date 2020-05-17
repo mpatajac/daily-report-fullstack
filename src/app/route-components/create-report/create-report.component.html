@@ -9,8 +9,12 @@
 	<app-report-element *ngFor="let label of labels" [label]="label"></app-report-element>
 </div>
 
-<button data-toggle="modal" data-target="#warningModal" (click)="submitReport()">
-	Submit report
-</button>
+<div [className]="'create-report-btn-wrapper'">
+	<button [className]="'btn-back'" data-toggle="tooltip" data-placement="bottom" title="Go back"
+		routerLink="/app/dashboard">&lt;</button>
+	<button data-toggle="modal" data-target="#warningModal" (click)="submitReport()">
+		Submit report
+	</button>
+</div>
 
 <app-warning *ngIf="this.user.showWarning"></app-warning>
