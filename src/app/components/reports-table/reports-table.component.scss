@@ -135,7 +135,8 @@
 
 			.dropdown-divider {
 				margin: 0;
-				border-color: var(--text-gray);
+				border-color: var(--body-bg);
+				border-width: .2em;
 			}
 
 			.dropdown-item {
