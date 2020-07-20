@@ -61,6 +61,7 @@
 				border-radius: .75em;
 				border: none;
 				background-color: var(--bg);
+				transition: .15s ease-in-out;
 
 				&:hover {
 					background-color: var(--wetasphalt);
