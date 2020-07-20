@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { User } from '../../common/models/user';
+import { UserService } from 'src/app/common/services/user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-not-found',
@@ -6,10 +9,23 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./not-found.component.scss']
 })
 export class NotFoundComponent implements OnInit {
+  user: User;
 
-  constructor() { }
+  constructor(
+    private userService: UserService,
+    private router: Router
+  ) { }
 
   ngOnInit() {
+    this.user = this.userService.getUser();
+  }
+
+  redirect() {
+    if (this.user) {
+      this.router.navigateByUrl("/app/dashboard");
+    } else {
+      this.router.navigateByUrl("/login");
+    } 
   }
 
 }
