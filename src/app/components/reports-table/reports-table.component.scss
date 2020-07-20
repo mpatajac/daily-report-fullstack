@@ -113,6 +113,10 @@
 				padding-left: 2.25em;
 				padding-right: .5em;
 				margin-right: .5em;
+
+				&:hover {
+					cursor: pointer;
+				}
 			}
 
 			button {
