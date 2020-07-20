@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Report } from '../../common/models/report';
 import { ReportService } from 'src/app/common/services/report.service';
 
@@ -16,6 +16,7 @@ export class DisplayReportComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private reportService: ReportService
   ) { }
 
@@ -29,5 +30,10 @@ export class DisplayReportComponent implements OnInit {
     const id = +this.route.snapshot.paramMap.get('id');
     // TODO: change to subscription
     this.report = this.reportService.getReport(id);
+
+    // redirect to 404 if no report with given ID is found
+    if (!this.report) {
+      this.router.navigateByUrl("/not-found");
+    }
   }
 }
