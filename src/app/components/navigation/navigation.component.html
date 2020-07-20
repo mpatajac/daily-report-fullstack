@@ -32,7 +32,7 @@
 
 		<div [className]="'navigation-bottom'">
 			<div id="navigation-logout" [className]="'field clickable'" routerLink="/login"
-				(click)="this.messenger.hideNavigation()">
+				(click)="this.messenger.hideNavigation(); this.userService.logout()">
 				<img src="../../../assets/img/dashboard/logout.svg">
 				<span>Logout</span>
 			</div>

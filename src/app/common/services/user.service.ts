@@ -37,4 +37,8 @@ export class UserService {
     this.user.password = pass;
     // TODO: update DB
   }
+
+  logout() {
+    this.user = null;
+  }
 }

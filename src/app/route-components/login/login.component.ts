@@ -31,6 +31,8 @@ export class LoginComponent implements OnInit {
       // TODO: warn user
       console.log("Unsuccessful login attempt.");
     } else {
+      // successful login
+      this.userService.user = this.user;
       this.router.navigateByUrl("/app/dashboard");
     }
   }
