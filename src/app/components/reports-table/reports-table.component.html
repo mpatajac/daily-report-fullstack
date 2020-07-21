@@ -1,9 +1,12 @@
+<!-- No reports to show -->
 <div [className]="'dashboard-no-reports container jumbotron'" *ngIf="this.reports.length === 0">
 	<h2>There are no reports to display.</h2>
 	<h4>Try adjusting your filters or create a new report by pressing the '+' button in the top-right corner.</h4>
 </div>
 
+
 <div [className]="'dashboard-table'" *ngIf="this.reports.length > 0">
+	<!-- Search and filter -->
 	<div [className]="'dashboard-saf'">
 		<div [className]="'dashboard-saf-top'">
 			<input type="text" placeholder="Search ...">
@@ -35,6 +38,7 @@
 	</div>
 
 
+	<!-- Table -->
 	<div [className]="'table-bg'">
 		<table>
 			<thead>
