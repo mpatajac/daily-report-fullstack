@@ -8,15 +8,42 @@ import { CreateReportComponent } from './route-components/create-report/create-r
 import { PasswordResetComponent } from './route-components/password-reset/password-reset.component';
 import { NotFoundComponent } from './route-components/not-found/not-found.component';
 
+import { UserAuthGuard } from './common/guards/user-auth.guard';
+
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
-  { path: 'app', redirectTo: '/app/dashboard', pathMatch: 'full' },
-  { path: 'app/dashboard', component: DashboardComponent },
-  { path: 'app/dashboard/:page', component: DashboardComponent },
-  { path: 'app/report/:id', component: DisplayReportComponent },
-  { path: 'app/new', component: CreateReportComponent },
-  { path: 'app/passreset', component: PasswordResetComponent },
+  {
+    path: 'app',
+    redirectTo: '/app/dashboard',
+    pathMatch: 'full',
+    canActivate: [UserAuthGuard]
+  },
+  {
+    path: 'app/dashboard',
+    component: DashboardComponent,
+    canActivate: [UserAuthGuard]
+  },
+  {
+    path: 'app/dashboard/:page',
+    component: DashboardComponent,
+    canActivate: [UserAuthGuard]
+  },
+  {
+    path: 'app/report/:id',
+    component: DisplayReportComponent,
+    canActivate: [UserAuthGuard]
+  },
+  {
+    path: 'app/new',
+    component: CreateReportComponent,
+    canActivate: [UserAuthGuard]
+  },
+  {
+    path: 'app/passreset',
+    component: PasswordResetComponent,
+    canActivate: [UserAuthGuard]
+  },
   { path: '**', component: NotFoundComponent },
 ];
 
