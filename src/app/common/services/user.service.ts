@@ -25,7 +25,7 @@ export class UserService {
     return this.user.name === username ? this.user : null;
   }
 
-  toggleTheme() {
+  toggleThemePreference() {
     this.user.darkTheme = !this.user.darkTheme;
   }
 

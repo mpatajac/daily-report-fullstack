@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/common/models/user';
 import { UserService } from 'src/app/common/services/user.service';
+import { ThemeService } from 'src/app/common/services/theme.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -15,7 +16,8 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private userService: UserService,
-    private router: Router
+    private router: Router,
+    private themeService: ThemeService
   ) { }
 
   ngOnInit() {
@@ -33,6 +35,7 @@ export class LoginComponent implements OnInit {
     } else {
       // successful login
       this.userService.user = this.user;
+      this.themeService.initialiseTheme(this.user.darkTheme);
       this.router.navigateByUrl("/app/dashboard");
     }
   }

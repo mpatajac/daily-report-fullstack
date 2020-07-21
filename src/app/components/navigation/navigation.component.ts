@@ -4,6 +4,7 @@ import { User } from "../../common/models/user";
 
 import { UserService } from "../../common/services/user.service";
 import { MessengerService } from "../../common/services/messenger.service";
+import { ThemeService } from "../../common/services/theme.service";
 
 @Component({
   selector: 'app-navigation',
@@ -17,25 +18,13 @@ export class NavigationComponent implements OnInit {
   constructor(
     private userService: UserService,
     private messenger: MessengerService,
+    private themeService: ThemeService
   ) { }
 
   ngOnInit() {
     // get user
     this.user = this.userService.getUser();
 
-    // change UI theme (if needed)
-    if (this.user.darkTheme) {
-        const body = document.body;
-        body.classList.remove("light");
-        body.classList.add("dark");
-    }
-  }
-
-  toggleTheme() {
-    const body = document.body;
-
-    body.classList.toggle("dark");
-    body.classList.toggle("light");
-    this.userService.toggleTheme();
+    
   }
 }

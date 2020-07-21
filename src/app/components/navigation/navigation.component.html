@@ -17,7 +17,7 @@
 				<img src="../../../assets/img/dashboard/home.svg">
 				<span>Home</span>
 			</div>
-			<div id="navigation-theme" [className]="'field clickable'" (click)="this.messenger.hideNavigation(); toggleTheme()">
+			<div id="navigation-theme" [className]="'field clickable'" (click)="this.messenger.hideNavigation(); this.themeService.toggleTheme()">
 				<img src="../../../assets/img/dashboard/theme.svg">
 				<span>Switch theme</span>
 			</div>
