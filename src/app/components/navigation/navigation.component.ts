@@ -24,7 +24,10 @@ export class NavigationComponent implements OnInit {
   ngOnInit() {
     // get user
     this.user = this.userService.getUser();
+  }
 
-    
+  logout() {
+    this.messenger.hideNavigation();
+    this.userService.logout();
   }
 }

@@ -17,7 +17,8 @@
 				<img src="../../../assets/img/dashboard/home.svg">
 				<span>Home</span>
 			</div>
-			<div id="navigation-theme" [className]="'field clickable'" (click)="this.messenger.hideNavigation(); this.themeService.toggleTheme()">
+			<div id="navigation-theme" [className]="'field clickable'"
+				(click)="this.messenger.hideNavigation(); this.themeService.toggleTheme()">
 				<img src="../../../assets/img/dashboard/theme.svg">
 				<span>Switch theme</span>
 			</div>
@@ -31,8 +32,7 @@
 		<div [className]="'navigation-horizontal-bar'"></div>
 
 		<div [className]="'navigation-bottom'">
-			<div id="navigation-logout" [className]="'field clickable'" routerLink="/login"
-				(click)="this.messenger.hideNavigation(); this.userService.logout()">
+			<div id="navigation-logout" [className]="'field clickable'" routerLink="/login" (click)="logout()">
 				<img src="../../../assets/img/dashboard/logout.svg">
 				<span>Logout</span>
 			</div>
