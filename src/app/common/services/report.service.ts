@@ -47,19 +47,19 @@ export class ReportService {
       id: 2,
       user: this.user,
       name: "Test report",
-      done: [""],
-      inProgress: [""],
-      scheduled: [""],
-      problems: [""],
+      done: [],
+      inProgress: [],
+      scheduled: ["Some thing that is scheduled."],
+      problems: [],
       date: new Date()
     },
     {
       id: 3,
       user: this.user,
       name: "Test report",
-      done: [""],
-      inProgress: [""],
-      scheduled: [""],
+      done: [],
+      inProgress: [],
+      scheduled: [],
       problems: [],
       date: new Date()
     }
