@@ -22,7 +22,6 @@ export class NavigationComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    // get user
     this.user = this.userService.getUser();
   }
 

@@ -12,10 +12,14 @@ export class UserAuthGuard implements CanActivate {
     private router: Router
   ) { }
 
+  /**
+   * Check that the user is logged in, 
+   * otherwise redirect to login view.
+   */
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
-  ): true | UrlTree {    
+  ): true | UrlTree {
     if (this.userService.getUser()) {
       return true;
     }

@@ -9,7 +9,10 @@ export class ThemeService {
 
   constructor(private userService: UserService) { }
 
-  // Change UI theme to dark (if needed)
+  /**
+   * Change UI theme to dark (if needed)
+   * @param prefersDarkTheme user's preference over light/dark theme
+   */
   initialiseTheme(prefersDarkTheme: boolean) {
     if (prefersDarkTheme === true) {
       this.body.classList.remove("light");
@@ -31,7 +34,10 @@ export class ThemeService {
     this.userService.toggleThemePreference();
   }
 
-  // Return UI theme to light (if needed)
+  /**
+   * Return UI theme to light (if needed)
+   * @param prefersDarkTheme user's preference over light/dark theme
+   */
   removeTheme(prefersDarkTheme: boolean) {
     if (prefersDarkTheme === true) {
       this.body.classList.add("light");

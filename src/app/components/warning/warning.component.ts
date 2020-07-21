@@ -25,6 +25,7 @@ export class WarningComponent implements OnInit {
     this.showWarning = !e.target.checked;
   }
 
+  // TODO: resolve this using guards
   submitChange() {
     if (this.showWarning !== undefined && this.user.showWarning !== this.showWarning) {
       this.userService.updateWarning(this.showWarning);

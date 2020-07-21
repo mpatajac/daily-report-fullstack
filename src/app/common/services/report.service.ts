@@ -77,13 +77,16 @@ export class ReportService {
   }
 
   addReport(report: Report): void {
-    // Fix potentialy empty fields
     report = this.fixReport(report);
 
     // TODO: insert report into DB
     this.reports.push(report);
   }
 
+  /**
+   * Replaces empty (undefined) fields inside report with empty array
+   * @param report Report that (potentially) needs fixing
+   */
   fixReport(report: Report) {
     if (report.done === undefined) report.done = [];
     if (report.inProgress === undefined) report.inProgress = [];

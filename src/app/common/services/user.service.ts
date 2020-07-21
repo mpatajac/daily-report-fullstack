@@ -16,12 +16,21 @@ export class UserService {
 
   constructor() { }
 
+  /**
+   * Return current user
+   */
   getUser(): User {
     return this.user;
   }
 
+  /**
+   * Fetch user from DB to validate login information
+   * 
+   * // TODO: fetch user from DB
+   * @param username username of the user that is trying to log in
+   */
   getUserFromDB(username: string): User {
-    // TODO: fetch user from DB
+    
     return this.user.name === username ? this.user : null;
   }
 

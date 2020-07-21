@@ -20,6 +20,10 @@ export class NotFoundComponent implements OnInit {
     this.user = this.userService.getUser();
   }
 
+  /**
+   * Choose redirect destination based on user
+   * being or not being logged in
+   */
   redirect() {
     if (this.user) {
       this.router.navigateByUrl("/app/dashboard");
