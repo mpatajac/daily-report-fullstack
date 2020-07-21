@@ -30,4 +30,12 @@ export class ThemeService {
   toggleUserThemePreference() {
     this.userService.toggleThemePreference();
   }
+
+  // Return UI theme to light (if needed)
+  removeTheme(prefersDarkTheme: boolean) {
+    if (prefersDarkTheme === true) {
+      this.body.classList.add("light");
+      this.body.classList.remove("dark");
+    }
+  }
 }

@@ -28,6 +28,7 @@ export class NavigationComponent implements OnInit {
 
   logout() {
     this.messenger.hideNavigation();
+    this.themeService.removeTheme(this.user.darkTheme);
     this.userService.logout();
   }
 }
