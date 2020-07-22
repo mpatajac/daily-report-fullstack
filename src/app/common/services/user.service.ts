@@ -5,14 +5,7 @@ import { User } from "../models/user";
   providedIn: 'root'
 })
 export class UserService {
-  // TODO: get user from DB
-  user: User = {
-    id: 1,
-    name: "matija",
-    password: "1234",
-    darkTheme: true,
-    showWarning: false
-  }
+  user: User;
 
   constructor() { }
 
@@ -38,8 +31,15 @@ export class UserService {
    * @param username username of the user that is trying to log in
    */
   getUserFromDB(username: string): User {
+    const user: User = {
+      id: 1,
+      name: "matija",
+      password: "1234",
+      darkTheme: true,
+      showWarning: false
+    }
     
-    return this.user.name === username ? this.user : null;
+    return user.name === username ? user : null;
   }
 
   toggleThemePreference() {
