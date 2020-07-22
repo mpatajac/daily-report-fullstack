@@ -34,7 +34,7 @@ export class LoginComponent implements OnInit {
       console.log("Unsuccessful login attempt.");
     } else {
       // successful login
-      this.userService.user = this.user;
+      this.userService.setUser(this.user);
       this.themeService.initialiseTheme(this.user.darkTheme);
       this.router.navigateByUrl("/app/dashboard");
     }

@@ -24,6 +24,14 @@ export class UserService {
   }
 
   /**
+   * Set current user after successful login
+   * @param user user that has just logged in
+   */
+  setUser(user: User) {
+    this.user = user;
+  }
+
+  /**
    * Fetch user from DB to validate login information
    * 
    * // TODO: fetch user from DB
