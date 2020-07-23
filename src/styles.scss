@@ -25,10 +25,12 @@
 
 // mixins
 @mixin button_hover($s: 1.1) {
-	transition: transform .2s;
-
-	&:hover {
-		transform: scale($s);
+	&:enabled {
+		transition: transform .2s;
+		
+		&:hover {
+			transform: scale($s);
+		}
 	}
 }
 
@@ -50,6 +52,12 @@ button {
 	font-family: 'Aleo', serif;
 	cursor: pointer;
 	outline: none;
+
+	&:disabled {
+		transform: none;
+		opacity: .6;
+		cursor: not-allowed;
+	}
 }
 
 ul, h1 {
@@ -63,7 +71,7 @@ input {
 
 // validation error style
 .validation-error-text {
-		color: red;
+	color: red;
 }
 
 .validation-error-border {
