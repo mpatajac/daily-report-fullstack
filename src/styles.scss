@@ -61,6 +61,16 @@ input {
 }
 
 
+// validation error style
+.validation-error-text {
+		color: red;
+}
+
+.validation-error-border {
+	border-color: red;
+}
+
+
 // themes
 .light {
 	--body-bg: var(--clouds);
