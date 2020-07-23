@@ -34,7 +34,7 @@ export class UserService {
     const user: User = {
       id: 1,
       name: "matija",
-      password: "1234",
+      password: "1234asdf",
       darkTheme: true,
       showWarning: false
     }
