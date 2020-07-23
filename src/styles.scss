@@ -34,6 +34,16 @@
 	}
 }
 
+@mixin validation_error() {	
+	.validation-error-text {
+		color: red;
+	}
+	
+	.validation-error-border {
+		border-color: red;
+	}
+}
+
 
 // style
 body {
@@ -66,16 +76,6 @@ ul, h1 {
 
 input {
 	outline: none;
-}
-
-
-// validation error style
-.validation-error-text {
-	color: red;
-}
-
-.validation-error-border {
-	border-color: red;
 }
 
 

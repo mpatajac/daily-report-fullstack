@@ -78,6 +78,8 @@ $login-width: 100% - $img-width;
 				border: .08em solid var(--wetasphalt);
 			}
 		}
+
+		@include validation-error;
 	}
 
 
