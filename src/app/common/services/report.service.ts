@@ -65,8 +65,17 @@ export class ReportService {
     }
   ];
 
+  id: number = 4;
 
   constructor(private userService: UserService) { }
+
+  /**
+   * Temporary method to generate ID
+   * WILL BE REMOVED
+   */
+  getNextID(): number {
+    return this.id++;
+  }
 
   getReports(): Report[] {
     return this.reports;
@@ -85,6 +94,7 @@ export class ReportService {
 
   /**
    * Replaces empty (undefined) fields inside report with empty array
+   * // TODO: check if this is necessary
    * @param report Report that (potentially) needs fixing
    */
   fixReport(report: Report) {
