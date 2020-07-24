@@ -1,21 +1,21 @@
-<form #createReportForm="ngForm" (ngSubmit)="submitReport()">
-	<div [className]="'report-wrapper'">
-		<div [className]="'name-input'">
-			<h2>Name</h2>
-			<input name="reportName" [(ngModel)]="reportName" required minlength="5">
-		</div>
-
-		<app-report-element [label]="'done'" (reportElementEmitter)="updateDone($event)"></app-report-element>
-		<app-report-element [label]="'in progress'" (reportElementEmitter)="updateInProgress($event)"></app-report-element>
-		<app-report-element [label]="'scheduled'" (reportElementEmitter)="updateScheduled($event)"></app-report-element>
-		<app-report-element [label]="'problems'" (reportElementEmitter)="updateProblems($event)"></app-report-element>
+<form [className]="'report-wrapper'" #createReportForm="ngForm" (ngSubmit)="submitReport()">
+	<div [className]="'name-input'">
+		<h2>Name</h2>
+		<input name="reportName" [(ngModel)]="reportName" required minlength="5" #reportNameInput="ngModel"
+			[class.validation-error-border]="reportNameInput.invalid && reportNameInput.dirty">
+		<span [hidden]="reportNameInput.valid || reportNameInput.pristine" [className]="'validation-error-text'">Report
+			name is required (min. 5 characters)</span>
 	</div>
+
+	<app-report-element [label]="'done'" (reportElementEmitter)="updateDone($event)"></app-report-element>
+	<app-report-element [label]="'in progress'" (reportElementEmitter)="updateInProgress($event)"></app-report-element>
+	<app-report-element [label]="'scheduled'" (reportElementEmitter)="updateScheduled($event)"></app-report-element>
+	<app-report-element [label]="'problems'" (reportElementEmitter)="updateProblems($event)"></app-report-element>
 
 	<div [className]="'create-report-btn-wrapper'">
 		<button [className]="'btn-back'" data-toggle="tooltip" data-placement="bottom" title="Go back"
 			routerLink="/app/dashboard" (click)="createReportForm.reset()">&lt;</button>
-		<button data-toggle="modal" data-target="#warningModal" type="submit"
-			[disabled]="!canSubmit(createReportForm)">
+		<button data-toggle="modal" data-target="#warningModal" type="submit" [disabled]="!canSubmit(createReportForm)">
 			Submit report
 		</button>
 	</div>

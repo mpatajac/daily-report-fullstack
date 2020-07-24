@@ -15,6 +15,10 @@
 		margin-bottom: .1em;
 	}
 
+	span {
+		margin-left: 1em;
+	}
+
 	input {
 		border: 1px solid var(--pass-border);
 		border-radius: .7em;
@@ -31,6 +35,8 @@
 			outline: none;
 		}
 	}
+
+	@include validation-error;
 }
 
 button {
