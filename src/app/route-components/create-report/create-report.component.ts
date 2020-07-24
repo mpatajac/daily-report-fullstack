@@ -1,7 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from "@angular/router";
+import { NgForm } from '@angular/forms';
+
 import { User } from "../../common/models/user";
+import { Report } from 'src/app/common/models/report';
+
 import { UserService } from "../../common/services/user.service";
+import { ReportService } from 'src/app/common/services/report.service';
 
 @Component({
   selector: 'app-create-report',
@@ -9,29 +14,63 @@ import { UserService } from "../../common/services/user.service";
   styleUrls: ['./create-report.component.scss']
 })
 export class CreateReportComponent implements OnInit {
-  labels: string[] = [
-    "done",
-    "in progress",
-    "scheduled",
-    "problems"
-  ];
-
   user: User;
+  reportName: string;
+  done: Array<string>;
+  inProgress: Array<string>;
+  scheduled: Array<string>;
+  problems: Array<string>;
+
 
   constructor(
     private userService: UserService,
+    private reportService: ReportService,
     private router: Router
   ) { }
 
   ngOnInit() {
     this.user = this.userService.getUser();
+    this.done = [];
+    this.inProgress = [];
+    this.scheduled = [];
+    this.problems = [];
+  }
+
+  updateDone(reportContent: Array<string>) {
+    this.done = reportContent;
+  }
+
+  updateInProgress(reportContent: Array<string>) {
+    this.inProgress = reportContent;
+  }
+
+  updateScheduled(reportContent: Array<string>) {
+    this.scheduled = reportContent;
+  }
+
+  updateProblems(reportContent: Array<string>) {
+    this.problems = reportContent;
   }
 
   submitReport() {
-    // TODO: check if any input field is empty, get data
-    if (this.user.showWarning === false) {
-      this.router.navigateByUrl("/app/dashboard")
-    }
+    let report = new Report(
+      this.user,
+      this.reportName,
+      this.done,
+      this.inProgress,
+      this.scheduled,
+      this.problems
+    );
+
+    // temporary fix; will be done differently when connected to DB
+    report.id = this.reportService.getNextID();
+
+    this.reportService.addReport(report);
+    this.router.navigateByUrl("/app/dashboard")
+  }
+
+  canSubmit(form: NgForm): boolean {
+    return form.valid;
   }
 
 }

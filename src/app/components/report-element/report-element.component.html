@@ -3,7 +3,7 @@
 </h2>
 
 <div>
-	<ul contenteditable="true">
+	<ul contenteditable="true" #reportElement (keyup)="emitValue(reportElement)">
 		<li></li>
 	</ul>
 </div>
