@@ -69,8 +69,18 @@ export class CreateReportComponent implements OnInit {
     this.router.navigateByUrl("/app/dashboard")
   }
 
+  /**
+   * User can submit report if it has a name and
+   * at least one element (done, in progress, scheduled, done) is filled.
+   * @param form Form used in creating a new report
+   */
   canSubmit(form: NgForm): boolean {
-    return form.valid;
+    return form.valid && (
+      !!this.done.length ||
+      !!this.inProgress.length ||
+      !!this.scheduled.length ||
+      !!this.problems.length
+    );
   }
 
 }

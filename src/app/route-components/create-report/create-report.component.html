@@ -12,6 +12,10 @@
 	<app-report-element [label]="'scheduled'" (reportElementEmitter)="updateScheduled($event)"></app-report-element>
 	<app-report-element [label]="'problems'" (reportElementEmitter)="updateProblems($event)"></app-report-element>
 
+	<span [hidden]="reportNameInput.invalid || canSubmit(createReportForm)" [className]="'validation-error-text centered'">
+		At least one element must be filled
+	</span>
+
 	<div [className]="'create-report-btn-wrapper'">
 		<button [className]="'btn-back'" data-toggle="tooltip" data-placement="bottom" title="Go back"
 			routerLink="/app/dashboard" (click)="createReportForm.reset()">&lt;</button>

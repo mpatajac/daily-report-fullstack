@@ -35,9 +35,9 @@
 			outline: none;
 		}
 	}
-
-	@include validation-error;
 }
+
+@include validation-error;
 
 button {
 	display: block;
@@ -55,6 +55,11 @@ button {
 	background-color: var(--bg);
 	color: var(--text);
 	font-size: 1.2em;
+}
+
+.centered {
+	display: block;
+	text-align: center;
 }
 
 
