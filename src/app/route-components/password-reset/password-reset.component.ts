@@ -81,7 +81,12 @@ export class PasswordResetComponent implements OnInit {
     // only change border color if field was written in
     if (passInputField.classList.contains('ng-dirty')) {
       passInputField.classList.remove('strong', 'ok', 'weak');
-      passInputField.classList.add(this.passwordStrength);
+
+      if (this.firstNewPassword === this.user.password) {
+        passInputField.classList.add('weak');
+      } else {
+        passInputField.classList.add(this.passwordStrength);
+      }
     }
 
     return this.passwordStrength;
@@ -96,6 +101,7 @@ export class PasswordResetComponent implements OnInit {
       this.user.password === this.oldPassword &&
       this.firstNewPassword &&
       this.isOkPassword() &&
+      this.user.password !== this.firstNewPassword &&
       this.firstNewPassword === this.secondNewPassword;
   }
 }
