@@ -80,12 +80,21 @@
 		}
 
 		.dashboard-saf-bottom {
-			height: 3em;
+			opacity: 0;
+			visibility: hidden;
+			height: 0em;
 			margin-top: 1.5em;
 			margin-bottom: -.25em;
 			display: flex;
 			flex-direction: row;
 			justify-content: space-between;
+			transition: all 250ms ease-in-out;
+
+			&.show-saf {
+				opacity: 1;
+				height: 3em;
+				visibility: visible;
+			}
 
 			input, button {
 				border: none;
@@ -228,7 +237,10 @@
 			.dashboard-saf-bottom {
 				flex-direction: column;
 				margin-bottom: 0;
-				height: auto;
+				
+				&.show-saf {
+					height: 15em;
+				}
 
 				* {
 					width: 100%;
@@ -294,10 +306,16 @@
 		}
 	}
 
-	.dashboard-table .dashboard-saf .dashboard-saf-top {
-		input {
-			width: 2.5em;
-			font-size: 1rem;
+	.dashboard-table .dashboard-saf {
+		.dashboard-saf-top {
+			input {
+				width: 2.5em;
+				font-size: 1rem;
+			}
+		}
+
+		.dashboard-saf-bottom {
+			transition-duration: 350ms;
 		}
 	}
 }

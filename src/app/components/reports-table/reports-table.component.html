@@ -12,12 +12,12 @@
 			<input type="text" placeholder="Search ...">
 
 			<button data-toggle="tooltip" data-placenemt="top" title="Filter"
-				(click)="this.showSearchAndFilterFields = !this.showSearchAndFilterFields">
+				(click)="this.toggleSAFVisibility()">
 				<img src="../../../assets/img/dashboard/filter.svg">
 			</button>
 		</div>
 
-		<div [className]="'dashboard-saf-bottom'" *ngIf="this.showSearchAndFilterFields">
+		<div [className]="'dashboard-saf-bottom'" [class.show-saf]="this.showSAF">
 			<input type="text" placeholder="filter by report name">
 			<input type="text" placeholder="filter by user">
 			<div [className]="'dashboard-filter-date'">

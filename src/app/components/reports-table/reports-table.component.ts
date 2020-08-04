@@ -9,7 +9,7 @@ import { ReportService } from '../../common/services/report.service';
   styleUrls: ['./reports-table.component.scss']
 })
 export class ReportsTableComponent implements OnInit {
-  showSearchAndFilterFields: boolean = false;
+  showSAF: boolean;
   reports: Report[];
 
   selectedOption: string;
@@ -18,8 +18,12 @@ export class ReportsTableComponent implements OnInit {
 
   ngOnInit() {
     this.reports = this.reportService.getReports();
-
+    this.showSAF = false;
     this.selectedOption = "all";
+  }
+
+  toggleSAFVisibility() {
+    this.showSAF = !this.showSAF;
   }
 
   isSelectedOption(option: string): boolean {
