@@ -1,5 +1,8 @@
 @import "src/styles.scss";
 
+
+// TODO: stop navigation from appearing on load
+
 .navigation-wrapper {
 	display: flex;
 	flex-direction: row;
@@ -10,13 +13,17 @@
 	color: var(--white);
 	position: fixed;
 	height: 90vh;
-	width: 25vw;
+	width: 0;
 	max-width: 400px;
-	min-width: 320px;
+	min-width: 0;
 	font-size: 1.6rem;
-	padding: 1em 1.5em 0;
+	padding: 0;
 	margin-top: 10vh;
 	z-index: 3;
+	visibility: hidden;
+	opacity: 0;
+	transition: all 250ms linear;
+	transition-property: width min-width opacity visibility;
 
 	.navigation-horizontal-bar {
 		width: 110%;
@@ -28,20 +35,11 @@
 	}
 
 	.field {
-		display: inline-flex;
+		display: inline-block;
 		align-items: center;
 		margin: 1.1em 0;
 		height: 1.05em;
-		width: 10em;
-	}
-
-	.clickable {
-		cursor: pointer;
-		transition: transform .2s;
-
-		&:hover {
-			transform: translateX(10px) scaleX(1.1);
-		}
+		width: 90%;
 	}
 
 	img {
@@ -63,7 +61,40 @@
 	background-color: rgba(0, 0, 0, .7);
 	z-index: 3;
 	position: fixed;
+	visibility: hidden;
+	opacity: 0;
+	transition: all 200ms linear;
 }
+
+
+.navigation-wrapper.navigation-show {
+	.navigation-sidepanel {
+		width: 25vw;
+		min-width: 320px;
+		padding: 1em 1.5em 0;
+		visibility: visible;
+		opacity: 1;
+
+		.field, .navigation-horizontal-bar, img {
+			transition: width 250ms ease-in-out;
+		}
+
+		.clickable {
+			cursor: pointer;
+			transition: transform 200ms;
+
+			&:hover {
+				transform: translateX(10px) scaleX(1.1);
+			}
+		}
+	}
+
+	.navigation-background-shadow {
+		visibility: visible;
+		opacity: 1;
+	}
+}
+
 
 @media (max-width: 800px) {
 	.navigation-sidepanel {

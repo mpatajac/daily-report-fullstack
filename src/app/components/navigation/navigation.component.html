@@ -1,7 +1,6 @@
-<div [className]="'navigation-wrapper'" *ngIf="this.messenger.showNavigation">
+<div [className]="'navigation-wrapper'" [class.navigation-show]="this.messenger.showNavigation">
 	<div [className]="'navigation-background-shadow'" (click)="this.messenger.hideNavigation()"></div>
 
-	<!-- TODO: add animation to show/hide -->
 	<div [className]="'navigation-sidepanel'">
 		<div [className]="'navigation-top'">
 			<div id="navigation-username" [className]="'field'">
