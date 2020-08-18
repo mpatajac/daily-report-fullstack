@@ -99,13 +99,32 @@
 @media (max-width: 800px) {
 	.navigation-sidepanel {
 		max-width: initial;
-		width: 50%;
+		width: 0;
+	}
+
+	.navigation-wrapper.navigation-show {
+		.navigation-sidepanel {
+			width: 50%;
+			visibility: visible;
+			opacity: 1;
+		}
 	}
 }
 
 @media (max-width: 425px) {
 	.navigation-sidepanel {
 		max-width: initial;
+		height: 0;
 		width: 100%;
+		transition-property: height, opacity, visibility;
+	}
+
+	.navigation-wrapper.navigation-show {
+		.navigation-sidepanel {
+			height: 90vh;
+			width: 100%;
+			visibility: visible;
+			opacity: 1;
+		}
 	}
 }
