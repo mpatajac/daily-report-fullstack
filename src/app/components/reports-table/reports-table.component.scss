@@ -1,20 +1,24 @@
 @import "src/styles";
 
 .dashboard-no-reports {
-	margin-top: 200px;
+	margin-top: 250px;
 	max-width: 650px;
 	text-align: center;
 	letter-spacing: .03em;
 	opacity: .75;
 	border-radius: 1em;
+	background-color: var(--table-bg);
 
 	h2 {
 		margin-bottom: .75em;
+		font-size: 2.25rem;
 	}
 
 	h4 {
 		color: var(--text-gray);
 		line-height: 1.2em;
+		margin-top: 1.75em;
+		font-size: 1.25rem;
 	}
 }
 
@@ -276,6 +280,19 @@
 
 
 @media(max-width: 576px) {
+	.dashboard-no-reports {
+		margin-top: 200px;
+
+		h2 {
+			font-size: 1.75rem;
+		}
+
+		h4 {
+			font-size: 1rem;
+		}
+	}
+
+
 	.dashboard-table table {
 		thead td {
 			font-size: 1.25rem;
