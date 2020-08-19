@@ -5,8 +5,6 @@ import { FormsModule } from "@angular/forms";
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-// import { BaasicApp } from 'baasic-sdk-angular';
-
 import { LoginComponent } from './route-components/login/login.component';
 import { DashboardComponent } from './route-components/dashboard/dashboard.component';
 import { DisplayReportComponent } from './route-components/display-report/display-report.component';
@@ -39,11 +37,7 @@ import { WarningComponent } from './components/warning/warning.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule,
-    // BaasicApp.forRoot('daily-report-app', {
-    //   apiRootUrl: "api.baasic.com",
-    //   apiVersion: "1.0.8.233"
-    // })
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
