@@ -179,10 +179,39 @@
 				font-size: 2rem;
 				padding: .2em;
 				position: relative;
-				transition: all 0.2s ease-in-out;
 
 				&:first-child {
 					padding-left: 2rem;
+				}
+
+				&.sort {
+					
+					div.arrow-container {
+						display: flex;
+						flex-direction: column;
+						float: right;
+						padding-right: 2em;
+						margin-top: .25rem;
+						opacity: 0;
+						transition: opacity 250ms ease-in-out;
+
+						.arrow {
+							width: 1rem;
+							height: 1rem;
+
+							&.up {
+								margin-bottom: .5rem;
+							}
+						}	
+					}
+
+					&:hover {
+						cursor: pointer;
+
+						& .arrow-container {
+							opacity: 1;
+						}
+					}
 				}
 
 			}
@@ -195,6 +224,7 @@
 
 		tbody tr {
 			box-shadow: 0 .1em rgba(0, 0, 0, .2);
+			transition: background-color 200ms ease-in-out;
 			&:last-child {
 				box-shadow: none;
 			}

@@ -27,11 +27,14 @@
 			<div [className]="'dropdown'">
 				<button [className]="'dropdown-toggle'" data-toggle="dropdown">Problems?</button>
 				<div [className]="'dropdown-menu'">
-					<a [className]="'dropdown-item'" (click)="selectDropdownOption('with')" [class.dropdown-selected]="isSelectedOption('with')">With problems</a>
+					<a [className]="'dropdown-item'" (click)="selectDropdownOption('with')"
+						[class.dropdown-selected]="isSelectedOption('with')">With problems</a>
 					<div [className]="'dropdown-divider'"></div>
-					<a [className]="'dropdown-item'" (click)="selectDropdownOption('without')" [class.dropdown-selected]="isSelectedOption('without')">Without problems</a>
+					<a [className]="'dropdown-item'" (click)="selectDropdownOption('without')"
+						[class.dropdown-selected]="isSelectedOption('without')">Without problems</a>
 					<div [className]="'dropdown-divider'"></div>
-					<a [className]="'dropdown-item'" (click)="selectDropdownOption('all')" [class.dropdown-selected]="isSelectedOption('all')">All</a>
+					<a [className]="'dropdown-item'" (click)="selectDropdownOption('all')"
+						[class.dropdown-selected]="isSelectedOption('all')">All</a>
 				</div>
 			</div>
 		</div>
@@ -43,11 +46,31 @@
 		<table>
 			<thead>
 				<tr>
-					<td>Name</td>
-					<td>User</td>
-					<td>Date</td>
-					<td><img src="../../../assets/img/dashboard/problem-header.svg" rel="tooltip" data-placement="top"
-							title="Does this report contain any problems?"></td>
+					<td [className]="'sort'">
+						Name
+						<div [className]="'arrow-container'">
+							<img src="../../../assets/img/dashboard/sort-up.svg" [className]="'arrow up'">
+							<img src="../../../assets/img/dashboard/sort-down.svg" [className]="'arrow down'">
+						</div>
+					</td>
+					<td [className]="'sort'">
+						User
+						<div [className]="'arrow-container'">
+							<img src="../../../assets/img/dashboard/sort-up.svg" [className]="'arrow up'">
+							<img src="../../../assets/img/dashboard/sort-down.svg" [className]="'arrow down'">
+						</div>
+					</td>
+					<td [className]="'sort desc'">
+						Date
+						<div [className]="'arrow-container'">
+							<img src="../../../assets/img/dashboard/sort-up.svg" [className]="'arrow up'">
+							<img src="../../../assets/img/dashboard/sort-down.svg" [className]="'arrow down'">
+						</div>
+					</td>
+					<td>
+						<img src="../../../assets/img/dashboard/problem-header.svg" rel="tooltip" data-placement="top"
+							title="Does this report contain any problems?">
+					</td>
 				</tr>
 			</thead>
 			<tbody>
