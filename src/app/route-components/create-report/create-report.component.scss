@@ -15,10 +15,6 @@
 		margin-bottom: .1em;
 	}
 
-	span {
-		margin-left: 1em;
-	}
-
 	input {
 		border: 1px solid var(--pass-border);
 		border-radius: .7em;
@@ -35,6 +31,14 @@
 			outline: none;
 		}
 	}
+}
+
+
+span {
+	margin-left: 1em;
+	transition: all 250ms ease-in-out;
+	opacity: 0;
+	font-size: 0;
 }
 
 @include validation-error;

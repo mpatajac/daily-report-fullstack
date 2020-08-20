@@ -3,7 +3,7 @@
 		<h2>Name</h2>
 		<input name="reportName" [(ngModel)]="reportName" required minlength="5" #reportNameInput="ngModel"
 			[class.validation-error-border]="reportNameInput.invalid && reportNameInput.dirty">
-		<span [hidden]="reportNameInput.valid || reportNameInput.pristine" [className]="'validation-error-text'">Report
+		<span [class.validation-error-show]="!(reportNameInput.valid || reportNameInput.pristine)" [className]="'validation-error-text'">Report
 			name is required (min. 5 characters)</span>
 	</div>
 
@@ -12,7 +12,7 @@
 	<app-report-element [label]="'scheduled'" (reportElementEmitter)="updateScheduled($event)"></app-report-element>
 	<app-report-element [label]="'problems'" (reportElementEmitter)="updateProblems($event)"></app-report-element>
 
-	<span [hidden]="reportNameInput.invalid || canSubmit(createReportForm)" [className]="'validation-error-text centered'">
+	<span [class.validation-error-show]="!(reportNameInput.invalid || canSubmit(createReportForm))" [className]="'validation-error-text centered'">
 		At least one element must be filled
 	</span>
 
