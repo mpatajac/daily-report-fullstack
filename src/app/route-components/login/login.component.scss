@@ -65,6 +65,9 @@ $login-width: 100% - $img-width;
 
 		span {
 			margin-top: .2em;
+			transition: all 250ms ease-in-out;
+			opacity: 0;
+			font-size: 0;
 		}
 
 		input {

@@ -8,10 +8,10 @@
 				<label for="login-username">Username</label>
 				<input type="text" [class.validation-error-border]="checkUsernameValid(loginForm)" id="login-username"
 					name="username" [(ngModel)]="username" required minlength="3" #userName="ngModel">
-				<span [hidden]="userName.valid || loginForm.pristine" [className]="'validation-error-text'">Username too
+				<span [class.validation-error-show]="!(userName.valid || loginForm.pristine)" [className]="'validation-error-text'">Username too
 					short
 					(min. 3 characters)</span>
-				<span [hidden]="userName.dirty || usernameFound" [className]="'validation-error-text'">No user with such
+				<span [class.validation-error-show]="!(userName.dirty || usernameFound)" [className]="'validation-error-text'">No user with such
 					username was found</span>
 			</div>
 
@@ -19,9 +19,9 @@
 				<label for="login-password">Password</label>
 				<input type="password" id="login-password" name="password" [(ngModel)]="password" #passWord="ngModel"
 					required minlength="8" [class.validation-error-border]="checkPasswordValid(passWord, 8)">
-				<span [hidden]="passWord.valid || passWord.pristine" [className]="'validation-error-text'">Password is
+				<span [class.validation-error-show]="!(passWord.valid || passWord.pristine)" [className]="'validation-error-text'">Password is
 					too short (min. 8 characters)</span>
-				<span [hidden]="passWord.dirty || passwordMatches || !usernameFound"
+				<span [class.validation-error-show]="!(passWord.dirty || passwordMatches || !usernameFound)"
 					[className]="'validation-error-text'">Wrong password</span>
 			</div>
 
