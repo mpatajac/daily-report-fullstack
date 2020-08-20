@@ -46,21 +46,21 @@
 		<table>
 			<thead>
 				<tr>
-					<td [className]="'sort'">
+					<td [className]="'sort'" id="header-name" (click)="configureSort('name')">
 						Name
 						<div [className]="'arrow-container'">
 							<img src="../../../assets/img/dashboard/sort-up.svg" [className]="'arrow up'">
 							<img src="../../../assets/img/dashboard/sort-down.svg" [className]="'arrow down'">
 						</div>
 					</td>
-					<td [className]="'sort'">
+					<td [className]="'sort'" id="header-user" (click)="configureSort('user')">
 						User
 						<div [className]="'arrow-container'">
 							<img src="../../../assets/img/dashboard/sort-up.svg" [className]="'arrow up'">
 							<img src="../../../assets/img/dashboard/sort-down.svg" [className]="'arrow down'">
 						</div>
 					</td>
-					<td [className]="'sort desc'">
+					<td [className]="'sort desc'" id="header-date" (click)="configureSort('date')">
 						Date
 						<div [className]="'arrow-container'">
 							<img src="../../../assets/img/dashboard/sort-up.svg" [className]="'arrow up'">
