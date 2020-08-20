@@ -38,6 +38,11 @@
 	.validation-error-text {
 		color: red;
 	}
+
+	.validation-error-show {
+		opacity: 1;
+		height: initial;
+	}
 	
 	.validation-error-border {
 		border-color: red;
