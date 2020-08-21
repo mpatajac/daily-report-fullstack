@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { User } from "../../common/models/user";
 import { Report } from '../../common/models/report';
 import { Column, SortOrder, SortOptions } from '../../common/models/sort'
 import { ReportService } from '../../common/services/report.service';
@@ -13,6 +12,11 @@ export class ReportsTableComponent implements OnInit {
   showSAF: boolean;
   reports: Report[];
 
+  generalSearch: string;
+  searchByName: string;
+  searchByUser: string;
+  startDate: Date;
+  endDate: Date;
   selectedOption: string;
   sortConfiguration: SortOptions;
 
@@ -28,6 +32,19 @@ export class ReportsTableComponent implements OnInit {
       column: Column.Date,
       order: SortOrder.Desc
     } as SortOptions;
+
+    /*
+    // mora se svaki put rucno
+    const data = {
+      generalSearch: this.generalSearch,
+      searchByName: this.searchByName,
+      searchByUser: this.searchByUser,
+      startDate: this.startDate,
+      endDate: this.endDate,
+      problems: this.selectedOption,
+      sort: this.sortConfiguration
+    };
+    */
   }
 
   toggleSAFVisibility() {

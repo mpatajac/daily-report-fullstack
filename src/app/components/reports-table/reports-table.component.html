@@ -9,7 +9,7 @@
 	<!-- Search and filter -->
 	<div [className]="'dashboard-saf'">
 		<div [className]="'dashboard-saf-top'">
-			<input type="text" placeholder="Search ...">
+			<input type="text" placeholder="Search ..." [(ngModel)]="generalSearch">
 
 			<button data-toggle="tooltip" data-placenemt="top" title="Filter"
 				(click)="this.toggleSAFVisibility()">
@@ -18,11 +18,11 @@
 		</div>
 
 		<div [className]="'dashboard-saf-bottom'" [class.show-saf]="this.showSAF">
-			<input type="text" placeholder="filter by report name">
-			<input type="text" placeholder="filter by user">
+			<input type="text" placeholder="filter by report name" [(ngModel)]="searchByName">
+			<input type="text" placeholder="filter by user" [(ngModel)]="searchByUser">
 			<div [className]="'dashboard-filter-date'">
-				<input type="date" id="start-date">
-				<input type="date" id="end-date">
+				<input type="date" id="start-date" [(ngModel)]="startDate">
+				<input type="date" id="end-date" [(ngModel)]="endDate">
 			</div>
 			<div [className]="'dropdown'">
 				<button [className]="'dropdown-toggle'" data-toggle="dropdown">Problems?</button>
