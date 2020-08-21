@@ -110,4 +110,29 @@ export class ReportsTableComponent implements OnInit {
     }
   }
 
+
+  /**
+   * Determine if some of the filter parameters is altered.
+   * Used to decide if search-and-filter header should be displayed.
+   */
+  isFilterUsed(): boolean {
+    return [
+      this.generalSearch,
+      this.searchByName,
+      this.searchByUser,
+      this.startDate,
+      this.endDate
+    ].some(this.isAltered) || 
+    this.selectedOption !== "all";
+  }
+
+  isAltered(element: string | Date): boolean {
+    return !(
+      element === undefined || (
+        typeof element === "string" ?
+          element.length === 0 :
+          false
+      )
+    );
+  }
 }
