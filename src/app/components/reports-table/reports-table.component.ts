@@ -122,8 +122,8 @@ export class ReportsTableComponent implements OnInit {
       this.searchByUser,
       this.startDate,
       this.endDate
-    ].some(this.isAltered) || 
-    this.selectedOption !== "all";
+    ].some(this.isAltered) ||
+      this.selectedOption !== "all";
   }
 
   isAltered(element: string | Date): boolean {
