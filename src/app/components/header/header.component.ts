@@ -12,4 +12,12 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit() {
   }
+
+  toTop() {
+    window.scroll({
+      top: 0,
+      left: 0,
+      behavior: 'smooth'
+    });
+  }
 }

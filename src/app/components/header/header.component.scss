@@ -18,6 +18,10 @@
 		color: var(--white);
 		font-size: 2.3em;
 		letter-spacing: .05em;
+
+		&:hover {
+			cursor: pointer;
+		}
 	}
 
 	.header-menu {
