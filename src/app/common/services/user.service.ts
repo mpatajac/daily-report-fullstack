@@ -31,15 +31,29 @@ export class UserService {
    * @param username username of the user that is trying to log in
    */
   getUserFromDB(username: string): User {
-    const user: User = {
+    const matija: User = {
       id: 1,
       name: "matija",
       password: "1234asdf",
       darkTheme: true,
       showWarning: false
     }
+
+    const testuser: User = {
+      id: 2,
+      name: "testuser",
+      password: "\\zxc\\zxc",
+      darkTheme: false,
+      showWarning: false
+    }
     
-    return user.name === username ? user : null;
+    if (username === "matija") {
+      return matija;
+    } else if (username === "testuser") {
+      return testuser;
+    } else {
+      return null;
+    }
   }
 
   toggleThemePreference() {
