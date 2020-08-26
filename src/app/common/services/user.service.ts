@@ -19,10 +19,15 @@ export class UserService {
   ) { }
 
   /**
-   * Return current user
-   * TODO: GET user from API
+   * Fetch user data from server 
+   * and update local user.
    */
   getUser(): User {
+    this.http
+      .get(`${this.baseUrl}/users/${this.user.name}`)
+      .subscribe(
+        response => this.updateLocalUser(response)
+      );
     return this.user;
   }
 
@@ -89,6 +94,12 @@ export class UserService {
   logout() {
     // TODO: DELETE on API
     this.user = null;
+  }
+
+  private updateLocalUser(response: any) {
+    this.user.name = response.name;
+    this.user.darkTheme = response.darkTheme;
+    this.user.showWarning = response.showWarning;
   }
 
   private handleError(result?: any) {
