@@ -10,11 +10,17 @@ import { Observable, of } from 'rxjs';
 })
 export class UserService {
   user: User;
+  token: string;
 
-  constructor() { }
+  private baseUrl = "https://api.baasic.com/v1/daily-report-app";
+
+  constructor(
+    private http: HttpClient
+  ) { }
 
   /**
    * Return current user
+   * TODO: GET user from API
    */
   getUser(): User {
     return this.user;
@@ -60,6 +66,15 @@ export class UserService {
     }
   }
 
+  doesUserExist(username: string): Observable<boolean> {
+    return this.http.get(`${this.baseUrl}/users/${username}/exists`,
+      { observe: 'response' }
+    ).pipe(
+      map(response => response.ok),
+      catchError(this.handleError)
+    )
+  }
+
   toggleThemePreference() {
     // TODO: PUT on API
     // pass email along with data (so it doesn't set to null)
@@ -82,4 +97,9 @@ export class UserService {
     this.user = null;
   }
 
+  private handleError(result?: any) {
+    return (error: any): Observable<any> => {
+      return of(result)
+    }
+  }
 }
