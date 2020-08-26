@@ -1,5 +1,9 @@
 import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { catchError, map } from "rxjs/operators";
+
 import { User } from "../models/user";
+import { Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -57,19 +61,25 @@ export class UserService {
   }
 
   toggleThemePreference() {
+    // TODO: PUT on API
+    // pass email along with data (so it doesn't set to null)
     this.user.darkTheme = !this.user.darkTheme;
   }
 
   updateWarning(warning: boolean) {
+    // TODO: PUT on API
+    // pass email along with data (so it doesn't set to null)
     this.user.showWarning = warning;
   }
 
   updatePassword(pass: string) {
-    this.user.password = pass;
     // TODO: update DB
+    this.user.password = pass;
   }
 
   logout() {
+    // TODO: DELETE on API
     this.user = null;
   }
+
 }
