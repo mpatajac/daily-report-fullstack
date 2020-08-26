@@ -39,10 +39,14 @@ export class UserService {
 
   /**
    * Set current user after successful login
-   * @param user user that has just logged in
+   * 
+   * TODO: remove password
    */
-  setUser(user: User) {
-    this.user = user;
+  setUser(username: string, password: string) {
+    this.user = new User(username, password);
+    this.fetchUserFromDB().subscribe(
+      response => this.updateLocalUser(response)
+    );
   }
 
 
@@ -65,6 +69,7 @@ export class UserService {
     ).subscribe(
       response => {
         this.token = response.body.access_token;
+        this.setUser(username, password);
         if (this.isMissingFields()) {
           this.addMissingFields();
         }
