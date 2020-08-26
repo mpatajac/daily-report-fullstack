@@ -23,12 +23,14 @@ export class UserService {
    * and update local user.
    */
   getUser(): User {
-    this.http
-      .get(`${this.baseUrl}/users/${this.user.name}`)
-      .subscribe(
-        response => this.updateLocalUser(response)
-      );
+    this.fetchUserFromDB().subscribe(
+      response => this.updateLocalUser(response)
+    );
     return this.user;
+  }
+
+  private fetchUserFromDB(): Observable<any> {
+    return this.http.get(`${this.baseUrl}/users/${this.user.name}`);
   }
 
   /**
