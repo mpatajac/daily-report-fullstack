@@ -83,15 +83,35 @@ export class UserService {
   }
 
   toggleThemePreference() {
-    // TODO: PUT on API
-    // pass email along with data (so it doesn't set to null)
     this.user.darkTheme = !this.user.darkTheme;
+
+    const header = new HttpHeaders({ Authorization: `Bearer ${this.token}` });
+    const email: string = this.extractEmail();
+
+    return this.http.put(
+      `${this.baseUrl}/users/${this.user.name}`,
+      {
+        darkTheme: this.user.darkTheme,
+        email: email
+      },
+      { headers: header }
+    ).subscribe();
   }
 
   updateWarning(warning: boolean) {
-    // TODO: PUT on API
-    // pass email along with data (so it doesn't set to null)
     this.user.showWarning = warning;
+
+    const header = new HttpHeaders({ Authorization: `Bearer ${this.token}` });
+    const email: string = this.extractEmail();
+
+    return this.http.put(
+      `${this.baseUrl}/users/${this.user.name}`,
+      {
+        darkTheme: this.user.showWarning,
+        email: email
+      },
+      { headers: header }
+    ).subscribe();
   }
 
   updatePassword(pass: string) {
