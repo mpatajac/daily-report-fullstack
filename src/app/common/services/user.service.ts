@@ -65,7 +65,9 @@ export class UserService {
     ).subscribe(
       response => {
         this.token = response.body.access_token;
-
+        if (this.isMissingFields()) {
+          this.addMissingFields();
+        }
       },
       catchError
     );
@@ -101,6 +103,50 @@ export class UserService {
     // TODO: DELETE on API
     this.user = null;
   }
+
+  private isMissingFields(): boolean {
+    let result: boolean;
+    this.fetchUserFromDB().subscribe(
+      response => {
+        result = response["darkTheme"] !== undefined ||
+          response["showWarning"] !== undefined;
+      }
+    )
+    return result;
+  }
+
+  /**
+   * When user logs in for the first time,
+   * add "darkTheme" and "showWarning" fields.
+   */
+  private addMissingFields() {
+    const header = new HttpHeaders({ Authorization: `Bearer ${this.token}` });
+
+    const email: string = this.extractEmail();
+
+    return this.http.put(
+      `${this.baseUrl}/users/${this.user.name}`,
+      {
+        darkTheme: false,
+        showWarning: true,
+        email: email
+      },
+      { headers: header }
+    ).subscribe();
+  }
+
+  /**
+   * Extracts "email" field from user data.
+   * 
+   * For some reason, PUT request on other fields sets "email" to null.
+   * This method is used to extract it and update it along with the request.
+   */
+  private extractEmail(): string {
+    let email: string;
+    this.fetchUserFromDB().subscribe(response => email = response.email);
+    return email;
+  }
+
 
   private updateLocalUser(response: any) {
     this.user.name = response.name;
