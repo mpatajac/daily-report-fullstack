@@ -30,7 +30,11 @@ export class UserService {
   }
 
   private fetchUserFromDB(): Observable<any> {
-    return this.http.get(`${this.baseUrl}/users/${this.user.name}`);
+    const header = new HttpHeaders({ Authorization: `Bearer ${this.token}` });
+    return this.http.get(
+      `${this.baseUrl}/users/${this.user.name}`,
+      { headers: header }
+    );
   }
 
   /**
@@ -61,7 +65,7 @@ export class UserService {
     ).subscribe(
       response => {
         this.token = response.body.access_token;
-        console.log(this.token);
+
       },
       catchError
     );
