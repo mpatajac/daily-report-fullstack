@@ -34,36 +34,30 @@ export class UserService {
     this.user = user;
   }
 
-  /**
-   * Fetch user from DB to validate login information
-   * 
-   * // TODO: fetch user from DB
-   * @param username username of the user that is trying to log in
-   */
-  getUserFromDB(username: string): User {
-    const matija: User = {
-      id: 1,
-      name: "matija",
-      password: "1234asdf",
-      darkTheme: true,
-      showWarning: false
-    }
 
-    const testuser: User = {
-      id: 2,
-      name: "testuser",
-      password: "\\zxc\\zxc",
-      darkTheme: false,
-      showWarning: false
-    }
-    
-    if (username === "matija") {
-      return matija;
-    } else if (username === "testuser") {
-      return testuser;
-    } else {
-      return null;
-    }
+  // TODO: work on error-handling
+  login(username: string, password?: string) {
+    const header = new HttpHeaders({ "Content-Type": "application/x-www-form-urlencoded" });
+
+    const body = `username=${username}&password=${password}&grant_type=password`;
+
+    return this.http.post<{
+      access_token: string,
+      error: string
+    }>(
+      `${this.baseUrl}/login?options=sliding`,
+      body,
+      {
+        headers: header,
+        observe: 'response'
+      }
+    ).subscribe(
+      response => {
+        this.token = response.body.access_token;
+        console.log(this.token);
+      },
+      catchError
+    );
   }
 
   doesUserExist(username: string): Observable<boolean> {
