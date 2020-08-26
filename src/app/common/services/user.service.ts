@@ -30,7 +30,7 @@ export class UserService {
   }
 
   private fetchUserFromDB(): Observable<any> {
-    const header = new HttpHeaders({ Authorization: `Bearer ${this.token}` });
+    const header = this.createHeader();
     return this.http.get(
       `${this.baseUrl}/users/${this.user.name}`,
       { headers: header }
@@ -48,7 +48,7 @@ export class UserService {
 
   // TODO: work on error-handling
   login(username: string, password?: string) {
-    const header = new HttpHeaders({ "Content-Type": "application/x-www-form-urlencoded" });
+    const header = this.createHeader(false, true);
 
     const body = `username=${username}&password=${password}&grant_type=password`;
 
@@ -85,7 +85,7 @@ export class UserService {
   toggleThemePreference() {
     this.user.darkTheme = !this.user.darkTheme;
 
-    const header = new HttpHeaders({ Authorization: `Bearer ${this.token}` });
+    const header = this.createHeader();
     const email: string = this.extractEmail();
 
     return this.http.put(
@@ -101,7 +101,7 @@ export class UserService {
   updateWarning(warning: boolean) {
     this.user.showWarning = warning;
 
-    const header = new HttpHeaders({ Authorization: `Bearer ${this.token}` });
+    const header = this.createHeader();
     const email: string = this.extractEmail();
 
     return this.http.put(
@@ -140,8 +140,7 @@ export class UserService {
    * add "darkTheme" and "showWarning" fields.
    */
   private addMissingFields() {
-    const header = new HttpHeaders({ Authorization: `Bearer ${this.token}` });
-
+    const header = this.createHeader();
     const email: string = this.extractEmail();
 
     return this.http.put(
@@ -178,5 +177,23 @@ export class UserService {
     return (error: any): Observable<any> => {
       return of(result)
     }
+  }
+
+  /**
+   * Create HttpHeader based on given parameters
+   * @param token Should header contain auth token
+   * @param urlencoded Should header be x-www-form-urlencoded
+   */
+  private createHeader(token: boolean = true, urlencoded: boolean = false): HttpHeaders {
+    let obj = {};
+    if (token) {
+      obj["Authorization"] = `Bearer ${this.token}`;
+    }
+
+    if (urlencoded) {
+      obj["Content-Type"] = "application/x-www-form-urlencoded";
+    }
+
+    return new HttpHeaders(obj);
   }
 }
