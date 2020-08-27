@@ -189,7 +189,10 @@ export class UserService {
    * @param token Should header contain auth token
    * @param urlencoded Should header be x-www-form-urlencoded
    */
-  private createHeader(token: boolean = true, urlencoded: boolean = false): HttpHeaders {
+  createHeader(
+    token: boolean = true,
+    urlencoded: boolean = false
+  ): HttpHeaders {
     let obj = {};
     if (token) {
       obj["Authorization"] = `Bearer ${this.token}`;
