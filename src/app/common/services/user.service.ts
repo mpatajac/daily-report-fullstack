@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from "@angular/common/http";
-import { catchError, map } from "rxjs/operators";
+import { catchError, map, tap } from "rxjs/operators";
+import { of } from 'rxjs';
 
 import { User } from "../models/user";
-import { Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -19,22 +19,20 @@ export class UserService {
   ) { }
 
   /**
-   * Fetch user data from server 
-   * and update local user.
+   * Update local user
+   * and return them.
    */
-  getUser(): User {
-    this.fetchUserFromDB().subscribe(
-      response => this.updateLocalUser(response)
-    );
+  async getUser(): Promise<User> {
+    await this.updateLocalUser();
     return this.user;
   }
 
-  private fetchUserFromDB(): Observable<any> {
+  private async fetchUserFromDB(): Promise<any> {
     const header = this.createHeader();
     return this.http.get(
       `${this.baseUrl}/users/${this.user.name}`,
       { headers: header }
-    );
+    ).toPromise();
   }
 
   /**
@@ -42,18 +40,14 @@ export class UserService {
    * 
    * TODO: remove password
    */
-  setUser(username: string, password: string) {
+  async setUser(username: string, password: string) {
     this.user = new User(username, password);
-    this.fetchUserFromDB().subscribe(
-      response => this.updateLocalUser(response)
-    );
+    await this.updateLocalUser();
   }
 
 
-  // TODO: work on error-handling
-  login(username: string, password?: string) {
+  async login(username: string, password: string) {
     const header = this.createHeader(false, true);
-
     const body = `username=${username}&password=${password}&grant_type=password`;
 
     return this.http.post<{
@@ -66,32 +60,34 @@ export class UserService {
         headers: header,
         observe: 'response'
       }
-    ).subscribe(
-      response => {
-        this.token = response.body.access_token;
-        this.setUser(username, password);
-        if (this.isMissingFields()) {
-          this.addMissingFields();
-        }
-      },
-      catchError
-    );
+    ).pipe(
+      tap(
+        async response => {
+          this.token = response.body.access_token;
+          await this.setUser(username, password);
+          if (await this.isMissingFields()) {
+            await this.addMissingFields();
+          }
+        }),
+      map(response => response.ok),
+      catchError(_ => of(false))
+    ).toPromise();
   }
 
-  doesUserExist(username: string): Observable<boolean> {
+  async doesUserExist(username: string): Promise<boolean> {
     return this.http.get(`${this.baseUrl}/users/${username}/exists`,
       { observe: 'response' }
     ).pipe(
       map(response => response.ok),
-      catchError(this.handleError)
-    )
+      catchError(_ => of(false))
+    ).toPromise()
   }
 
-  toggleThemePreference() {
+  async toggleThemePreference() {
     this.user.darkTheme = !this.user.darkTheme;
 
     const header = this.createHeader();
-    const email: string = this.extractEmail();
+    const email = await this.extractEmail();
 
     return this.http.put(
       `${this.baseUrl}/users/${this.user.name}`,
@@ -103,16 +99,16 @@ export class UserService {
     ).subscribe();
   }
 
-  updateWarning(warning: boolean) {
+  async updateWarning(warning: boolean) {
     this.user.showWarning = warning;
 
     const header = this.createHeader();
-    const email: string = this.extractEmail();
+    const email = await this.extractEmail();
 
     return this.http.put(
       `${this.baseUrl}/users/${this.user.name}`,
       {
-        darkTheme: this.user.showWarning,
+        showWarning: this.user.showWarning,
         email: email
       },
       { headers: header }
@@ -129,24 +125,19 @@ export class UserService {
     this.user = null;
   }
 
-  private isMissingFields(): boolean {
-    let result: boolean;
-    this.fetchUserFromDB().subscribe(
-      response => {
-        result = response["darkTheme"] !== undefined ||
-          response["showWarning"] !== undefined;
-      }
-    )
-    return result;
+  private async isMissingFields(): Promise<boolean> {
+    let response = await this.fetchUserFromDB();
+    return response.darkTheme === undefined ||
+      response.showWarning === undefined;
   }
 
   /**
    * When user logs in for the first time,
    * add "darkTheme" and "showWarning" fields.
    */
-  private addMissingFields() {
+  private async addMissingFields() {
     const header = this.createHeader();
-    const email: string = this.extractEmail();
+    const email = await this.extractEmail();
 
     return this.http.put(
       `${this.baseUrl}/users/${this.user.name}`,
@@ -165,23 +156,17 @@ export class UserService {
    * For some reason, PUT request on other fields sets "email" to null.
    * This method is used to extract it and update it along with the request.
    */
-  private extractEmail(): string {
-    let email: string;
-    this.fetchUserFromDB().subscribe(response => email = response.email);
-    return email;
+  private async extractEmail(): Promise<string> {
+    let response = await this.fetchUserFromDB();
+    return response.email;
   }
 
 
-  private updateLocalUser(response: any) {
+  private async updateLocalUser() {
+    let response = await this.fetchUserFromDB();
     this.user.name = response.name;
     this.user.darkTheme = response.darkTheme;
     this.user.showWarning = response.showWarning;
-  }
-
-  private handleError(result?: any) {
-    return (error: any): Observable<any> => {
-      return of(result)
-    }
   }
 
   /**

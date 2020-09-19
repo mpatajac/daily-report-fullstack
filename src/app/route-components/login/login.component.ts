@@ -33,18 +33,18 @@ export class LoginComponent implements OnInit {
 
   /**
    * 1. Search for user with given username
-   * 2. If such user exists, compare passwords
-   * 3. If passwords match, log user in
+   * 2. If such user exists, attempt login
+   * 3. If login is successful, init user and dashboard
    */
-  login() {
-    this.user = this.userService.getUserFromDB(this.username);
-
-    this.usernameFound = !!this.user;
-    this.passwordMatches = this.usernameFound && this.user.password === this.password;
+  async login() {
+    this.usernameFound = await this.userService.doesUserExist(this.username);
+    if (!this.usernameFound) return;
+    
+    this.passwordMatches = await this.userService.login(this.username, this.password);
 
     if (this.passwordMatches) {
       // successful login
-      this.userService.setUser(this.user);
+      this.user = await this.userService.getUser();
       this.themeService.initialiseTheme(this.user.darkTheme);
       this.router.navigateByUrl("/app/dashboard");
     }
