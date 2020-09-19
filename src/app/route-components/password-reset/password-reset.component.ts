@@ -25,8 +25,8 @@ export class PasswordResetComponent implements OnInit {
     private router: Router
   ) { }
 
-  ngOnInit() {
-    this.user = this.userService.getUser();
+  async ngOnInit() {
+    this.user = await this.userService.getUser();
     this.passwordStrength = 'weak';
 
     // source: https://www.thepolyglotdeveloper.com/2015/05/use-regex-to-test-password-strength-in-javascript/

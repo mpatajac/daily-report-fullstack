@@ -21,13 +21,13 @@ export class NavigationComponent implements OnInit {
     private themeService: ThemeService
   ) { }
 
-  ngOnInit() {
-    this.user = this.userService.getUser();
+  async ngOnInit() {
+    this.user = await this.userService.getUser();
   }
 
-  logout() {
+  async logout() {
     this.messenger.hideNavigation();
     this.themeService.removeTheme(this.user.darkTheme);
-    this.userService.logout();
+    await this.userService.logout();
   }
 }

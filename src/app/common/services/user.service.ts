@@ -115,12 +115,12 @@ export class UserService {
     ).subscribe();
   }
 
-  updatePassword(pass: string) {
+  async updatePassword(pass: string) {
     // TODO: update DB
     this.user.password = pass;
   }
 
-  logout() {
+  async logout() {
     // TODO: DELETE on API
     this.user = null;
   }

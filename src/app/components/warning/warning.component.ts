@@ -17,8 +17,8 @@ export class WarningComponent implements OnInit {
     private router: Router
   ) { }
 
-  ngOnInit() {
-    this.user = this.userService.getUser();
+  async ngOnInit() {
+    this.user = await this.userService.getUser();
   }
 
   onChange(e) {
