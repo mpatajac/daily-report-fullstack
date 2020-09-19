@@ -76,10 +76,10 @@ export class CreateReportComponent implements OnInit {
    */
   canSubmit(form: NgForm): boolean {
     return form.valid && (
-      !!this.done.length ||
-      !!this.inProgress.length ||
-      !!this.scheduled.length ||
-      !!this.problems.length
+      !!this.done?.length ||
+      !!this.inProgress?.length ||
+      !!this.scheduled?.length ||
+      !!this.problems?.length
     );
   }
 

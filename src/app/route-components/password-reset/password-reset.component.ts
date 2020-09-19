@@ -82,7 +82,7 @@ export class PasswordResetComponent implements OnInit {
     if (passInputField.classList.contains('ng-dirty')) {
       passInputField.classList.remove('strong', 'ok', 'weak');
 
-      if (this.firstNewPassword === this.user.password) {
+      if (this.firstNewPassword === this.user?.password) {
         passInputField.classList.add('weak');
       } else {
         passInputField.classList.add(this.passwordStrength);
@@ -98,10 +98,10 @@ export class PasswordResetComponent implements OnInit {
    */
   canSubmit(form: NgForm): boolean {
     return form.valid &&
-      this.user.password === this.oldPassword &&
+      this.user?.password === this.oldPassword &&
       this.firstNewPassword &&
       this.isOkPassword() &&
-      this.user.password !== this.firstNewPassword &&
+      this.user?.password !== this.firstNewPassword &&
       this.firstNewPassword === this.secondNewPassword;
   }
 }
