@@ -23,7 +23,6 @@ export class UserService {
    * and return them.
    */
   async getUser(): Promise<User> {
-    await this.updateLocalUser();
     return this.user;
   }
 
@@ -162,7 +161,7 @@ export class UserService {
   }
 
 
-  private async updateLocalUser() {
+  async updateLocalUser() {
     let response = await this.fetchUserFromDB();
     this.user.name = response.name;
     this.user.darkTheme = response.darkTheme;

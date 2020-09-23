@@ -44,6 +44,7 @@ export class LoginComponent implements OnInit {
 
     if (this.passwordMatches) {
       // successful login
+      await this.userService.updateLocalUser();
       this.user = await this.userService.getUser();
       this.themeService.initialiseTheme(this.user.darkTheme);
       this.router.navigateByUrl("/app/dashboard");
