@@ -20,7 +20,7 @@ export class UserAuthGuard implements CanActivate {
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Promise<true | UrlTree> {
-    if (await this.userService.getUser()) {
+    if (await this.userService.isLoggedIn()) {
       return true;
     }
 
