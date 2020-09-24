@@ -8,9 +8,7 @@ import { User } from '../models/user';
 })
 export class ReportService {
   user: User = {
-    id: 1,
     name: "matija",
-    password: "1234",
     darkTheme: true,
     showWarning: false
   }

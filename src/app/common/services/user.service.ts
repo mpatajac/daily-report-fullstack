@@ -200,7 +200,7 @@ export class UserService {
     let response = await this.fetchUserFromDB();
 
     // TODO: remove password
-    this.user = this.user ?? new User(response.name, "");
+    this.user = this.user ?? new User(response.name);
 
     this.user.darkTheme = response.darkTheme;
     this.user.showWarning = response.showWarning;
