@@ -114,9 +114,20 @@ export class UserService {
     ).subscribe();
   }
 
-  async updatePassword(pass: string) {
-    // TODO: update DB
-    this.user.password = pass;
+  async updatePassword(password: string) {
+    const header = this.createHeader();
+    const body = {
+      newPassword: password,
+      sendMailNotification: false
+    };
+
+    this.http.put(
+      `${this.baseUrl}/users/${this.user.name}/change-password`,
+      body,
+      {
+        headers: header
+      }
+    ).subscribe();
   }
 
   async logout() {
