@@ -120,8 +120,22 @@ export class UserService {
   }
 
   async logout() {
-    // TODO: DELETE on API and clean localStorage
-    this.user = null;
+    const header = this.createHeader();
+    const options = {
+      headers: header,
+      body: {
+        token: localStorage.token,
+        type: "Bearer"
+      }
+    };
+
+    this.http.delete(`${this.baseUrl}/login`, options).subscribe();
+    this.clearUserData();
+  }
+
+  clearUserData() {
+    this.user = undefined;
+    localStorage.clear();
   }
 
   isLoggedIn(): boolean {
