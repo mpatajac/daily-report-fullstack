@@ -133,6 +133,12 @@ export class UserService {
     this.clearUserData();
   }
 
+  /**
+   * Reset local user and remove data from localStorage
+   * 
+   * Used during logout and
+   * while handling errors caused by token expiration (401)
+   */
   clearUserData() {
     this.user = undefined;
     localStorage.clear();
