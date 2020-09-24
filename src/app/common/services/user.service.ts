@@ -4,46 +4,44 @@ import { catchError, map, tap } from "rxjs/operators";
 import { of } from 'rxjs';
 
 import { User } from "../models/user";
+import { ThemeService } from "../services/theme.service";
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
   user: User;
-  token: string;
 
   private baseUrl = "https://api.baasic.com/v1/daily-report-app";
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private themeService: ThemeService
   ) { }
 
   /**
    * Update local user
+   * (if undefined)
    * and return them.
    */
   async getUser(): Promise<User> {
+    if (this.user === undefined) {
+      await this.updateLocalUser();
+
+      // update displayed theme when re-setting the user
+      this.themeService.initialiseTheme(this.user.darkTheme);
+    }
+
     return this.user;
   }
 
   private async fetchUserFromDB(): Promise<any> {
     const header = this.createHeader();
     return this.http.get(
-      `${this.baseUrl}/users/${this.user.name}`,
+      `${this.baseUrl}/users/${this.user?.name ?? localStorage.username}`,
       { headers: header }
     ).toPromise();
   }
-
-  /**
-   * Set current user after successful login
-   * 
-   * TODO: remove password
-   */
-  async setUser(username: string, password: string) {
-    this.user = new User(username, password);
-    await this.updateLocalUser();
-  }
-
 
   async login(username: string, password: string) {
     const header = this.createHeader(false, true);
@@ -62,8 +60,10 @@ export class UserService {
     ).pipe(
       tap(
         async response => {
-          this.token = response.body.access_token;
-          await this.setUser(username, password);
+          localStorage.token = response.body.access_token;
+          localStorage.username = username;
+
+          await this.updateLocalUser();
           if (await this.isMissingFields()) {
             await this.addMissingFields();
           }
@@ -120,8 +120,12 @@ export class UserService {
   }
 
   async logout() {
-    // TODO: DELETE on API
+    // TODO: DELETE on API and clean localStorage
     this.user = null;
+  }
+
+  isLoggedIn(): boolean {
+    return localStorage.username;
   }
 
   private async isMissingFields(): Promise<boolean> {
@@ -163,7 +167,10 @@ export class UserService {
 
   async updateLocalUser() {
     let response = await this.fetchUserFromDB();
-    this.user.name = response.name;
+
+    // TODO: remove password
+    this.user = this.user ?? new User(response.name, "");
+
     this.user.darkTheme = response.darkTheme;
     this.user.showWarning = response.showWarning;
   }
@@ -179,7 +186,7 @@ export class UserService {
   ): HttpHeaders {
     let obj = {};
     if (token) {
-      obj["Authorization"] = `Bearer ${this.token}`;
+      obj["Authorization"] = `Bearer ${localStorage.token}`;
     }
 
     if (urlencoded) {

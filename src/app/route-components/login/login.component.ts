@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { User } from 'src/app/common/models/user';
 import { UserService } from 'src/app/common/services/user.service';
-import { ThemeService } from 'src/app/common/services/theme.service';
 import { Router } from '@angular/router';
 import { NgForm, NgModel } from '@angular/forms';
 
@@ -13,7 +11,6 @@ import { NgForm, NgModel } from '@angular/forms';
 export class LoginComponent implements OnInit {
   username: string;
   password: string;
-  user: User;
 
   // used for form validation
   usernameFound: boolean;
@@ -22,7 +19,6 @@ export class LoginComponent implements OnInit {
   constructor(
     private userService: UserService,
     private router: Router,
-    private themeService: ThemeService
   ) { }
 
   ngOnInit() {
@@ -34,7 +30,7 @@ export class LoginComponent implements OnInit {
   /**
    * 1. Search for user with given username
    * 2. If such user exists, attempt login
-   * 3. If login is successful, init user and dashboard
+   * 3. If login is successful, go to dashboard
    */
   async login() {
     this.usernameFound = await this.userService.doesUserExist(this.username);
@@ -43,10 +39,6 @@ export class LoginComponent implements OnInit {
     this.passwordMatches = await this.userService.login(this.username, this.password);
 
     if (this.passwordMatches) {
-      // successful login
-      await this.userService.updateLocalUser();
-      this.user = await this.userService.getUser();
-      this.themeService.initialiseTheme(this.user.darkTheme);
       this.router.navigateByUrl("/app/dashboard");
     }
   }
