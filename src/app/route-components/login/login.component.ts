@@ -22,6 +22,12 @@ export class LoginComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    // if the user is already logged in, redirect them to dashboard
+    if (this.userService.isLoggedIn()) {
+      this.router.navigateByUrl("/app/dashboard");
+      return;
+    }
+
     // initially set to "true", so the error message doesn't show up
     this.usernameFound = true;
     this.passwordMatches = true;
