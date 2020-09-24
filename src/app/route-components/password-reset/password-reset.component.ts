@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { User } from "../../common/models/user";
 import { UserService } from "../../common/services/user.service";
 import { Router } from "@angular/router";
 import { NgForm } from '@angular/forms';
@@ -11,8 +10,6 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['./password-reset.component.scss']
 })
 export class PasswordResetComponent implements OnInit {
-  user: User;
-  oldPassword: string;
   firstNewPassword: string;
   secondNewPassword: string;
   passwordStrength: string;
@@ -26,11 +23,10 @@ export class PasswordResetComponent implements OnInit {
   ) { }
 
   async ngOnInit() {
-    this.user = await this.userService.getUser();
     this.passwordStrength = 'weak';
 
     // source: https://www.thepolyglotdeveloper.com/2015/05/use-regex-to-test-password-strength-in-javascript/
-    this.strongRegExp = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})");
+    this.strongRegExp = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9\s])(?=.*[0-9])(?=.{8,})");
     this.okRegExp = new RegExp("^(((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9])))(?=.{8,})");
   }
 
@@ -57,7 +53,7 @@ export class PasswordResetComponent implements OnInit {
 
   /**
    * Password is strong if it has at least 8 characters, 1 lowercase letter,
-   * 1 uppercase letter and 1 number
+   * 1 uppercase letter, 1 number and 1 non-alphanumeric character
    */
   isStrongPassword(): boolean {
     return this.strongRegExp.test(this.firstNewPassword);
@@ -81,12 +77,7 @@ export class PasswordResetComponent implements OnInit {
     // only change border color if field was written in
     if (passInputField.classList.contains('ng-dirty')) {
       passInputField.classList.remove('strong', 'ok', 'weak');
-
-      if (this.firstNewPassword === this.user?.password) {
-        passInputField.classList.add('weak');
-      } else {
-        passInputField.classList.add(this.passwordStrength);
-      }
+      passInputField.classList.add(this.passwordStrength);
     }
 
     return this.passwordStrength;
@@ -98,10 +89,8 @@ export class PasswordResetComponent implements OnInit {
    */
   canSubmit(form: NgForm): boolean {
     return form.valid &&
-      this.user?.password === this.oldPassword &&
       this.firstNewPassword &&
       this.isOkPassword() &&
-      this.user?.password !== this.firstNewPassword &&
       this.firstNewPassword === this.secondNewPassword;
   }
 }
