@@ -24,7 +24,7 @@ export class UserAuthGuard implements CanActivate {
       return true;
     }
 
-    localStorage.clear();
+    this.userService.clearUserData();
     return this.router.parseUrl("/login");
   }
 
