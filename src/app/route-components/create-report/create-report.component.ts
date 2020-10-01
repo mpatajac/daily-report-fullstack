@@ -15,7 +15,7 @@ import { ReportService } from 'src/app/common/services/report.service';
 })
 export class CreateReportComponent implements OnInit {
   user: User;
-  reportName: string;
+  reportTitle: string;
   done: Array<string>;
   inProgress: Array<string>;
   scheduled: Array<string>;
@@ -54,8 +54,8 @@ export class CreateReportComponent implements OnInit {
 
   submitReport() {
     let report = new Report(
-      this.user,
-      this.reportName,
+      this.user.name,
+      this.reportTitle,
       this.done,
       this.inProgress,
       this.scheduled,
@@ -63,14 +63,14 @@ export class CreateReportComponent implements OnInit {
     );
 
     // temporary fix; will be done differently when connected to DB
-    report.id = this.reportService.getNextID();
+    report.id = this.reportService.getNextID().toString();
 
     this.reportService.addReport(report);
     this.router.navigateByUrl("/app/dashboard")
   }
 
   /**
-   * User can submit report if it has a name and
+   * User can submit report if it has a title and
    * at least one element (done, in progress, scheduled, done) is filled.
    * @param form Form used in creating a new report
    */

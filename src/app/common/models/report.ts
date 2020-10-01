@@ -1,9 +1,7 @@
-import { User } from './user';
-
 export class Report {
-	id: number;
-	user: User;
-	name: string;
+	id: string;
+	user: string;
+	title: string;
 	done: string[];
 	inProgress: string[];
 	scheduled: string[];
@@ -11,15 +9,15 @@ export class Report {
 	date: Date;
 
 	constructor(
-		user: User,
-		name: string,
+		user: string,
+		title: string,
 		done: string[],
 		inProgress: string[],
 		scheduled: string[],
 		problems: string[],
 	) {
 		this.user = user;
-		this.name = name;
+		this.title = title;
 		this.done = done;
 		this.inProgress = inProgress;
 		this.scheduled = scheduled;

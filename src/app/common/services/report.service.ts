@@ -16,9 +16,9 @@ export class ReportService {
   // TODO: get reports from DB
   reports: Report[] = [
     {
-      id: 1,
-      user: this.user,
-      name: "Test report",
+      id: "1",
+      user: this.user.name,
+      title: "Test report",
       done: [
         "Something that is done",
         "Another thing that is done",
@@ -42,9 +42,9 @@ export class ReportService {
       date: new Date()
     },
     {
-      id: 2,
-      user: this.user,
-      name: "Test report",
+      id: "2",
+      user: this.user.name,
+      title: "Test report",
       done: [],
       inProgress: [],
       scheduled: ["Some thing that is scheduled."],
@@ -52,9 +52,9 @@ export class ReportService {
       date: new Date()
     },
     {
-      id: 3,
-      user: this.user,
-      name: "Test report",
+      id: "3",
+      user: this.user.name,
+      title: "Test report",
       done: [],
       inProgress: [],
       scheduled: [],
@@ -79,11 +79,13 @@ export class ReportService {
     return this.reports;
   }
 
-  getReport(id: number): Report {
+  getReport(id: string): Report {
     return this.reports.find(report => report.id === id);
   }
 
   addReport(report: Report): void {
+    // console.log(report);
+    
     report = this.fixReport(report);
 
     // TODO: insert report into DB

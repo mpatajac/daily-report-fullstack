@@ -13,7 +13,7 @@ export class ReportsTableComponent implements OnInit {
   reports: Report[];
 
   generalSearch: string;
-  searchByName: string;
+  searchByTitle: string;
   searchByUser: string;
   startDate: Date;
   endDate: Date;
@@ -37,7 +37,7 @@ export class ReportsTableComponent implements OnInit {
     // mora se svaki put rucno
     const data = {
       generalSearch: this.generalSearch,
-      searchByName: this.searchByName,
+      searchByTitle: this.searchByTitle,
       searchByUser: this.searchByUser,
       startDate: this.startDate,
       endDate: this.endDate,
@@ -68,10 +68,10 @@ export class ReportsTableComponent implements OnInit {
         this.sortConfiguration.order = SortOrder.Desc :
         this.sortConfiguration.order = SortOrder.Asc;
     } else {
-      // username and report name start as ascending, date as descending
+      // username and report title start as ascending, date as descending
       switch (column) {
-        case "name":
-          this.sortConfiguration.column = Column.Name;
+        case "title":
+          this.sortConfiguration.column = Column.Title;
           this.sortConfiguration.order = SortOrder.Asc;
           break;
 
@@ -118,7 +118,7 @@ export class ReportsTableComponent implements OnInit {
   isFilterUsed(): boolean {
     return [
       this.generalSearch,
-      this.searchByName,
+      this.searchByTitle,
       this.searchByUser,
       this.startDate,
       this.endDate

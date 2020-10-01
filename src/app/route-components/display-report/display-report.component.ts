@@ -27,7 +27,7 @@ export class DisplayReportComponent implements OnInit {
 
 
   getReport(): void {
-    const id = +this.route.snapshot.paramMap.get('id');
+    const id = this.route.snapshot.paramMap.get('id');
     // TODO: change to subscription
     this.report = this.reportService.getReport(id);
 

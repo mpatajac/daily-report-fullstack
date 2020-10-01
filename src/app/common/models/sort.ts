@@ -4,7 +4,7 @@ export enum SortOrder {
 };
 
 export enum Column {
-	Name = "name",
+	Title = "title",
 	User = "user",
 	Date = "date"
 }

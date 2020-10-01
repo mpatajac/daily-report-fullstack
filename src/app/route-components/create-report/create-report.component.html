@@ -1,10 +1,10 @@
 <form [className]="'report-wrapper'" #createReportForm="ngForm" (ngSubmit)="submitReport()">
-	<div [className]="'name-input'">
-		<h2>Name</h2>
-		<input name="reportName" [(ngModel)]="reportName" required minlength="5" #reportNameInput="ngModel"
-			[class.validation-error-border]="reportNameInput.invalid && reportNameInput.dirty">
-		<span [class.validation-error-show]="!(reportNameInput.valid || reportNameInput.pristine)" [className]="'validation-error-text'">Report
-			name is required (min. 5 characters)</span>
+	<div [className]="'title-input'">
+		<h2>Title</h2>
+		<input name="reportTitle" [(ngModel)]="reportTitle" required minlength="5" #reportTitleInput="ngModel"
+			[class.validation-error-border]="reportTitleInput.invalid && reportTitleInput.dirty">
+		<span [class.validation-error-show]="!(reportTitleInput.valid || reportTitleInput.pristine)" [className]="'validation-error-text'">Report
+			title is required (min. 5 characters)</span>
 	</div>
 
 	<app-report-element [label]="'done'" (reportElementEmitter)="updateDone($event)"></app-report-element>
@@ -12,7 +12,7 @@
 	<app-report-element [label]="'scheduled'" (reportElementEmitter)="updateScheduled($event)"></app-report-element>
 	<app-report-element [label]="'problems'" (reportElementEmitter)="updateProblems($event)"></app-report-element>
 
-	<span [class.validation-error-show]="!(reportNameInput.invalid || canSubmit(createReportForm))" [className]="'validation-error-text centered'">
+	<span [class.validation-error-show]="!(reportTitleInput.invalid || canSubmit(createReportForm))" [className]="'validation-error-text centered'">
 		At least one element must be filled
 	</span>
 
