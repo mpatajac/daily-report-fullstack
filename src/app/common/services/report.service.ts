@@ -84,24 +84,7 @@ export class ReportService {
   }
 
   addReport(report: Report): void {
-    // console.log(report);
-    
-    report = this.fixReport(report);
-
     // TODO: insert report into DB
     this.reports.push(report);
-  }
-
-  /**
-   * Replaces empty (undefined) fields inside report with empty array
-   * // TODO: check if this is necessary
-   * @param report Report that (potentially) needs fixing
-   */
-  fixReport(report: Report) {
-    if (report.done === undefined) report.done = [];
-    if (report.inProgress === undefined) report.inProgress = [];
-    if (report.scheduled === undefined) report.scheduled = [];
-    if (report.problems === undefined) report.problems = [];
-    return report;
   }
 }
