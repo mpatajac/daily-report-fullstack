@@ -20,16 +20,15 @@ export class DisplayReportComponent implements OnInit {
     private reportService: ReportService
   ) { }
 
-  ngOnInit() {
-    this.getReport();
+  async ngOnInit() {
+    await this.getReport();
     this.date = this.report.date.toDateString();
   }
 
 
-  getReport(): void {
+  async getReport() {
     const id = this.route.snapshot.paramMap.get('id');
-    // TODO: change to subscription
-    this.report = this.reportService.getReport(id);
+    this.report = await this.reportService.getReportById(id);
 
     // redirect to 404 if no report with given ID is found
     if (!this.report) {

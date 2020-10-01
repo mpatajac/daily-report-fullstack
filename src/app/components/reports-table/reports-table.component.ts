@@ -22,10 +22,10 @@ export class ReportsTableComponent implements OnInit {
 
   constructor(private reportService: ReportService) { }
 
-  ngOnInit() {
-    this.reports = this.reportService.getReports();
+  async ngOnInit() {
     this.showSAF = false;
     this.selectedOption = "all";
+    this.reports = await this.reportService.getReports();
 
     // Initially, display reports from newest to oldest
     this.sortConfiguration = {

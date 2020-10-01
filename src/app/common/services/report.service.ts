@@ -1,90 +1,65 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+
 import { Report } from '../models/report';
-import { UserService } from "./user.service";
-import { User } from '../models/user';
+import { UserService } from './user.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ReportService {
-  user: User = {
-    name: "matija",
-    darkTheme: true,
-    showWarning: false
+  private baseUrl = "https://api.baasic.com/v1/daily-report-app/resources/Report";
+
+  constructor(
+    private http: HttpClient,
+    private userService: UserService
+  ) { }
+
+  // TODO: add sorting, filtering, paging etc.
+  async getReports(): Promise<Report[]> {
+    const header = this.userService.createHeader();
+
+    let response: any = await this.http.get(
+      `${this.baseUrl}`,
+      { headers: header }
+    ).toPromise();
+
+    let reports = response.item;
+    reports.forEach(report => this.fixDate(report));
+
+    return reports;
   }
 
-  // TODO: get reports from DB
-  reports: Report[] = [
-    {
-      id: "1",
-      user: this.user.name,
-      title: "Test report",
-      done: [
-        "Something that is done",
-        "Another thing that is done",
-        "Oh wow, we've been productive today"
-      ],
-      inProgress: ["Not so much"],
-      scheduled: [
-        "There are some things that are scheduled",
-        "Actually here is a veeeeeeery looooooong thing that we have scheduled for some time in the near (or not so near) future"
-      ],
-      problems: [
-        "Problem",
-        "Another one",
-        "Another one",
-        "Another one",
-        "Another one",
-        "Another one",
-        "Another one",
-        "Another one",
-      ],
-      date: new Date()
-    },
-    {
-      id: "2",
-      user: this.user.name,
-      title: "Test report",
-      done: [],
-      inProgress: [],
-      scheduled: ["Some thing that is scheduled."],
-      problems: [],
-      date: new Date()
-    },
-    {
-      id: "3",
-      user: this.user.name,
-      title: "Test report",
-      done: [],
-      inProgress: [],
-      scheduled: [],
-      problems: [],
-      date: new Date()
-    }
-  ];
+  async getReportById(id: string): Promise<Report> {
+    const header = this.userService.createHeader();
 
-  id: number = 4;
+    let report: any = await this.http.get(
+      `${this.baseUrl}/${id}`,
+      { headers: header }
+    ).toPromise();
 
-  constructor(private userService: UserService) { }
-
-  /**
-   * Temporary method to generate ID
-   * WILL BE REMOVED
-   */
-  getNextID(): number {
-    return this.id++;
-  }
-
-  getReports(): Report[] {
-    return this.reports;
-  }
-
-  getReport(id: string): Report {
-    return this.reports.find(report => report.id === id);
+    this.fixDate(report);
+    return report;
   }
 
   addReport(report: Report): void {
-    // TODO: insert report into DB
-    this.reports.push(report);
+    // copy report and change date format
+    let requestBody: any = report;
+    requestBody.date = report.date.toJSON();
+
+    const header = this.userService.createHeader();
+
+    this.http.post(
+      `${this.baseUrl}`,
+      requestBody,
+      { headers: header }
+    ).subscribe();
+  }
+
+  /**
+   * Turn ISO 8601 formated date to Date object
+   */
+  fixDate(report) {
+    report.date = new Date(JSON.parse(`"${report.date}"`));
   }
 }

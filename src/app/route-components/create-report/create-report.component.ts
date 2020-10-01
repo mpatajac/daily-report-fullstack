@@ -62,9 +62,6 @@ export class CreateReportComponent implements OnInit {
       this.problems
     );
 
-    // temporary fix; will be done differently when connected to DB
-    report.id = this.reportService.getNextID().toString();
-
     this.reportService.addReport(report);
     this.router.navigateByUrl("/app/dashboard")
   }

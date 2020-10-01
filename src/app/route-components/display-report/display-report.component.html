@@ -1,10 +1,10 @@
 <button data-toggle="tooltip" data-placement="bottom" title="Go back" routerLink="/app/dashboard">&lt;</button>
 
 <div [className]="'display-report-wrapper container'">
-	<h1>{{report.title}}</h1>
+	<h1>{{report?.title}}</h1>
 	<div [className]="'display-report-row'">
 		<h2>User:</h2>
-		<h3>{{report.user}}</h3>
+		<h3>{{report?.user}}</h3>
 	</div>
 
 	<div [className]="'display-report-border'"></div>
@@ -13,7 +13,7 @@
 		<h3>{{date || date}}</h3>
 	</div>
 
-	<div *ngIf="report.done.length">
+	<div *ngIf="report?.done?.length">
 		<div [className]="'display-report-border'"></div>
 		<div [className]="'display-report-row report-element'">
 			<h2>Done:</h2>
@@ -23,7 +23,7 @@
 		</div>
 	</div>
 
-	<div *ngIf="report.inProgress.length">
+	<div *ngIf="report?.inProgress?.length">
 		<div [className]="'display-report-border'"></div>
 		<div [className]="'display-report-row report-element'">
 			<h2>In progress:</h2>
@@ -33,7 +33,7 @@
 		</div>
 	</div>
 
-	<div *ngIf="report.scheduled.length">
+	<div *ngIf="report?.scheduled?.length">
 		<div [className]="'display-report-border'"></div>
 		<div [className]="'display-report-row report-element'">
 			<h2>Scheduled:</h2>
@@ -43,7 +43,7 @@
 		</div>
 	</div>
 
-	<div *ngIf="report.problems.length">
+	<div *ngIf="report?.problems?.length">
 		<div [className]="'display-report-border'"></div>
 		<div [className]="'display-report-row report-element'">
 			<h2>Problems:</h2>
