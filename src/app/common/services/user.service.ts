@@ -64,6 +64,7 @@ export class UserService {
           localStorage.username = username;
 
           await this.updateLocalUser();
+          this.themeService.initialiseTheme(this.user.darkTheme);
           if (await this.isMissingFields()) {
             await this.addMissingFields();
           }
@@ -155,8 +156,27 @@ export class UserService {
     localStorage.clear();
   }
 
-  isLoggedIn(): boolean {
-    return localStorage.username;
+  /**
+   * User is logged in if:
+   * 1. local user is defined or
+   * 2. username is stored and token is vaild (i.e. GET request has status 2xx)
+   */
+  async isLoggedIn(): Promise<boolean> {
+    if (this.user !== undefined) {
+      return true;
+    }
+
+    if (localStorage.username) {
+      try {
+        await this.fetchUserFromDB();
+        return true;
+      } catch (e) {
+        this.clearUserData();
+        return false;
+      }
+    }
+
+    return false;
   }
 
   private async isMissingFields(): Promise<boolean> {
@@ -199,9 +219,7 @@ export class UserService {
   async updateLocalUser() {
     let response = await this.fetchUserFromDB();
 
-    // TODO: remove password
     this.user = this.user ?? new User(response.name);
-
     this.user.darkTheme = response.darkTheme;
     this.user.showWarning = response.showWarning;
   }
