@@ -2,7 +2,7 @@
 	<!-- Search and filter -->
 	<div [className]="'dashboard-saf'" *ngIf="this.reports?.length > 0 ||isFilterUsed()">
 		<div [className]="'dashboard-saf-top'">
-			<input type="text" placeholder="Search ..." [(ngModel)]="generalSearch">
+			<input type="text" placeholder="Search ..." #generalSearchInput (keyup.enter)="updateGeneralSearch(generalSearchInput.value)" (blur)="updateGeneralSearch(generalSearchInput.value)">
 			
 			<button data-toggle="tooltip" data-placenemt="top" title="Filter"
 			(click)="this.toggleSAFVisibility()">
@@ -11,8 +11,8 @@
 	</div>
 	
 	<div [className]="'dashboard-saf-bottom'" [class.show-saf]="this.showSAF">
-		<input type="text" placeholder="filter by report title" [(ngModel)]="searchByTitle">
-		<input type="text" placeholder="filter by user" [(ngModel)]="searchByUser">
+		<input type="text" placeholder="filter by report title" #searchByTitleInput (keyup.enter)="updateSearchByTitle(searchByTitleInput.value)" (blur)="updateSearchByTitle(searchByTitleInput.value)">
+		<input type="text" placeholder="filter by user" #searchByUserInput (keyup.enter)="updateSearchByUser(searchByUserInput.value)" (blur)="updateSearchByUser(searchByUserInput.value)">
 		<div [className]="'dashboard-filter-date'">
 			<input type="date" id="start-date" [(ngModel)]="startDate">
 			<input type="date" id="end-date" [(ngModel)]="endDate">
@@ -69,7 +69,7 @@
 		<tbody>
 			<tr *ngFor="let report of reports" routerLink="/app/report/{{report.id}}">
 				<td>{{report.title}}</td>
-				<td>{{report.user}}</td>
+				<td>{{report.username}}</td>
 				<td>{{report.date | date}}</td>
 				<td><img src="../../../assets/img/dashboard/problem.svg" *ngIf="report.problems?.length > 0"
 					rel="tooltip" data-placement="right" title="This report contains problems."></td>

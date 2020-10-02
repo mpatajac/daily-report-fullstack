@@ -1,6 +1,6 @@
 export class Report {
 	id: string;
-	user: string;
+	username: string;
 	title: string;
 	done: string[];
 	inProgress: string[];
@@ -16,7 +16,7 @@ export class Report {
 		scheduled: string[],
 		problems: string[],
 	) {
-		this.user = user;
+		this.username = user;
 		this.title = title;
 		this.done = done;
 		this.inProgress = inProgress;
