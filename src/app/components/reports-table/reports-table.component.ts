@@ -19,13 +19,13 @@ export class ReportsTableComponent implements OnInit {
   endDate: Date;
   selectedOption: string;
   sortConfiguration: SortOptions;
+  filterConfiguration: any;
 
   constructor(private reportService: ReportService) { }
 
   async ngOnInit() {
     this.showSAF = false;
     this.selectedOption = "all";
-    this.reports = await this.reportService.getReports();
 
     // Initially, display reports from newest to oldest
     this.sortConfiguration = {
@@ -33,9 +33,7 @@ export class ReportsTableComponent implements OnInit {
       order: SortOrder.Desc
     } as SortOptions;
 
-    /*
-    // mora se svaki put rucno
-    const data = {
+    this.filterConfiguration = {
       generalSearch: this.generalSearch,
       searchByTitle: this.searchByTitle,
       searchByUser: this.searchByUser,
@@ -44,7 +42,8 @@ export class ReportsTableComponent implements OnInit {
       problems: this.selectedOption,
       sort: this.sortConfiguration
     };
-    */
+
+    await this.getReports();
   }
 
   toggleSAFVisibility() {
@@ -55,11 +54,12 @@ export class ReportsTableComponent implements OnInit {
     return option === this.selectedOption;
   }
 
-  selectDropdownOption(option: string) {
-    this.selectedOption = option;
+  async selectDropdownOption(option: string) {
+    this.filterConfiguration.problems = this.selectedOption = option;
+    await this.getReports();
   }
 
-  configureSort(column: string) {
+  async configureSort(column: string) {
     this.updateTableHeader(column);
 
     // same column -> change sort order
@@ -89,6 +89,53 @@ export class ReportsTableComponent implements OnInit {
           console.error("Invalid column value.");
       }
     }
+
+    this.filterConfiguration.sort = this.sortConfiguration;
+    await this.getReports();
+  }
+
+  async updateGeneralSearch(value: string) {
+    if (value !== this.generalSearch) {
+      this.filterConfiguration.generalSearch = this.generalSearch = value;
+      await this.getReports();
+    }
+  }
+
+  async updateSearchByTitle(value: string) {
+    if (value !== this.searchByTitle) {
+      this.filterConfiguration.searchByTitle = this.searchByTitle = value;
+      await this.getReports();
+    }
+  }
+
+  async updateSearchByUser(value: string) {
+    if (value !== this.searchByUser) {
+      this.filterConfiguration.searchByUser = this.searchByUser = value;
+      await this.getReports();
+    }
+  }
+
+  async updateStartDate(value: Date) {
+    if (value !== this.startDate) {
+      this.startDate = value;
+      this.filterConfiguration.startDate = this.startDate?.toJSON();
+      await this.getReports();
+    }
+  }
+
+  async updateEndDate(value: Date) {
+    if (value !== this.endDate) {
+      // use day after set date (to include reports submitted on that day)
+      value?.setDate(value?.getDate() + 1);
+      this.endDate = value;
+      
+      this.filterConfiguration.endDate = this.endDate?.toJSON();
+      await this.getReports();
+    }
+  }
+
+  async getReports() {
+    this.reports = await this.reportService.getReports(this.filterConfiguration);
   }
 
   /** update DOM */
@@ -109,7 +156,6 @@ export class ReportsTableComponent implements OnInit {
       }
     }
   }
-
 
   /**
    * Determine if some of the filter parameters is altered.
