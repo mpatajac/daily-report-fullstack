@@ -43,6 +43,8 @@ export class ReportsTableComponent implements OnInit {
       sort: this.sortConfiguration
     };
 
+    this.reportService.resetPage();
+
     await this.getReports();
   }
 
@@ -56,11 +58,13 @@ export class ReportsTableComponent implements OnInit {
 
   async selectDropdownOption(option: string) {
     this.filterConfiguration.problems = this.selectedOption = option;
+    this.reportService.resetPage();
     await this.getReports();
   }
 
   async configureSort(column: string) {
     this.updateTableHeader(column);
+    this.reportService.resetPage();
 
     // same column -> change sort order
     if (column === this.sortConfiguration.column) {
@@ -97,6 +101,7 @@ export class ReportsTableComponent implements OnInit {
   async updateGeneralSearch(value: string) {
     if (value !== this.generalSearch) {
       this.filterConfiguration.generalSearch = this.generalSearch = value;
+      this.reportService.resetPage();
       await this.getReports();
     }
   }
@@ -104,6 +109,7 @@ export class ReportsTableComponent implements OnInit {
   async updateSearchByTitle(value: string) {
     if (value !== this.searchByTitle) {
       this.filterConfiguration.searchByTitle = this.searchByTitle = value;
+      this.reportService.resetPage();
       await this.getReports();
     }
   }
@@ -111,6 +117,7 @@ export class ReportsTableComponent implements OnInit {
   async updateSearchByUser(value: string) {
     if (value !== this.searchByUser) {
       this.filterConfiguration.searchByUser = this.searchByUser = value;
+      this.reportService.resetPage();
       await this.getReports();
     }
   }
@@ -119,6 +126,7 @@ export class ReportsTableComponent implements OnInit {
     if (value !== this.startDate) {
       this.startDate = value;
       this.filterConfiguration.startDate = this.startDate?.toJSON();
+      this.reportService.resetPage();
       await this.getReports();
     }
   }
@@ -130,12 +138,27 @@ export class ReportsTableComponent implements OnInit {
       this.endDate = value;
       
       this.filterConfiguration.endDate = this.endDate?.toJSON();
+      this.reportService.resetPage();
       await this.getReports();
     }
   }
 
   async getReports() {
-    this.reports = await this.reportService.getReports(this.filterConfiguration);
+    let newReports = await this.reportService.getReports(this.filterConfiguration);
+    if (this.reportService.page === 1) {
+      this.reports = newReports;
+    } else {
+      this.reports = this.reports.concat(newReports);
+    }
+  }
+
+  async moreReports() {
+    this.reportService.nextPage();
+    this.getReports();
+  }
+
+  existRemainingReports(): boolean {
+    return this.reports.length < this.reportService.totalReports;
   }
 
   /** update DOM */

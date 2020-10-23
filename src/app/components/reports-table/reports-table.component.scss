@@ -285,8 +285,24 @@
 				cursor: pointer;
 			}
 		}
+	}
 
+	#show-more-reports {
+		display: block;
+		background-color: var(--table-bg);
+		outline: none;
+		height: 2em;
+		width: 2em;
+		border: none;
+		border-radius: 3em;
+		font-size: 2rem;
+		margin: -2rem auto 3em;
+		@include button_hover(1.2);
 
+		img {
+			transform: rotate(90deg);
+			// TODO: fix arrow color on dark theme
+		}
 	}
 }
 

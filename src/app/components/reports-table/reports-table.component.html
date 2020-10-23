@@ -84,6 +84,10 @@
 			</tbody>
 		</table>
 	</div>
+
+	<button id="show-more-reports" *ngIf="existRemainingReports()" (click)="moreReports()" data-toggle="tooltip" data-placement="top" title="Show more reports">
+		<img src="../../../assets/img/dashboard/arrow.svg">
+	</button>
 </div>
 
 

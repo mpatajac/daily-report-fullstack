@@ -10,6 +10,7 @@ import { UserService } from './user.service';
 export class ReportService {
   private baseUrl = "https://api.baasic.com/v1/daily-report-app/resources/Report";
   page: number = 1;
+  totalReports: number;
 
   constructor(
     private http: HttpClient,
@@ -24,6 +25,9 @@ export class ReportService {
       `${this.baseUrl}/?${parameters}`,
       { headers: header }
     ).toPromise();
+
+    // get total number of reports for pagination
+    this.totalReports = response.totalRecords;
 
     let reports = response.item;
     reports.forEach(report => this.fixDate(report));
@@ -64,7 +68,14 @@ export class ReportService {
     report.date = new Date(JSON.parse(`"${report.date}"`));
   }
 
-  
+  nextPage() {
+    ++this.page;
+  }
+
+  resetPage() {
+    this.page = 1;
+  }
+
   setCriteriaParameters(configuration): string {
     let searchParameters: string = "";
 
@@ -72,8 +83,8 @@ export class ReportService {
     searchParameters += `sort=${configuration.sort.column}|${configuration.sort.order}`;
 
     // pageing
-    const rpp = this.page * 10;
-    searchParameters += `&page=1&rpp=${rpp}`;
+    const rpp = 10;
+    searchParameters += `&page=${this.page}&rpp=${rpp}`;
 
     // search/filter
     const search = this.configureSearch(configuration);
