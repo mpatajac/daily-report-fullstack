@@ -158,7 +158,7 @@ export class ReportsTableComponent implements OnInit {
   }
 
   existRemainingReports(): boolean {
-    return this.reports.length < this.reportService.totalReports;
+    return this.reports?.length < this.reportService.totalReports;
   }
 
   /** update DOM */
