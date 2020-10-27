@@ -1,3 +1,6 @@
+<ngx-spinner bdColor="rgba(0,0,0,0.8)" size="large" color="#ddd" type="ball-scale-multiple" [fullScreen]="true">
+</ngx-spinner>
+
 <div [className]="'dashboard-table'">
 	<!-- Search and filter -->
 	<div [className]="'dashboard-saf'" *ngIf="this.reports?.length > 0 ||isFilterUsed()">
@@ -85,7 +88,8 @@
 		</table>
 	</div>
 
-	<button id="show-more-reports" *ngIf="existRemainingReports()" (click)="moreReports()" data-toggle="tooltip" data-placement="top" title="Show more reports">
+	<button id="show-more-reports" *ngIf="existRemainingReports()" (click)="moreReports()" data-toggle="tooltip"
+		data-placement="top" title="Show more reports">
 		<img src="../../../assets/img/dashboard/arrow.svg">
 	</button>
 </div>

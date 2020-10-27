@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Report } from '../../common/models/report';
 import { Column, SortOrder, SortOptions } from '../../common/models/sort'
 import { ReportService } from '../../common/services/report.service';
+import { NgxSpinnerService } from "ngx-spinner";
 
 @Component({
   selector: 'app-reports-table',
@@ -21,7 +22,10 @@ export class ReportsTableComponent implements OnInit {
   sortConfiguration: SortOptions;
   filterConfiguration: any;
 
-  constructor(private reportService: ReportService) { }
+  constructor(
+    private reportService: ReportService,
+    private spinner: NgxSpinnerService
+  ) { }
 
   async ngOnInit() {
     this.showSAF = false;
@@ -136,7 +140,7 @@ export class ReportsTableComponent implements OnInit {
       // use day after set date (to include reports submitted on that day)
       value?.setDate(value?.getDate() + 1);
       this.endDate = value;
-      
+
       this.filterConfiguration.endDate = this.endDate?.toJSON();
       this.reportService.resetPage();
       await this.getReports();
@@ -144,12 +148,16 @@ export class ReportsTableComponent implements OnInit {
   }
 
   async getReports() {
+    this.spinner.show();
+    
     let newReports = await this.reportService.getReports(this.filterConfiguration);
     if (this.reportService.page === 1) {
       this.reports = newReports;
     } else {
       this.reports = this.reports.concat(newReports);
     }
+
+    this.spinner.hide();
   }
 
   async moreReports() {
