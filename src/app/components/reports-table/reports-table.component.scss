@@ -438,4 +438,13 @@
 			transition-duration: 350ms;
 		}
 	}
+
+	.dashboard-table #show-more-reports {
+		width: 1.5em;
+		height: 1.5em;
+
+		img {
+			width: .8rem;
+		}
+	}
 }
