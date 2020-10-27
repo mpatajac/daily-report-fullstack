@@ -109,4 +109,9 @@ input {
 	--back-btn: var(--dark-text);
 
 	--border-size: 5px;
+
+	// change "show more" arrow color to white on dark theme
+	#show-more-reports img {
+		filter: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(303%) hue-rotate(178deg) brightness(96%) contrast(80%);
+	}
 }
