@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { Report } from '../../common/models/report';
-import { Column, SortOrder, SortOptions } from '../../common/models/sort'
-import { ReportService } from '../../common/services/report.service';
 import { Router } from "@angular/router";
+
+import { Report } from '@app/common/models/report';
+import { ReportService } from '@app/common/services/report.service';
+import { Column, SortOptions, SortOrder } from '@app/common/models/sort';
+
 import { NgxSpinnerService } from "ngx-spinner";
 
 @Component({

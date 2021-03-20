@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Report } from '../../common/models/report';
-import { ReportService } from 'src/app/common/services/report.service';
+import { Report } from '@app/common/models/report';
+import { ReportService } from '@app/common/services/report.service';
 import { NgxSpinnerService } from "ngx-spinner";
 
 
