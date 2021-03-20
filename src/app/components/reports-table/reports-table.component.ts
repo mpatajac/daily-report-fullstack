@@ -148,12 +148,38 @@ export class ReportsTableComponent implements OnInit {
   }
 
   async resetFilter() {
-	  
+    this.filterConfiguration.generalSearch = this.generalSearch = undefined;
+    this.filterConfiguration.searchByTitle = this.searchByTitle = undefined;
+    this.filterConfiguration.searchByUser = this.searchByUser = undefined;
+    this.filterConfiguration.startDate = this.startDate = undefined;
+    this.filterConfiguration.endDate = this.endDate = undefined;
+    this.filterConfiguration.problems = this.selectedOption = "all";
+
+    this.showSAF = false;
+    this.reportService.resetPage();
+    await this.getReports();
+    await this.clearSafUi();
+  }
+
+  async clearSafUi() {
+    // generalSearch
+    const generalSearch: any = document.getElementsByClassName("dashboard-saf-top")[0]?.children[0];
+    generalSearch.value = "";
+
+    const safBottom: any = document.getElementsByClassName("dashboard-saf-bottom")[0]?.children;
+
+    // individual filters
+    safBottom[0].value = "";
+    safBottom[1].value = "";
+
+    // start/end date
+    safBottom[2].children[0].value = undefined;
+    safBottom[2].children[1].value = undefined;
   }
 
   async getReports() {
     this.spinner.show();
-    
+
     let newReports = await this.reportService.getReports(this.filterConfiguration);
     if (this.reportService.page === 1) {
       this.reports = newReports;
