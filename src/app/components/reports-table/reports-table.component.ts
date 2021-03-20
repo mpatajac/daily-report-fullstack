@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Report } from '../../common/models/report';
 import { Column, SortOrder, SortOptions } from '../../common/models/sort'
 import { ReportService } from '../../common/services/report.service';
+import { Router } from "@angular/router";
 import { NgxSpinnerService } from "ngx-spinner";
 
 @Component({
@@ -13,23 +14,19 @@ export class ReportsTableComponent implements OnInit {
   showSAF: boolean;
   reports: Report[];
 
-  generalSearch: string;
-  searchByTitle: string;
-  searchByUser: string;
   startDate: Date;
   endDate: Date;
-  selectedOption: string;
   sortConfiguration: SortOptions;
   filterConfiguration: any;
 
   constructor(
     private reportService: ReportService,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private router: Router
   ) { }
 
   async ngOnInit() {
     this.showSAF = false;
-    this.selectedOption = "all";
 
     // Initially, display reports from newest to oldest
     this.sortConfiguration = {
@@ -37,38 +34,56 @@ export class ReportsTableComponent implements OnInit {
       order: SortOrder.Desc
     } as SortOptions;
 
-    this.filterConfiguration = {
-      generalSearch: this.generalSearch,
-      searchByTitle: this.searchByTitle,
-      searchByUser: this.searchByUser,
-      startDate: this.startDate,
-      endDate: this.endDate,
-      problems: this.selectedOption,
-      sort: this.sortConfiguration
-    };
+    const filterConfig = JSON.parse(localStorage.getItem("filterConfig"));
+    if (filterConfig) {
+      this.filterConfiguration = filterConfig;
+    } else {
+      this.initializeFilterConfiguration();
+    }
 
-    this.reportService.resetPage();
-
-    await this.getReports();
+    await this.updateDisplayedReports(true);
   }
 
   toggleSAFVisibility() {
     this.showSAF = !this.showSAF;
   }
 
+  // set filterConfiguration to its base values
+  initializeFilterConfiguration() {
+    this.filterConfiguration = {
+      generalSearch: undefined,
+      searchByTitle: undefined,
+      searchByUser: undefined,
+      startDate: undefined,
+      endDate: undefined,
+      problems: "all",
+      sort: this.sortConfiguration
+    };
+  }
+
   isSelectedOption(option: string): boolean {
-    return option === this.selectedOption;
+    return option === this.filterConfiguration.problems;
+  }
+
+  async updateDisplayedReports(force: boolean = false) {
+    // localStorage contains last queried/saved configuration
+    // only update if something changed
+    // TODO: find better way to compare objects (LoDash?)
+    if (localStorage.getItem("filterConfig") !== JSON.stringify(this.filterConfiguration) || force) {
+      this.reportService.resetPage();
+      await this.getReports();
+
+      localStorage.setItem("filterConfig", JSON.stringify(this.filterConfiguration));
+    }
   }
 
   async selectDropdownOption(option: string) {
-    this.filterConfiguration.problems = this.selectedOption = option;
-    this.reportService.resetPage();
-    await this.getReports();
+    this.filterConfiguration.problems = option;
+    await this.updateDisplayedReports();
   }
 
   async configureSort(column: string) {
     this.updateTableHeader(column);
-    this.reportService.resetPage();
 
     // same column -> change sort order
     if (column === this.sortConfiguration.column) {
@@ -99,82 +114,32 @@ export class ReportsTableComponent implements OnInit {
     }
 
     this.filterConfiguration.sort = this.sortConfiguration;
-    await this.getReports();
+    await this.updateDisplayedReports();
   }
 
-  async updateGeneralSearch(value: string) {
-    if (value !== this.generalSearch) {
-      this.filterConfiguration.generalSearch = this.generalSearch = value;
-      this.reportService.resetPage();
-      await this.getReports();
-    }
+  async updateStartDate() {
+    this.filterConfiguration.startDate = new Date(this.startDate).toJSON();
+    await this.updateDisplayedReports();
   }
 
-  async updateSearchByTitle(value: string) {
-    if (value !== this.searchByTitle) {
-      this.filterConfiguration.searchByTitle = this.searchByTitle = value;
-      this.reportService.resetPage();
-      await this.getReports();
-    }
-  }
+  async updateEndDate() {
+    let date = new Date(this.endDate);
 
-  async updateSearchByUser(value: string) {
-    if (value !== this.searchByUser) {
-      this.filterConfiguration.searchByUser = this.searchByUser = value;
-      this.reportService.resetPage();
-      await this.getReports();
-    }
-  }
-
-  async updateStartDate(value: Date) {
-    if (value !== this.startDate) {
-      this.startDate = value;
-      this.filterConfiguration.startDate = this.startDate?.toJSON();
-      this.reportService.resetPage();
-      await this.getReports();
-    }
-  }
-
-  async updateEndDate(value: Date) {
-    if (value !== this.endDate) {
-      // use day after set date (to include reports submitted on that day)
-      value?.setDate(value?.getDate() + 1);
-      this.endDate = value;
-
-      this.filterConfiguration.endDate = this.endDate?.toJSON();
-      this.reportService.resetPage();
-      await this.getReports();
-    }
+    // use day after set date (to include reports submitted on that day)
+    date.setDate(date.getDate() + 1);
+    this.filterConfiguration.endDate = date.toJSON();
+    await this.updateDisplayedReports();
   }
 
   async resetFilter() {
-    this.filterConfiguration.generalSearch = this.generalSearch = undefined;
-    this.filterConfiguration.searchByTitle = this.searchByTitle = undefined;
-    this.filterConfiguration.searchByUser = this.searchByUser = undefined;
-    this.filterConfiguration.startDate = this.startDate = undefined;
-    this.filterConfiguration.endDate = this.endDate = undefined;
-    this.filterConfiguration.problems = this.selectedOption = "all";
+    this.initializeFilterConfiguration();
 
     this.showSAF = false;
-    this.reportService.resetPage();
-    await this.getReports();
-    await this.clearSafUi();
-  }
-
-  async clearSafUi() {
-    // generalSearch
-    const generalSearch: any = document.getElementsByClassName("dashboard-saf-top")[0]?.children[0];
-    generalSearch.value = "";
-
-    const safBottom: any = document.getElementsByClassName("dashboard-saf-bottom")[0]?.children;
-
-    // individual filters
-    safBottom[0].value = "";
-    safBottom[1].value = "";
-
-    // start/end date
-    safBottom[2].children[0].value = undefined;
-    safBottom[2].children[1].value = undefined;
+    this.startDate = undefined;
+    this.endDate = undefined;
+    localStorage.removeItem("filterConfig");
+    
+    await this.updateDisplayedReports();
   }
 
   async getReports() {
@@ -224,13 +189,13 @@ export class ReportsTableComponent implements OnInit {
    */
   isFilterUsed(): boolean {
     return [
-      this.generalSearch,
-      this.searchByTitle,
-      this.searchByUser,
-      this.startDate,
-      this.endDate
+      this.filterConfiguration.generalSearch,
+      this.filterConfiguration.searchByTitle,
+      this.filterConfiguration.searchByUser,
+      this.filterConfiguration.startDate,
+      this.filterConfiguration.endDate
     ].some(this.isAltered) ||
-      this.selectedOption !== "all";
+      this.filterConfiguration.problems !== "all";
   }
 
   isAltered(element: string | Date): boolean {
@@ -241,5 +206,16 @@ export class ReportsTableComponent implements OnInit {
           false
       )
     );
+  }
+
+  openReport(report: Report) {
+    // save SAF settings
+    localStorage.setItem(
+      "filterConfig",
+      JSON.stringify(this.filterConfiguration)
+    );
+
+    const baseUrl = "/app/report";
+    this.router.navigateByUrl(`${baseUrl}/${report.id}`);
   }
 }

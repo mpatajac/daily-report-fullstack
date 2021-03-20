@@ -5,9 +5,10 @@
 	<!-- Search and filter -->
 	<div [className]="'dashboard-saf'" *ngIf="this.reports?.length > 0 ||isFilterUsed()">
 		<div [className]="'dashboard-saf-top'">
-			<input type="text" placeholder="Search ..." #generalSearchInput
-				(keyup.enter)="updateGeneralSearch(generalSearchInput.value)"
-				(blur)="updateGeneralSearch(generalSearchInput.value)">
+			<input type="text" placeholder="Search ..."
+				[(ngModel)]="filterConfiguration.generalSearch"
+				(keyup.enter)="updateDisplayedReports()"
+				(blur)="updateDisplayedReports()">
 
 			<button data-toggle="tooltip" data-placenemt="top" title="Filter" (click)="this.toggleSAFVisibility()">
 				<img src="../../../assets/img/dashboard/filter.svg">
@@ -15,17 +16,21 @@
 		</div>
 
 		<div [className]="'dashboard-saf-bottom'" [class.show-saf]="this.showSAF">
-			<input type="text" placeholder="filter by report title" #searchByTitleInput
-				(keyup.enter)="updateSearchByTitle(searchByTitleInput.value)"
-				(blur)="updateSearchByTitle(searchByTitleInput.value)">
-			<input type="text" placeholder="filter by user" #searchByUserInput
-				(keyup.enter)="updateSearchByUser(searchByUserInput.value)"
-				(blur)="updateSearchByUser(searchByUserInput.value)">
+			<input type="text" placeholder="filter by report title" 
+				[(ngModel)]="filterConfiguration.searchByTitle"
+				(keyup.enter)="updateDisplayedReports()"
+				(blur)="updateDisplayedReports()">
+			<input type="text" placeholder="filter by user" 
+				[(ngModel)]="filterConfiguration.searchByUser" 
+				(keyup.enter)="updateDisplayedReports()" 
+				(blur)="updateDisplayedReports()">
 			<div [className]="'dashboard-filter-date'">
-				<input type="date" id="start-date" #startDate [ngModel]="startDate"
-					(ngModelChange)="updateStartDate(startDate.valueAsDate)">
-				<input type="date" id="end-date" #endDate [ngModel]="endDate"
-					(ngModelChange)="updateEndDate(endDate.valueAsDate)">
+				<input type="date" id="start-date"
+					[(ngModel)]="startDate"
+					(change)="updateStartDate()">
+				<input type="date" id="end-date"
+					[(ngModel)]="endDate"
+					(change)="updateEndDate()">
 			</div>
 			<div [className]="'dashboard-end-group'">
 				<div [className]="'dropdown'">
@@ -82,7 +87,7 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr *ngFor="let report of reports" routerLink="/app/report/{{report.id}}">
+				<tr *ngFor="let report of reports" (click)="openReport(report)">
 					<td>{{report.title}}</td>
 					<td>{{report.username}}</td>
 					<td>{{report.date | date}}</td>
