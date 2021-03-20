@@ -147,6 +147,10 @@ export class ReportsTableComponent implements OnInit {
     }
   }
 
+  async resetFilter() {
+	  
+  }
+
   async getReports() {
     this.spinner.show();
     

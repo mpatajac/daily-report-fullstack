@@ -27,18 +27,23 @@
 				<input type="date" id="end-date" #endDate [ngModel]="endDate"
 					(ngModelChange)="updateEndDate(endDate.valueAsDate)">
 			</div>
-			<div [className]="'dropdown'">
-				<button [className]="'dropdown-toggle'" data-toggle="dropdown">Problems?</button>
-				<div [className]="'dropdown-menu'">
-					<a [className]="'dropdown-item'" (click)="selectDropdownOption('with')"
-						[class.dropdown-selected]="isSelectedOption('with')">With problems</a>
-					<div [className]="'dropdown-divider'"></div>
-					<a [className]="'dropdown-item'" (click)="selectDropdownOption('without')"
-						[class.dropdown-selected]="isSelectedOption('without')">Without problems</a>
-					<div [className]="'dropdown-divider'"></div>
-					<a [className]="'dropdown-item'" (click)="selectDropdownOption('all')"
-						[class.dropdown-selected]="isSelectedOption('all')">All</a>
+			<div [className]="'dashboard-end-group'">
+				<div [className]="'dropdown'">
+					<button [className]="'dropdown-toggle'" data-toggle="dropdown">Problems?</button>
+					<div [className]="'dropdown-menu'">
+						<a [className]="'dropdown-item'" (click)="selectDropdownOption('with')"
+							[class.dropdown-selected]="isSelectedOption('with')">With problems</a>
+						<div [className]="'dropdown-divider'"></div>
+						<a [className]="'dropdown-item'" (click)="selectDropdownOption('without')"
+							[class.dropdown-selected]="isSelectedOption('without')">Without problems</a>
+						<div [className]="'dropdown-divider'"></div>
+						<a [className]="'dropdown-item'" (click)="selectDropdownOption('all')"
+							[class.dropdown-selected]="isSelectedOption('all')">All</a>
+					</div>
 				</div>
+				<button [className]="'dashboard-filter-reset'" data-toggle="tooltip" data-placenemt="top" title="Reset" (click)="this.resetFilter()">
+					<img src="../../../assets/img/dashboard/reset.svg">
+				</button>
 			</div>
 		</div>
 	</div>
