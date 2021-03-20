@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MessengerService } from '../../common/services/messenger.service';
+import { MessengerService } from '@app/common/services/messenger.service';
 
 @Component({
   selector: 'app-header',

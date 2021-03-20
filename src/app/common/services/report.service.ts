@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
-import { Report } from '../models/report';
-import { UserService } from './user.service';
+import { Report } from '@app/common/models/report';
+import { UserService } from '@app/common/services/user.service';
 
 @Injectable({
   providedIn: 'root'
