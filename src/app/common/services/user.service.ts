@@ -3,8 +3,10 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { catchError, map, tap } from "rxjs/operators";
 import { of } from 'rxjs';
 
-import { User } from "../models/user";
-import { ThemeService } from "../services/theme.service";
+import { User } from '@app/common/models/user';
+import { ThemeService } from '@app/common/services/theme.service';
+
+
 
 @Injectable({
   providedIn: 'root'
