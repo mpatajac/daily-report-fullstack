@@ -18,7 +18,7 @@ export class ReportsTableComponent implements OnInit {
 
   startDate: Date;
   endDate: Date;
-  sortConfiguration: SortOptions;
+
   filterConfiguration: any;
 
   constructor(
@@ -30,12 +30,6 @@ export class ReportsTableComponent implements OnInit {
   async ngOnInit() {
     this.showSAF = false;
 
-    // Initially, display reports from newest to oldest
-    this.sortConfiguration = {
-      column: Column.Date,
-      order: SortOrder.Desc
-    } as SortOptions;
-
     const filterConfig = JSON.parse(localStorage.getItem("filterConfig"));
     if (filterConfig) {
       this.filterConfiguration = filterConfig;
@@ -44,6 +38,7 @@ export class ReportsTableComponent implements OnInit {
     }
 
     await this.updateDisplayedReports(true);
+		this.updateTableHeader();
   }
 
   toggleSAFVisibility() {
@@ -59,7 +54,12 @@ export class ReportsTableComponent implements OnInit {
       startDate: undefined,
       endDate: undefined,
       problems: "all",
-      sort: this.sortConfiguration
+
+			// Initially, display reports from newest to oldest
+			sort: {
+				column: Column.Date,
+				order: SortOrder.Desc
+			} as SortOptions
     };
   }
 
@@ -85,29 +85,27 @@ export class ReportsTableComponent implements OnInit {
   }
 
   async configureSort(column: string) {
-    this.updateTableHeader(column);
-
     // same column -> change sort order
-    if (column === this.sortConfiguration.column) {
-      this.sortConfiguration.order === SortOrder.Asc ?
-        this.sortConfiguration.order = SortOrder.Desc :
-        this.sortConfiguration.order = SortOrder.Asc;
+    if (column === this.filterConfiguration.sort.column) {
+      this.filterConfiguration.sort.order === SortOrder.Asc ?
+        this.filterConfiguration.sort.order = SortOrder.Desc :
+        this.filterConfiguration.sort.order = SortOrder.Asc;
     } else {
       // username and report title start as ascending, date as descending
       switch (column) {
         case "title":
-          this.sortConfiguration.column = Column.Title;
-          this.sortConfiguration.order = SortOrder.Asc;
+          this.filterConfiguration.sort.column = Column.Title;
+          this.filterConfiguration.sort.order = SortOrder.Asc;
           break;
 
         case "user":
-          this.sortConfiguration.column = Column.User;
-          this.sortConfiguration.order = SortOrder.Asc;
+          this.filterConfiguration.sort.column = Column.User;
+          this.filterConfiguration.sort.order = SortOrder.Asc;
           break;
 
         case "date":
-          this.sortConfiguration.column = Column.Date;
-          this.sortConfiguration.order = SortOrder.Desc;
+          this.filterConfiguration.sort.column = Column.Date;
+          this.filterConfiguration.sort.order = SortOrder.Desc;
           break;
 
         default:
@@ -115,8 +113,8 @@ export class ReportsTableComponent implements OnInit {
       }
     }
 
-    this.filterConfiguration.sort = this.sortConfiguration;
     await this.updateDisplayedReports();
+		this.updateTableHeader();
   }
 
   async updateStartDate() {
@@ -142,6 +140,7 @@ export class ReportsTableComponent implements OnInit {
     localStorage.removeItem("filterConfig");
     
     await this.updateDisplayedReports();
+		this.updateTableHeader();
   }
 
   async getReports() {
@@ -167,22 +166,26 @@ export class ReportsTableComponent implements OnInit {
   }
 
   /** update DOM */
-  updateTableHeader(column: string) {
-    const oldHeader = document.getElementById('header-' + this.sortConfiguration.column);
+  updateTableHeader() {
+		// use setTimeout to delay process in the event loop
+		// gives enough time for DOM to load
+		// otherwise, document.getElementsBy___ returns 'null'
+		setTimeout(_ => {
+			const columns = document.getElementsByClassName("sort");
 
-    if (column === this.sortConfiguration.column) {
-      oldHeader.classList.toggle("asc");
-      oldHeader.classList.toggle("desc");
-    } else {
-      oldHeader.classList.remove(this.sortConfiguration.order);
+			// remove old marks
+			for (let i = 0; i < columns.length; ++i) {
+				const column = columns[i];
 
-      const newHeader = document.getElementById('header-' + column);
-      if (column === "date") {
-        newHeader.classList.add("desc");
-      } else {
-        newHeader.classList.add("asc");
-      }
-    }
+				column.classList.remove('asc');
+				column.classList.remove('desc');
+			}
+
+			// 'highlight' current column
+			const currentColumnName = this.filterConfiguration.sort.column.toString();
+			const currentColumn = document.getElementById('header-' + currentColumnName);
+			currentColumn.classList.add(this.filterConfiguration.sort.order.toString());
+		}, 0);
   }
 
   /**
