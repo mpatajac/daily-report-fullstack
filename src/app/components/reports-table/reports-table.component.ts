@@ -28,8 +28,6 @@ export class ReportsTableComponent implements OnInit {
   ) { }
 
   async ngOnInit() {
-    this.showSAF = false;
-
     const filterConfig = JSON.parse(localStorage.getItem("filterConfig"));
     if (filterConfig) {
       this.filterConfiguration = filterConfig;
@@ -39,6 +37,21 @@ export class ReportsTableComponent implements OnInit {
 
     await this.updateDisplayedReports(true);
 		this.updateTableHeader();
+
+		// use setTimeout to let everything load first
+		setTimeout(
+			_ => {
+				if (localStorage.showSAF) {
+					this.showSAF = JSON.parse(localStorage.showSAF);
+
+					// we don't need it after everything has loaded
+					localStorage.removeItem("showSAF");
+				} else {
+					this.showSAF = false;
+				}
+				
+			}
+		, 0);
   }
 
   toggleSAFVisibility() {
@@ -134,7 +147,6 @@ export class ReportsTableComponent implements OnInit {
   async resetFilter() {
     this.initializeFilterConfiguration();
 
-    this.showSAF = false;
     this.startDate = undefined;
     this.endDate = undefined;
     localStorage.removeItem("filterConfig");
@@ -219,6 +231,9 @@ export class ReportsTableComponent implements OnInit {
       "filterConfig",
       JSON.stringify(this.filterConfiguration)
     );
+
+		// only save `showSAF` if we are opening a report
+		localStorage.setItem("showSAF", JSON.stringify(this.showSAF));
 
     const baseUrl = "/app/report";
     this.router.navigateByUrl(`${baseUrl}/${report.id}`);
