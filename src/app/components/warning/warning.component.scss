@@ -41,7 +41,7 @@
 	}
 
 	input:checked ~ .checkbox-box {
-		background: var(--asbestos) url(../../../assets/img/check.svg) 3px 3px no-repeat;
+		background: var(--asbestos) url("/assets/img/check.svg") 3px 3px no-repeat;
 		background-size: .5em;
 	}
 

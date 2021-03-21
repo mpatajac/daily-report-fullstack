@@ -4,7 +4,7 @@
 	<div [className]="'navigation-sidepanel'">
 		<div [className]="'navigation-top'">
 			<div id="navigation-username" [className]="'field'">
-				<img src="../../../assets/img/dashboard/username.svg">
+				<img src="assets/img/dashboard/username.svg">
 				<span *ngIf="user">{{user.name}}</span>
 			</div>
 		</div>
@@ -13,17 +13,17 @@
 
 		<div [className]="'navigation-middle'">
 			<div id="navigation-home" [className]="'field clickable'" (click)="this.messenger.hideNavigation()">
-				<img src="../../../assets/img/dashboard/home.svg">
+				<img src="assets/img/dashboard/home.svg">
 				<span>Home</span>
 			</div>
 			<div id="navigation-theme" [className]="'field clickable'"
 				(click)="this.messenger.hideNavigation(); this.themeService.toggleTheme()">
-				<img src="../../../assets/img/dashboard/theme.svg">
+				<img src="assets/img/dashboard/theme.svg">
 				<span>Switch theme</span>
 			</div>
 			<div id="navigation-password" [className]="'field clickable'" routerLink="/app/passreset"
 				(click)="this.messenger.hideNavigation()">
-				<img src="../../../assets/img/dashboard/pass-reset.svg">
+				<img src="assets/img/dashboard/pass-reset.svg">
 				<span>Reset password</span>
 			</div>
 		</div>
@@ -32,7 +32,7 @@
 
 		<div [className]="'navigation-bottom'">
 			<div id="navigation-logout" [className]="'field clickable'" routerLink="/login" (click)="logout()">
-				<img src="../../../assets/img/dashboard/logout.svg">
+				<img src="assets/img/dashboard/logout.svg">
 				<span>Logout</span>
 			</div>
 		</div>

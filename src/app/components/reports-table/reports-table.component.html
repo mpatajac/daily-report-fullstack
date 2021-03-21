@@ -11,7 +11,7 @@
 				(blur)="updateDisplayedReports()">
 
 			<button data-toggle="tooltip" data-placenemt="top" title="Filter" (click)="this.toggleSAFVisibility()">
-				<img src="../../../assets/img/dashboard/filter.svg">
+				<img src="/assets/img/dashboard/filter.svg">
 			</button>
 		</div>
 
@@ -47,7 +47,7 @@
 					</div>
 				</div>
 				<button [className]="'dashboard-filter-reset'" data-toggle="tooltip" data-placenemt="top" title="Reset" (click)="this.resetFilter()">
-					<img src="../../../assets/img/dashboard/reset.svg">
+					<img src="/assets/img/dashboard/reset.svg">
 				</button>
 			</div>
 		</div>
@@ -62,26 +62,26 @@
 					<td [className]="'sort'" id="header-title" (click)="configureSort('title')">
 						Title
 						<div [className]="'arrow-container'">
-							<img src="../../../assets/img/dashboard/sort-up.svg" [className]="'arrow up'">
-							<img src="../../../assets/img/dashboard/sort-down.svg" [className]="'arrow down'">
+							<img src="/assets/img/dashboard/sort-up.svg" [className]="'arrow up'">
+							<img src="/assets/img/dashboard/sort-down.svg" [className]="'arrow down'">
 						</div>
 					</td>
 					<td [className]="'sort'" id="header-user" (click)="configureSort('user')">
 						User
 						<div [className]="'arrow-container'">
-							<img src="../../../assets/img/dashboard/sort-up.svg" [className]="'arrow up'">
-							<img src="../../../assets/img/dashboard/sort-down.svg" [className]="'arrow down'">
+							<img src="/assets/img/dashboard/sort-up.svg" [className]="'arrow up'">
+							<img src="/assets/img/dashboard/sort-down.svg" [className]="'arrow down'">
 						</div>
 					</td>
 					<td [className]="'sort desc'" id="header-date" (click)="configureSort('date')">
 						Date
 						<div [className]="'arrow-container'">
-							<img src="../../../assets/img/dashboard/sort-up.svg" [className]="'arrow up'">
-							<img src="../../../assets/img/dashboard/sort-down.svg" [className]="'arrow down'">
+							<img src="/assets/img/dashboard/sort-up.svg" [className]="'arrow up'">
+							<img src="/assets/img/dashboard/sort-down.svg" [className]="'arrow down'">
 						</div>
 					</td>
 					<td>
-						<img src="../../../assets/img/dashboard/problem-header.svg" rel="tooltip" data-placement="top"
+						<img src="/assets/img/dashboard/problem-header.svg" rel="tooltip" data-placement="top"
 							title="Does this report contain any problems?">
 					</td>
 				</tr>
@@ -91,7 +91,7 @@
 					<td>{{report.title}}</td>
 					<td>{{report.username}}</td>
 					<td>{{report.date | date}}</td>
-					<td><img src="../../../assets/img/dashboard/problem.svg" *ngIf="report.problems?.length > 0"
+					<td><img src="/assets/img/dashboard/problem.svg" *ngIf="report.problems?.length > 0"
 							rel="tooltip" data-placement="right" title="This report contains problems."></td>
 				</tr>
 			</tbody>
@@ -100,7 +100,7 @@
 
 	<button id="show-more-reports" *ngIf="existRemainingReports()" (click)="moreReports()" data-toggle="tooltip"
 		data-placement="top" title="Show more reports">
-		<img src="../../../assets/img/dashboard/arrow.svg">
+		<img src="/assets/img/dashboard/arrow.svg">
 	</button>
 </div>
 

@@ -47,7 +47,7 @@
 
 			input {
 				height: 100%;
-				background: var(--bg) url("../../../assets/img/dashboard/search.svg") 1.25em center no-repeat;
+				background: var(--bg) url("/assets/img/dashboard/search.svg") 1.25em center no-repeat;
 				color: var(--text-gray);
 				background-size: 30px;
 				border: none;
@@ -112,7 +112,7 @@
 			}
 
 			input[type="text"] {
-				background: var(--bg) url("../../../assets/img/dashboard/search.svg") 1em center no-repeat;
+				background: var(--bg) url("/assets/img/dashboard/search.svg") 1em center no-repeat;
 				background-size: 20px;
 				padding-left: 3.5em;
 				font-size: 1.1rem;
@@ -125,7 +125,7 @@
 			}
 
 			input[type="date"] {
-				background: var(--bg) url("../../../assets/img/dashboard/calendar.svg") .6em center no-repeat;
+				background: var(--bg) url("/assets/img/dashboard/calendar.svg") .6em center no-repeat;
 				background-size: 20px;
 				height: 100%;
 				padding-left: 2.25em;
