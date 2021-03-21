@@ -113,12 +113,14 @@ export class ReportService {
 
 
     // search/filter
-    let somethingAdded = false, addWhere = true;
+    let somethingAdded = false;
 
+		// both searchByTitle and searchByUser were used
     if (configuration.searchByTitle?.length && configuration.searchByUser?.length) {
       query += `title LIKE '%${configuration.searchByTitle}%' AND username LIKE '%${configuration.searchByUser}%'`;
       somethingAdded = true;
 
+		// only one of searchByTitle and searchByUser was used
     } else if (configuration.searchByTitle?.length || configuration.searchByUser?.length || query !== "") {
       let firstPart = "", secondPart = "";
       if (configuration.searchByTitle || configuration.generalSearch) {
@@ -134,16 +136,12 @@ export class ReportService {
       }
 
       let bothIn = firstPart && secondPart;
-      query += bothIn ? `(${firstPart} OR ${secondPart})` : `${firstPart}${secondPart}`;
+      query += bothIn ? `${firstPart} OR ${secondPart}` : `${firstPart}${secondPart}`;
 
     } else {
       if (configuration.generalSearch) {
-        query = configuration.generalSearch;
+				query += `title LIKE '%${configuration.generalSearch}%' OR username LIKE '%${configuration.generalSearch}%'`;
         somethingAdded = true;
-
-        // if we are only searching by generalSearch, 
-        // we don't need "WHERE" inside our query
-        addWhere = false;
       }
     }
 
@@ -157,7 +155,7 @@ export class ReportService {
       // since it can't be known which of the subqueries will be
       // the last one, every one ends with an ' AND'
       // so we can chain them and then just remove the last ' AND'
-      query = `&searchQuery=${addWhere ? "WHERE " : ""}${query.substring(0, query.length - 4)}`
+      query = `&searchQuery=WHERE ${query.substring(0, query.length - 4)}`
     }
 
     return query;
