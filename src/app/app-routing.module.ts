@@ -13,12 +13,9 @@ import { UserAuthGuard } from './common/guards/user-auth.guard';
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
-  {
-    path: 'app',
+  { path: 'app',
     redirectTo: '/app/dashboard',
-    pathMatch: 'full',
-    canActivate: [UserAuthGuard]
-  },
+    pathMatch: 'full' },
   {
     path: 'app/dashboard',
     component: DashboardComponent,
@@ -50,7 +47,7 @@ const routes: Routes = [
 @NgModule({
   imports: [
     // scrolls back to top
-    RouterModule.forRoot(routes, { scrollPositionRestoration: 'enabled' })
+    RouterModule.forRoot(routes, { scrollPositionRestoration: 'enabled', relativeLinkResolution: 'legacy' })
   ],
   exports: [RouterModule]
 })
