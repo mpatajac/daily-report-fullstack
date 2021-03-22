@@ -96,6 +96,12 @@ input {
 	--back-btn: white;
 
 	--border-size: 2px;
+
+	// change "add report dropdown image" color to blue on light theme
+	// src: https://codepen.io/sosuke/pen/Pjoqqp
+	.new-report-dropdown img {
+		filter: brightness(0) saturate(100%) invert(26%) sepia(11%) saturate(1548%) hue-rotate(169deg) brightness(93%) contrast(90%);;
+	}
 }
 
 .dark {

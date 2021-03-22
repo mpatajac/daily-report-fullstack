@@ -20,4 +20,14 @@ export class HeaderComponent implements OnInit {
       behavior: 'smooth'
     });
   }
+
+  toggleReportDropdown() {
+	  const dropdown = document.getElementsByClassName("new-report-dropdown")[0];
+	  dropdown.classList.toggle("show");
+  }
+
+  hideReportDropdown() {
+	  const dropdown = document.getElementsByClassName("new-report-dropdown")[0];
+	  dropdown.classList.remove("show");
+  }
 }

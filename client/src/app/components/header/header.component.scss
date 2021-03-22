@@ -50,6 +50,54 @@
 		font-size: 2rem;
 		@include button_hover(1.25);
 	}
+
+	.new-report-dropdown {
+		opacity: 0;
+		visibility: hidden;
+		z-index: 5;
+		width: 11em;
+		background-color: var(--table-bg);
+		position: absolute;
+		right: 3em;
+		top: 8vh;
+		border: none;
+		border-radius: 1em;
+		padding: .75em 1em .75em 2em;
+		transition: all 100ms ease-in-out;
+
+		img {
+			margin-right: 1.25em;
+			height: 1.5rem;
+			width: 20%;
+		}
+
+		span {
+			width: 80%;
+		}
+
+		&.show {
+			opacity: 1;
+			visibility: visible;
+		}
+	}
+
+	.field {
+		display: inline-block;
+		align-items: center;
+		margin: 1em 0;
+		height: 1.05em;
+		width: 90%;
+		transition: width 250ms ease-in-out;
+	}
+
+	.clickable {
+			cursor: pointer;
+			transition: transform 200ms;
+
+			&:hover {
+				transform: translateX(5px) scaleX(1.1);
+			}
+		}
 }
 
 @media (max-width: 500px) {
