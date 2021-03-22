@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MessengerService } from '@app/common/services/messenger.service';
+import { ReportService } from '@app/common/services/report.service';
 
 @Component({
   selector: 'app-header',
@@ -8,7 +9,10 @@ import { MessengerService } from '@app/common/services/messenger.service';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(private messenger: MessengerService) { }
+  constructor(
+    private messenger: MessengerService,
+    private reportService: ReportService
+  ) { }
 
   ngOnInit() {
   }
@@ -22,12 +26,21 @@ export class HeaderComponent implements OnInit {
   }
 
   toggleReportDropdown() {
-	  const dropdown = document.getElementsByClassName("new-report-dropdown")[0];
-	  dropdown.classList.toggle("show");
+    const dropdown = document.getElementsByClassName("new-report-dropdown")[0];
+    dropdown.classList.toggle("show");
   }
 
   hideReportDropdown() {
-	  const dropdown = document.getElementsByClassName("new-report-dropdown")[0];
-	  dropdown.classList.remove("show");
+    const dropdown = document.getElementsByClassName("new-report-dropdown")[0];
+    dropdown.classList.remove("show");
+  }
+
+  async uploadReport(files: FileList) {
+    const response = await this.reportService.uploadReport(files[0]);
+    if (response.ok) {
+      // route to confirm-report
+    } else {
+      // route to report-improper-format
+    }
   }
 }
