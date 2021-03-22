@@ -18,11 +18,11 @@
       "es2018",
       "dom"
     ],
-		"paths": {
-			"@app/*": [
-				"app/*"
-			]
-		},
+	"paths": {
+		"@app/*": [
+			"app/*"
+		]
+	},
   },
   "angularCompilerOptions": {
     "fullTemplateTypeCheck": true,
