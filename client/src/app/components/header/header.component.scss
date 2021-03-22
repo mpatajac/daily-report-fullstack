@@ -62,7 +62,7 @@
 		top: 8vh;
 		border: none;
 		border-radius: 1em;
-		padding: .75em 1em .75em 2em;
+		padding: .5em 1em .5em 2em;
 		transition: all 100ms ease-in-out;
 
 		img {
@@ -84,8 +84,7 @@
 	.field {
 		display: inline-block;
 		align-items: center;
-		margin: 1em 0;
-		height: 1.05em;
+		padding: 1em 0;
 		width: 90%;
 		transition: width 250ms ease-in-out;
 	}
