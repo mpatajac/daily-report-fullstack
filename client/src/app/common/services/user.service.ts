@@ -67,8 +67,8 @@ export class UserService {
 
           await this.updateLocalUser();
           this.themeService.initialiseTheme(this.user.darkTheme);
-          if (await this.isMissingFields()) {
-            await this.addMissingFields();
+          if (await !this.hasThemeField()) {
+            await this.addThemeField();
           }
         }),
       map(response => response.ok),
@@ -89,29 +89,11 @@ export class UserService {
     this.user.darkTheme = !this.user.darkTheme;
 
     const header = this.createHeader();
-    const email = await this.extractEmail();
 
     return this.http.put(
       `${this.baseUrl}/users/${this.user.name}`,
       {
         darkTheme: this.user.darkTheme,
-        email: email
-      },
-      { headers: header }
-    ).subscribe();
-  }
-
-  async updateWarning(warning: boolean) {
-    this.user.showWarning = warning;
-
-    const header = this.createHeader();
-    const email = await this.extractEmail();
-
-    return this.http.put(
-      `${this.baseUrl}/users/${this.user.name}`,
-      {
-        showWarning: this.user.showWarning,
-        email: email
       },
       { headers: header }
     ).subscribe();
@@ -181,49 +163,32 @@ export class UserService {
     return false;
   }
 
-  private async isMissingFields(): Promise<boolean> {
+  private async hasThemeField(): Promise<boolean> {
     let response = await this.fetchUserFromDB();
-    return response.darkTheme === undefined ||
-      response.showWarning === undefined;
+    return response.darkTheme !== undefined;
   }
 
   /**
    * When user logs in for the first time,
-   * add "darkTheme" and "showWarning" fields.
+   * add "darkTheme" field.
    */
-  private async addMissingFields() {
+  private async addThemeField() {
     const header = this.createHeader();
-    const email = await this.extractEmail();
 
     return this.http.put(
       `${this.baseUrl}/users/${this.user.name}`,
       {
         darkTheme: false,
-        showWarning: true,
-        email: email
       },
       { headers: header }
     ).subscribe();
   }
-
-  /**
-   * Extracts "email" field from user data.
-   * 
-   * For some reason, PUT request on other fields sets "email" to null.
-   * This method is used to extract it and update it along with the request.
-   */
-  private async extractEmail(): Promise<string> {
-    let response = await this.fetchUserFromDB();
-    return response.email;
-  }
-
 
   async updateLocalUser() {
     let response = await this.fetchUserFromDB();
 
     this.user = this.user ?? new User(response.name);
     this.user.darkTheme = response.darkTheme;
-    this.user.showWarning = response.showWarning;
   }
 
   /**

@@ -19,10 +19,8 @@
 	<div [className]="'create-report-btn-wrapper'">
 		<button [className]="'btn-back'" data-toggle="tooltip" data-placement="bottom" title="Go back"
 			routerLink="/app/dashboard" (click)="createReportForm.reset()">&lt;</button>
-		<button data-toggle="modal" data-target="#warningModal" type="submit" [disabled]="!canSubmit(createReportForm)">
+		<button type="submit" [disabled]="!canSubmit(createReportForm)">
 			Submit report
 		</button>
 	</div>
-
-	<app-warning *ngIf="this.user?.showWarning"></app-warning>
 </form>

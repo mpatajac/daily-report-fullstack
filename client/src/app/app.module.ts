@@ -20,7 +20,6 @@ import { HeaderComponent } from './components/header/header.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
 import { ReportsTableComponent } from './components/reports-table/reports-table.component';
 import { ReportElementComponent } from './components/report-element/report-element.component';
-import { WarningComponent } from './components/warning/warning.component';
 
 
 @NgModule({
@@ -36,7 +35,6 @@ import { WarningComponent } from './components/warning/warning.component';
     NavigationComponent,
     ReportsTableComponent,
     ReportElementComponent,
-    WarningComponent
   ],
   imports: [
     BrowserModule,
