@@ -3,10 +3,11 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { LoginComponent } from './route-components/login/login.component';
 import { DashboardComponent } from './route-components/dashboard/dashboard.component';
-import { DisplayReportComponent } from './route-components/display-report/display-report.component';
+import { ReadReportComponent } from '@app/route-components/read-report/read-report.component';
 import { CreateReportComponent } from './route-components/create-report/create-report.component';
 import { PasswordResetComponent } from './route-components/password-reset/password-reset.component';
 import { NotFoundComponent } from './route-components/not-found/not-found.component';
+import { ConfirmReportComponent } from '@app/route-components/confirm-report/confirm-report.component';
 
 import { UserAuthGuard } from './common/guards/user-auth.guard';
 
@@ -22,13 +23,8 @@ const routes: Routes = [
     canActivate: [UserAuthGuard]
   },
   {
-    path: 'app/dashboard/:page',
-    component: DashboardComponent,
-    canActivate: [UserAuthGuard]
-  },
-  {
     path: 'app/report/:id',
-    component: DisplayReportComponent,
+    component: ReadReportComponent,
     canActivate: [UserAuthGuard]
   },
   {
@@ -41,6 +37,11 @@ const routes: Routes = [
     component: PasswordResetComponent,
     canActivate: [UserAuthGuard]
   },
+	{
+		path: 'app/confirm',
+		component: ConfirmReportComponent,
+		canActivate: [UserAuthGuard]
+	},
   { path: '**', component: NotFoundComponent },
 ];
 

@@ -11,7 +11,6 @@ import { AppComponent } from './app.component';
 
 import { LoginComponent } from './route-components/login/login.component';
 import { DashboardComponent } from './route-components/dashboard/dashboard.component';
-import { DisplayReportComponent } from './route-components/display-report/display-report.component';
 import { CreateReportComponent } from './route-components/create-report/create-report.component';
 import { PasswordResetComponent } from './route-components/password-reset/password-reset.component';
 import { NotFoundComponent } from './route-components/not-found/not-found.component';
@@ -20,6 +19,9 @@ import { HeaderComponent } from './components/header/header.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
 import { ReportsTableComponent } from './components/reports-table/reports-table.component';
 import { ReportElementComponent } from './components/report-element/report-element.component';
+import { DisplayReportComponent } from './components/display-report/display-report.component';
+import { ConfirmReportComponent } from './route-components/confirm-report/confirm-report.component';
+import { ReadReportComponent } from './route-components/read-report/read-report.component';
 
 
 @NgModule({
@@ -35,6 +37,8 @@ import { ReportElementComponent } from './components/report-element/report-eleme
     NavigationComponent,
     ReportsTableComponent,
     ReportElementComponent,
+    ConfirmReportComponent,
+    ReadReportComponent,
   ],
   imports: [
     BrowserModule,
