@@ -14,11 +14,14 @@
 	</button>
 
 	<div [className]="'new-report-dropdown'">
-		<div id="new-report-write" [className]="'field clickable'" (click)="this.messenger.hideNavigation()">
+		<div id="new-report-write" 
+			[className]="'field clickable'"
+			routerLink="/app/new">
 			<img src="assets/img/dashboard/write.svg">
 			<span>Write</span>
 		</div>
-		<div id="new-report-write" [className]="'field clickable'" (click)="this.messenger.hideNavigation()">
+		<div id="new-report-write" 
+			[className]="'field clickable'">
 			<img src="assets/img/dashboard/upload.svg">
 			<span>Upload</span>
 		</div>
