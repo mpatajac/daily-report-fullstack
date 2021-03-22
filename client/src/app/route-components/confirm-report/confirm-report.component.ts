@@ -21,6 +21,9 @@ export class ConfirmReportComponent implements OnInit {
 		this.report = JSON.parse(localStorage.uploadedReport) as Report;
 		this.report.date = new Date(this.report.date);
 		this.date = this.report.date.toDateString();
+
+		// cleanup
+		localStorage.removeItem("uploadedReport");
   }
 
 	confirmReport() {
