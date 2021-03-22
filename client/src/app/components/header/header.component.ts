@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Report } from '@app/common/models/report';
 import { MessengerService } from '@app/common/services/messenger.service';
 import { ReportService } from '@app/common/services/report.service';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-header',
@@ -14,7 +15,8 @@ export class HeaderComponent implements OnInit {
   constructor(
     private messenger: MessengerService,
     private reportService: ReportService,
-    private router: Router
+    private router: Router,
+		private spinner: NgxSpinnerService
   ) { }
 
   ngOnInit() {
@@ -39,17 +41,18 @@ export class HeaderComponent implements OnInit {
   }
 
   async uploadReport(files: FileList) {
-    // TODO: add spinner
+		this.spinner.show();
 
-    const response = await this.reportService.uploadReport(files[0]);
-    if (response.ok) {
-      // TODO: remove this, get report from response
-      const dummyReport = new Report("matija", "Test", ["abcabc"], [], [], []);
+		const response = await this.reportService.uploadReport(files[0]);
+		this.spinner.hide();
+		if (response.ok) {
+			// TODO: remove this, get report from response
+			const dummyReport = new Report("matija", "Test", ["abcabc"], [], [], []);
 
 			localStorage.setItem("uploadedReport", JSON.stringify(dummyReport));
-      this.router.navigateByUrl("app/confirm");
-    } else {
-      // route to report-improper-format
-    }
+			this.router.navigateByUrl("app/confirm");
+		} else {
+			// route to report-improper-format
+		}
   }
 }
