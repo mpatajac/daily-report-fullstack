@@ -22,6 +22,7 @@ import { ReportElementComponent } from './components/report-element/report-eleme
 import { DisplayReportComponent } from './components/display-report/display-report.component';
 import { ConfirmReportComponent } from './route-components/confirm-report/confirm-report.component';
 import { ReadReportComponent } from './route-components/read-report/read-report.component';
+import { BackButtonComponent } from './components/back-button/back-button.component';
 
 
 @NgModule({
@@ -39,6 +40,7 @@ import { ReadReportComponent } from './route-components/read-report/read-report.
     ReportElementComponent,
     ConfirmReportComponent,
     ReadReportComponent,
+    BackButtonComponent,
   ],
   imports: [
     BrowserModule,
