@@ -16,6 +16,7 @@ import { PasswordResetComponent } from '@app/route-components/password-reset/pas
 import { NotFoundComponent } from '@app/route-components/not-found/not-found.component';
 import { ReadReportComponent } from '@app/route-components/read-report/read-report.component';
 import { ConfirmReportComponent } from '@app/route-components/confirm-report/confirm-report.component';
+import { ReportImproperFormatComponent } from '@app/route-components/report-improper-format/report-improper-format.component';
 
 import { HeaderComponent } from '@app/components/header/header.component';
 import { NavigationComponent } from '@app/components/navigation/navigation.component';
@@ -41,6 +42,7 @@ import { BackButtonComponent } from '@app/components/back-button/back-button.com
     ConfirmReportComponent,
     ReadReportComponent,
     BackButtonComponent,
+    ReportImproperFormatComponent,
   ],
   imports: [
     BrowserModule,

@@ -52,7 +52,8 @@ export class HeaderComponent implements OnInit {
 			localStorage.setItem("uploadedReport", JSON.stringify(dummyReport));
 			this.router.navigateByUrl("app/confirm");
 		} else {
-			// route to report-improper-format
+			// TODO?: include error message
+			this.router.navigateByUrl("app/fail");
 		}
   }
 }

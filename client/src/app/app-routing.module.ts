@@ -8,6 +8,7 @@ import { CreateReportComponent } from './route-components/create-report/create-r
 import { PasswordResetComponent } from './route-components/password-reset/password-reset.component';
 import { NotFoundComponent } from './route-components/not-found/not-found.component';
 import { ConfirmReportComponent } from '@app/route-components/confirm-report/confirm-report.component';
+import { ReportImproperFormatComponent } from '@app/route-components/report-improper-format/report-improper-format.component';
 
 import { UserAuthGuard } from './common/guards/user-auth.guard';
 
@@ -40,6 +41,11 @@ const routes: Routes = [
 	{
 		path: 'app/confirm',
 		component: ConfirmReportComponent,
+		canActivate: [UserAuthGuard]
+	},
+	{
+		path: 'app/fail',
+		component: ReportImproperFormatComponent,
 		canActivate: [UserAuthGuard]
 	},
   { path: '**', component: NotFoundComponent },

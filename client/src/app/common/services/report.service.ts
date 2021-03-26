@@ -176,6 +176,6 @@ export class ReportService {
     // ).toPromise();
 
     // return response;
-    return {ok: true};
+    return {ok: false};
   }
 }
