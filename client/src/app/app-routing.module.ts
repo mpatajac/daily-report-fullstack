@@ -1,16 +1,16 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { LoginComponent } from './route-components/login/login.component';
-import { DashboardComponent } from './route-components/dashboard/dashboard.component';
+import { LoginComponent } from '@app/route-components/login/login.component';
+import { DashboardComponent } from '@app/route-components/dashboard/dashboard.component';
+import { CreateReportComponent } from '@app/route-components/create-report/create-report.component';
+import { PasswordResetComponent } from '@app/route-components/password-reset/password-reset.component';
+import { NotFoundComponent } from '@app/route-components/not-found/not-found.component';
 import { ReadReportComponent } from '@app/route-components/read-report/read-report.component';
-import { CreateReportComponent } from './route-components/create-report/create-report.component';
-import { PasswordResetComponent } from './route-components/password-reset/password-reset.component';
-import { NotFoundComponent } from './route-components/not-found/not-found.component';
 import { ConfirmReportComponent } from '@app/route-components/confirm-report/confirm-report.component';
 import { ReportImproperFormatComponent } from '@app/route-components/report-improper-format/report-improper-format.component';
 
-import { UserAuthGuard } from './common/guards/user-auth.guard';
+import { UserAuthGuard } from '@app/common/guards/user-auth.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
