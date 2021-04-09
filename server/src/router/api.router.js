@@ -1,7 +1,7 @@
 import { Router } from "express";
-import { userRouter } from "../router/user.router";
-import { authRouter } from "../router/auth.router";
-import { reportRouter } from "../router/report.router";
+import { userRouter } from "../router/user.router.js";
+import { authRouter } from "../router/auth.router.js";
+import { reportRouter } from "../router/report.router.js";
 
 
 export const apiRouter = Router();

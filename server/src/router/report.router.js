@@ -1,6 +1,6 @@
 import { Router } from "express";
-import { jwtMiddleware } from "../common/jwt.middleware";
-import { ReportController } from "../controller/report.controller";
+import { jwtMiddleware } from "../common/jwt.middleware.js";
+import { ReportController } from "../controller/report.controller.js";
 
 
 export const reportRouter = Router();
