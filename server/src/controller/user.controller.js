@@ -4,11 +4,23 @@ export class UserController {
 	// Auth
 
 	static async login(req, res) {
-
+		const loginParams = req.body;
+		try {
+			const token = await UserService.login(loginParams);
+			res.status(201).send(token);
+		} catch (error) {
+			res.sendStatus(error.code);
+		}
 	}
 	
 	static async logout(req, res) {
-
+		const logoutParams = req.body;
+		try {
+			await UserService.logout(logoutParams);
+			res.sendStatus(204);
+		} catch (error) {
+			res.sendStatus(error.code);
+		}
 	}
 
 	// ------------------------------------------------
