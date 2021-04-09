@@ -2,7 +2,8 @@ import { ReportService } from "../service/report.service.js";
 
 export class ReportController {
 	static async get(req, res) {
-		const reports = await ReportService.get();
+		const reportParams = req.query;
+		const reports = await ReportService.get(reportParams);
 		res.send(reports.map(ReportController.#fixId));
 	}
 
