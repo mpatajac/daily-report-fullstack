@@ -18,8 +18,13 @@ export class ReportController {
 
 	static async create(req, res) {
 		const report = req.body;
-		await ReportService.create(report);
-		res.sendStatus(201);
+
+		try {
+			await ReportService.create(report);
+			res.sendStatus(201);
+		} catch (error) {
+			res.sendStatus(error.code);
+		}
 	}
 
 	static async upload(req, res) {
