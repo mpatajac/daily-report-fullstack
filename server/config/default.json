@@ -6,5 +6,10 @@
     "jwt": {
         "secret": "patajacprojekt",
         "expiresIn": "2h"
-    }
+    },
+
+	"database": {
+		"connectionString": "mongodb://127.0.0.1:27017",
+		"name": "daily-report"
+	}
 }
