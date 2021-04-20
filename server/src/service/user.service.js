@@ -48,7 +48,7 @@ export class UserService {
 		return !!user;
 	}
 
-	static async update() { }
+	static async updateTheme() { }
 
 	static async changePassword() { }
 

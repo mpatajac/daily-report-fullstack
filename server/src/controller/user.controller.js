@@ -43,10 +43,10 @@ export class UserController {
 		res.sendStatus(status);
 	}
 
-	static async update(req, res) {
-		const updateParams = req.body;
+	static async updateTheme(req, res) {
+		const themePreference = req.body;
 		try {
-			await UserService.update(updateParams);
+			await UserService.updateTheme(themePreference);
 			res.sendStatus(204);
 		} catch (error) {
 			res.sendStatus(error.code ?? 500);
