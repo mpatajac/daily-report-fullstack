@@ -2,7 +2,7 @@ import mongodb from "mongodb";
 import { database } from "../common/db.js";
 
 export class ReportService {
-	static #reports = database.collections("reports");
+	static #reports = database.collection("reports");
 
 	static async get(reportParams) {
 		const rpp = reportParams["rpp"];
