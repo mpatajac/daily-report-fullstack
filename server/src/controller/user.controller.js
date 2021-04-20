@@ -33,7 +33,7 @@ export class UserController {
 		if (!user) {
 			res.sendStatus(404);
 		} else {
-			res.send(user);
+			res.send(UserController.#excludePassword(user));
 		}
 	}
 
@@ -61,5 +61,10 @@ export class UserController {
 		} catch (error) {
 			res.sendStatus(error.code ?? 500);
 		}
+	}
+
+	static #excludePassword(user) {
+		delete user.password;
+		return user;
 	}
 }
