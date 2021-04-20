@@ -1,10 +1,15 @@
 import { ReportService } from "../service/report.service.js";
+import { handleError } from "../common/errorHandler.js";
 
 export class ReportController {
 	static async get(req, res) {
 		const reportParams = req.query;
-		const reports = await ReportService.get(reportParams);
-		res.send(reports.map(ReportController.#fixId));
+		try {
+			const reports = await ReportService.get(reportParams);
+			res.send(reports.map(ReportController.#fixId));
+		} catch (error) {
+			res.sendStatus(handleError(error));
+		}
 	}
 
 	static async getById(req, res) {
@@ -18,12 +23,11 @@ export class ReportController {
 
 	static async create(req, res) {
 		const report = req.body;
-
 		try {
 			await ReportService.create(report);
 			res.sendStatus(201);
 		} catch (error) {
-			res.sendStatus(error.code);
+			res.sendStatus(handleError(error));
 		}
 	}
 
