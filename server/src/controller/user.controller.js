@@ -9,7 +9,7 @@ export class UserController {
 			const token = await UserService.login(loginParams);
 			res.status(201).send(token);
 		} catch (error) {
-			res.sendStatus(error.code);
+			res.sendStatus(error.code ?? 500);
 		}
 	}
 	
@@ -19,7 +19,7 @@ export class UserController {
 			await UserService.logout(logoutParams);
 			res.sendStatus(204);
 		} catch (error) {
-			res.sendStatus(error.code);
+			res.sendStatus(error.code ?? 500);
 		}
 	}
 
@@ -47,7 +47,7 @@ export class UserController {
 			await UserService.update(updateParams);
 			res.sendStatus(204);
 		} catch (error) {
-			res.sendStatus(error.code);
+			res.sendStatus(error.code ?? 500);
 		}
 	}
 
@@ -57,7 +57,7 @@ export class UserController {
 			await UserService.changePassword(newPassword);
 			res.sendStatus(200);
 		} catch (error) {
-			res.sendStatus(error.code);
+			res.sendStatus(error.code ?? 500);
 		}
 	}
 }
