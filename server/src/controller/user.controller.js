@@ -7,7 +7,9 @@ export class UserController {
 		const loginParams = req.body;
 		try {
 			const token = await UserService.login(loginParams);
-			res.status(201).send(token);
+			res.status(201).send(
+				{ "access_token": token }
+			);
 		} catch (error) {
 			res.sendStatus(error.code ?? 500);
 		}
