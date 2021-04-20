@@ -23,6 +23,7 @@ export class UserService {
 		if (!(await bcrypt.compare(password, user.password))) {
 			throw { code: 401 };
 		}
+
 		return UserService.#signToken(user);
 	}
 
@@ -48,9 +49,36 @@ export class UserService {
 		return !!user;
 	}
 
-	static async updateTheme() { }
+	static async updateTheme(username, themePreference) {
+		if (
+			!username ||
+			!themePreference ||
+			typeof themePreference !== "boolean"
+		) {
+			throw { code: 400 }
+		}
+		
+		if (!UserService.#fetchUser(username)) {
+			throw { code: 404 }
+		}
 
-	static async changePassword() { }
+		return await UserService.#users.updateOne(
+			{ "name": username },
+			{ $set: { "darkTheme": themePreference } }
+		);
+	}
+
+	static async changePassword(username, newPassword) {
+		if (!username || !newPassword) {
+			throw { code: 400 }
+		}
+
+		const newPasswordHash = await bcrypt.hash(newPassword, 10);
+		return await UserService.#users.updateOne(
+			{ "name": username },
+			{ $set: { "password": newPasswordHash } }
+		);
+	}
 
 
 	static async #fetchUser(username) {

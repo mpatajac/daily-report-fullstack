@@ -1,5 +1,6 @@
 import { UserService } from "../service/user.service.js";
 
+// TODO!: handleError
 export class UserController {
 	// Auth
 
@@ -44,9 +45,10 @@ export class UserController {
 	}
 
 	static async updateTheme(req, res) {
-		const themePreference = req.body;
+		const username = req.params.username;
+		const themePreference = req.body.darkTheme;
 		try {
-			await UserService.updateTheme(themePreference);
+			await UserService.updateTheme(username, themePreference);
 			res.sendStatus(204);
 		} catch (error) {
 			res.sendStatus(error.code ?? 500);
@@ -54,9 +56,10 @@ export class UserController {
 	}
 
 	static async changePassword(req, res) {
+		const username = req.params.username;
 		const newPassword = req.body.newPassword;
 		try {
-			await UserService.changePassword(newPassword);
+			await UserService.changePassword(username, newPassword);
 			res.sendStatus(200);
 		} catch (error) {
 			res.sendStatus(error.code ?? 500);
