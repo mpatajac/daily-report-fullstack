@@ -5,8 +5,9 @@ export class ReportController {
 	static async get(req, res) {
 		const reportParams = req.query;
 		try {
-			const reports = await ReportService.get(reportParams);
-			res.send(reports.map(ReportController.#fixId));
+			const result = await ReportService.get(reportParams);
+			result.reports.map(ReportController.#fixId);
+			res.send(result);
 		} catch (error) {
 			res.sendStatus(handleError(error));
 		}
