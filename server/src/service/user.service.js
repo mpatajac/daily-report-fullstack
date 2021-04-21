@@ -73,6 +73,10 @@ export class UserService {
 			throw { code: 400 }
 		}
 
+		if (!UserService.#fetchUser(username)) {
+			throw { code: 404 }
+		}
+
 		const newPasswordHash = await bcrypt.hash(newPassword, 10);
 		return await UserService.#users.updateOne(
 			{ "name": username },
