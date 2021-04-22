@@ -1,0 +1,14 @@
+<app-display-report
+	[report]="report"
+	[date]="date">
+</app-display-report>
+
+<div [className]="'btn-wrapper'">
+	<button [className]="'btn-back'"
+		routerLink="/app/dashboard">
+		Discard
+	</button>
+	<button (click)="confirmReport()">
+		Confirm
+	</button>
+</div>

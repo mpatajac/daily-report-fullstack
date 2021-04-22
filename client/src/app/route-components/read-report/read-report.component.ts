@@ -1,19 +1,17 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Report } from '@app/common/models/report';
 import { ReportService } from '@app/common/services/report.service';
-import { NgxSpinnerService } from "ngx-spinner";
-
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
-  selector: 'app-display-report',
-  templateUrl: './display-report.component.html',
-  styleUrls: ['./display-report.component.scss']
+  selector: 'app-read-report',
+  templateUrl: './read-report.component.html',
+  styleUrls: ['./read-report.component.scss']
 })
-export class DisplayReportComponent implements OnInit {
-  @Input() report: Report;
-
+export class ReadReportComponent implements OnInit {
   date: string;
+  report: Report;
 
   constructor(
     private route: ActivatedRoute,
@@ -21,6 +19,7 @@ export class DisplayReportComponent implements OnInit {
     private reportService: ReportService,
     private spinner: NgxSpinnerService
   ) { }
+
 
   async ngOnInit() {
     await this.getReport();
@@ -35,10 +34,11 @@ export class DisplayReportComponent implements OnInit {
     this.report = await this.reportService.getReportById(id);
 
     this.spinner.hide()
-    
+
     // redirect to 404 if no report with given ID is found
     if (!this.report) {
       this.router.navigateByUrl("/not-found");
     }
   }
+
 }

@@ -1,8 +1,35 @@
+<ngx-spinner bdColor="rgba(0,0,0,0.8)" size="large" color="#ddd" type="ball-scale-multiple" [fullScreen]="true">
+</ngx-spinner>
+
 <div [className]="'header-wrapper'">
 	<button [className]="'header-menu'" (click)="this.messenger.switchNavigationVisibility()"></button>
 	<h1 (click)="toTop()">Daily Report</h1>
-	<button [className]="'header-new'" data-toggle="tooltip" data-placement="bottom" title="Create new report"
-		routerLink="/app/new" (click)="this.messenger.hideNavigation()">
+	<button [className]="'header-new'" 
+		data-toggle="tooltip" 
+		data-placement="bottom" 
+		title="New report"
+		(blur)="this.hideReportDropdown()"
+		(click)="
+			this.messenger.hideNavigation();
+			this.toggleReportDropdown();
+		">
 		+
 	</button>
+
+	<div [className]="'new-report-dropdown'">
+		<div id="new-report-write" 
+			[className]="'field clickable'"
+			routerLink="/app/new">
+			<img src="assets/img/dashboard/write.svg">
+			<span>Write</span>
+		</div>
+		<div id="new-report-write"
+			(change)="uploadReport($event.target.files)">
+			<label for="reportUpload" [className]="'field clickable'">
+				<img src="assets/img/dashboard/upload.svg">
+				<span>Upload</span>
+			</label>
+			<input type="file" id="reportUpload" [(ngModel)]="reportFile">
+		</div>
+	</div>
 </div>

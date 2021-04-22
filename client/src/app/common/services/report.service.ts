@@ -160,4 +160,22 @@ export class ReportService {
 
     return query;
   }
+
+  async uploadReport(file: File) {
+    console.log(file);
+    
+    const header = this.userService.createHeader();
+    const formData = new FormData();
+    formData.append('report', file, file.name);
+
+    /// TODO: uncomment when server is implemented
+    // const response: any = await this.http.post(
+    //   `${this.baseUrl}/upload`,
+    //   formData,
+    //   { headers: header }
+    // ).toPromise();
+
+    // return response;
+    return {ok: false};
+  }
 }

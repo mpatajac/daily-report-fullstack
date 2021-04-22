@@ -1,21 +1,5 @@
 @import "src/styles";
 
-button {
-	outline: none;
-	border: none;
-	border-radius: 1em;
-	position: fixed;
-	top: 50px;
-	left: 50px;
-	height: 2em;
-	width: 4em;
-	background-color: var(--table-bg);
-	color: var(--text-gray);
-	font-size: 2rem;
-	box-shadow: .3em .3em .3em rgba(0, 0, 0, .1);
-	@include button_hover;
-}
-
 
 .display-report-wrapper {
 	margin: 4em auto;
@@ -61,13 +45,6 @@ h1 {
 }
 
 @media (max-width: 1600px) {
-	button {
-		width: 100%;
-		left: 0;
-		top: 0;
-		border-radius: 0;
-	}
-
 	.display-report-wrapper {
 		margin-top: 7em;
 	}
