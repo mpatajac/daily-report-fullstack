@@ -8,7 +8,7 @@ import { UserService } from '@app/common/services/user.service';
   providedIn: 'root'
 })
 export class ReportService {
-  private baseUrl = "https://api.baasic.com/v1/daily-report-app/resources/Report";
+  private baseUrl = "http://localhost:3000/api/reports";
   page: number = 1;
   totalReports: number;
 

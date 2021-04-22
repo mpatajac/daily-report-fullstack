@@ -14,7 +14,7 @@ import { ThemeService } from '@app/common/services/theme.service';
 export class UserService {
   user: User;
 
-  private baseUrl = "https://api.baasic.com/v1/daily-report-app";
+  private baseUrl = "http://localhost:3000/api";
 
   constructor(
     private http: HttpClient,
@@ -53,7 +53,7 @@ export class UserService {
       access_token: string,
       error: string
     }>(
-      `${this.baseUrl}/login?options=sliding`,
+      `${this.baseUrl}/login`,
       body,
       {
         headers: header,
@@ -107,7 +107,7 @@ export class UserService {
     };
 
     this.http.put(
-      `${this.baseUrl}/users/${this.user.name}/change-password`,
+      `${this.baseUrl}/users/${this.user.name}/password`,
       body,
       {
         headers: header
