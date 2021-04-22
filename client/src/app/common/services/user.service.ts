@@ -14,7 +14,7 @@ import { ThemeService } from '@app/common/services/theme.service';
 export class UserService {
   user: User;
 
-  private baseUrl = "http://localhost:3000/api";
+  private baseUrl = "/api";
 
   constructor(
     private http: HttpClient,
