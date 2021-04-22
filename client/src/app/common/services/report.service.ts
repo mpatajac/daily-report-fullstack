@@ -57,7 +57,10 @@ export class ReportService {
     this.http.post(
       `${this.baseUrl}`,
       requestBody,
-      { headers: header }
+      { 
+				headers: header,
+				responseType: "text"
+			}
     ).subscribe();
   }
 

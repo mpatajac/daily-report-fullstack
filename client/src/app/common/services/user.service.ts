@@ -104,7 +104,8 @@ export class UserService {
       `${this.baseUrl}/users/${this.user.name}/password`,
       body,
       {
-        headers: header
+        headers: header,
+				responseType: "text"
       }
     ).subscribe();
   }
