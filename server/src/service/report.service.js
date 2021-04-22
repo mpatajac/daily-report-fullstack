@@ -160,7 +160,7 @@ export class ReportService {
 			if (titleTmp) {
 				titlePattern = titleTmp
 					.split(' ')[2]
-					.slice(2, -2);
+					.slice(1, -1);
 			}
 
 			let usernameTmp = search.filter(
@@ -169,7 +169,7 @@ export class ReportService {
 			if (usernameTmp) {
 				usernamePattern = usernameTmp
 					.split(' ')[2]
-					.slice(2, -2);
+					.slice(1, -1);
 			}
 		} catch (error) {
 			throw { code: 400 }

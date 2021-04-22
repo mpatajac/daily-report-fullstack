@@ -117,7 +117,7 @@ export class ReportService {
 
 		// both searchByTitle and searchByUser were used
     if (configuration.searchByTitle?.length && configuration.searchByUser?.length) {
-      query += `title LIKE '%${configuration.searchByTitle}%' AND username LIKE '%${configuration.searchByUser}%'`;
+      query += `title LIKE '${configuration.searchByTitle}' AND username LIKE '${configuration.searchByUser}'`;
       somethingAdded = true;
 
 		// only one of searchByTitle and searchByUser was used
@@ -125,13 +125,13 @@ export class ReportService {
       let firstPart = "", secondPart = "";
       if (configuration.searchByTitle || configuration.generalSearch) {
         let byTitle = configuration.searchByTitle ?? configuration.generalSearch;
-        firstPart = `title LIKE '%${byTitle}%'`;
+        firstPart = `title LIKE '${byTitle}'`;
         somethingAdded = true;
       }
 
       if (configuration.searchByUser || configuration.generalSearch) {
         let byUser = configuration.searchByUser ?? configuration.generalSearch;
-        secondPart = `username LIKE '%${byUser}%'`;
+        secondPart = `username LIKE '${byUser}'`;
         somethingAdded = true;
       }
 
@@ -140,7 +140,7 @@ export class ReportService {
 
     } else {
       if (configuration.generalSearch) {
-				query += `title LIKE '%${configuration.generalSearch}%' OR username LIKE '%${configuration.generalSearch}%'`;
+				query += `title LIKE '${configuration.generalSearch}' OR username LIKE '${configuration.generalSearch}'`;
         somethingAdded = true;
       }
     }
@@ -158,7 +158,7 @@ export class ReportService {
       query = `&searchQuery=WHERE ${query.substring(0, query.length - 4)}`
     }
 
-		return encodeURIComponent(query);
+		return query;
   }
 
   async uploadReport(file: File) {
