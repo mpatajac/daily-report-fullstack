@@ -27,9 +27,9 @@ export class ReportService {
     ).toPromise();
 
     // get total number of reports for pagination
-    this.totalReports = response.totalRecords;
+    this.totalReports = response.totalReports;
 
-    let reports = response.item;
+    let reports = response.reports;
     reports.forEach(report => this.fixDate(report));
 
     return reports;
@@ -158,7 +158,7 @@ export class ReportService {
       query = `&searchQuery=WHERE ${query.substring(0, query.length - 4)}`
     }
 
-    return query;
+		return encodeURIComponent(query);
   }
 
   async uploadReport(file: File) {
