@@ -47,7 +47,11 @@ export class UserService {
 
   async login(username: string, password: string) {
     const header = this.createHeader();
-    const body = `username=${username}&password=${password}&grant_type=password`;
+    const body = {
+      "username": username,
+      "password": password,
+      "grant_type": "password"
+    };
 
     return this.http.post<{
       access_token: string,
