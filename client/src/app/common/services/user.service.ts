@@ -46,7 +46,7 @@ export class UserService {
   }
 
   async login(username: string, password: string) {
-    const header = this.createHeader(false, true);
+    const header = this.createHeader();
     const body = `username=${username}&password=${password}&grant_type=password`;
 
     return this.http.post<{
@@ -67,7 +67,7 @@ export class UserService {
 
           await this.updateLocalUser();
           this.themeService.initialiseTheme(this.user.darkTheme);
-          if (await !this.hasThemeField()) {
+          if (!this.hasThemeField()) {
             await this.addThemeField();
           }
         }),
@@ -102,8 +102,7 @@ export class UserService {
   async updatePassword(password: string) {
     const header = this.createHeader();
     const body = {
-      newPassword: password,
-      sendMailNotification: false
+      newPassword: password
     };
 
     this.http.put(
@@ -192,23 +191,11 @@ export class UserService {
   }
 
   /**
-   * Create HttpHeader based on given parameters
-   * @param token Should header contain auth token
-   * @param urlencoded Should header be x-www-form-urlencoded
+   * Create HttpHeader containing user auth token
    */
-  createHeader(
-    token: boolean = true,
-    urlencoded: boolean = false
-  ): HttpHeaders {
-    let obj = {};
-    if (token) {
-      obj["Authorization"] = `Bearer ${localStorage.token}`;
-    }
-
-    if (urlencoded) {
-      obj["Content-Type"] = "application/x-www-form-urlencoded";
-    }
-
-    return new HttpHeaders(obj);
+  createHeader(): HttpHeaders {
+    return new HttpHeaders({
+			"Authorization": `Bearer ${localStorage.token}`
+		});
   }
 }
