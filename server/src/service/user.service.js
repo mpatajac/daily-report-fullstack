@@ -52,7 +52,9 @@ export class UserService {
 	static async updateTheme(username, themePreference) {
 		if (
 			!username ||
-			!themePreference ||
+			// check that themePreference is defined
+			// both `null` and `undefined` will evaluate to `true`
+			themePreference == null ||
 			typeof themePreference !== "boolean"
 		) {
 			throw { code: 400 }
