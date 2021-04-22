@@ -87,16 +87,7 @@ export class UserService {
 
   async toggleThemePreference() {
     this.user.darkTheme = !this.user.darkTheme;
-
-    const header = this.createHeader();
-
-    return this.http.put(
-      `${this.baseUrl}/users/${this.user.name}`,
-      {
-        darkTheme: this.user.darkTheme,
-      },
-      { headers: header }
-    ).subscribe();
+		return await this.updateThemePreference(this.user.darkTheme);
   }
 
   async updatePassword(password: string) {
@@ -172,16 +163,20 @@ export class UserService {
    * add "darkTheme" field.
    */
   private async addThemeField() {
-    const header = this.createHeader();
-
-    return this.http.put(
-      `${this.baseUrl}/users/${this.user.name}`,
-      {
-        darkTheme: false,
-      },
-      { headers: header }
-    ).subscribe();
+		return await this.updateThemePreference(false);
   }
+
+	private async updateThemePreference(preference: boolean) {
+		const header = this.createHeader();
+
+		return this.http.put(
+			`${this.baseUrl}/users/${this.user.name}`,
+			{
+				darkTheme: preference,
+			},
+			{ headers: header }
+		).subscribe();
+	}
 
   async updateLocalUser() {
     let response = await this.fetchUserFromDB();
