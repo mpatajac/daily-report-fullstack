@@ -89,11 +89,11 @@ export class ReportService {
 				const operator = problems.split(" ")[1];
 				switch (operator) {
 					case "=":
-						query.problems = { $eq: '[]' };
+						query.problems = { $eq: [ ] };
 						break;
 
 					case "<>":
-						query.problems = { $ne: '[]' };
+						query.problems = { $ne: [ ] };
 						break;
 
 					default:
