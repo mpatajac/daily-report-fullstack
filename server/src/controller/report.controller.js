@@ -9,7 +9,7 @@ export class ReportController {
 			result.reports.map(ReportController.#fixId);
 			res.send(result);
 		} catch (error) {
-			res.sendStatus(handleError(error));
+			res.sendStatus(await handleError(error));
 		}
 	}
 
@@ -28,7 +28,7 @@ export class ReportController {
 			await ReportService.create(report);
 			res.sendStatus(201);
 		} catch (error) {
-			res.sendStatus(handleError(error));
+			res.sendStatus(await handleError(error));
 		}
 	}
 
@@ -39,7 +39,7 @@ export class ReportController {
 			const parsedReport = await ReportService.upload(username, reportFile);
 			res.send(parsedReport);
 		} catch (error) {
-			res.sendStatus(handleError(error))
+			res.sendStatus(await handleError(error))
 		}
 	}
 

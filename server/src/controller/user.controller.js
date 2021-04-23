@@ -12,7 +12,7 @@ export class UserController {
 				{ "access_token": token }
 			);
 		} catch (error) {
-			res.sendStatus(handleError(error));
+			res.sendStatus(await handleError(error));
 		}
 	}
 	
@@ -22,7 +22,7 @@ export class UserController {
 			await UserService.logout(logoutParams);
 			res.sendStatus(204);
 		} catch (error) {
-			res.sendStatus(handleError(error));
+			res.sendStatus(await handleError(error));
 		}
 	}
 
@@ -51,7 +51,7 @@ export class UserController {
 			await UserService.updateTheme(username, themePreference);
 			res.sendStatus(204);
 		} catch (error) {
-			res.sendStatus(handleError(error));
+			res.sendStatus(await handleError(error));
 		}
 	}
 
@@ -62,7 +62,7 @@ export class UserController {
 			await UserService.changePassword(username, newPassword);
 			res.sendStatus(200);
 		} catch (error) {
-			res.sendStatus(handleError(error));
+			res.sendStatus(await handleError(error));
 		}
 	}
 
