@@ -14,7 +14,8 @@ export class ReportController {
 	}
 
 	static async getById(req, res) {
-		const report = await ReportService.getById(req.params.id);
+		const id = req.params.id;
+		const report = await ReportService.getById(id);
 		if (!report) {
 			res.sendStatus(404);
 		} else {
