@@ -33,7 +33,14 @@ export class ReportController {
 	}
 
 	static async upload(req, res) {
-		// TODO
+		const reportFile = req.file;
+		const username = req.body.username;
+		try {
+			const parsedReport = await ReportService.upload(username, reportFile);
+			res.send(parsedReport);
+		} catch (error) {
+			res.sendStatus(handleError(error))
+		}
 	}
 
 	static #fixId(report) {

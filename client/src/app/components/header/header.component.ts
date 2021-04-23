@@ -43,17 +43,15 @@ export class HeaderComponent implements OnInit {
   async uploadReport(files: FileList) {
 		this.spinner.show();
 
-		const response = await this.reportService.uploadReport(files[0]);
-		this.spinner.hide();
-		if (response.ok) {
-			// TODO: remove this, get report from response
-			const dummyReport = new Report("matija", "Test", ["abcabc"], [], [], []);
-
-			localStorage.setItem("uploadedReport", JSON.stringify(dummyReport));
+		try {
+			const response = await this.reportService.uploadReport(files[0]);
+			localStorage.setItem("uploadedReport", JSON.stringify(response));
 			this.router.navigateByUrl("app/confirm");
-		} else {
+		} catch (_) {
 			// TODO?: include error message
 			this.router.navigateByUrl("app/fail");
+		} finally {
+			this.spinner.hide();
 		}
   }
 }

@@ -1,8 +1,106 @@
 import mongodb from "mongodb";
 import { database } from "../common/db.js";
 
+// TODO: error checking
+class ReportParser {
+	constructor() { }
+
+	parse(raw_report, username) {
+		console.log("Parsing report...");
+		const report = {};
+
+		this.#add_time_stamp(report);
+		this.#add_author(report, username);
+
+		raw_report = this.#trim_raw_report(raw_report);
+		this.#parse_title(report, raw_report);
+		this.#parse_components(report, raw_report);
+		console.log("Report parsed!");
+		return report;
+	}
+
+	#add_time_stamp(report) {
+		report.date = new Date();
+	}
+
+	#add_author(report, username) {
+		report.username = username;
+	}
+
+	#trim_raw_report(raw_report) {
+		return raw_report.trim();
+	}
+
+	#parse_title(report, raw_report) {
+		// TODO: check that there is only one title
+		const regex = /^#( )?(?<title>[\w ]+)/;
+		const title_match = regex.exec(raw_report);
+		report.title = title_match.groups.title.trim();
+	}
+
+	#parse_components(report, raw_report) {
+		const regex = /##(?<title>[\w ]+)(\n|\r\n)(?<items>(\t| )*(-(\w| )+)(\n|\r\n)?)*/g;
+		const components = raw_report.match(regex);
+
+		// TODO: check that there are only 4 components
+		// (Done, In progress, Scheduled, Problems)
+		for (let component of components) {
+			const component_title = this.#parse_component_title(component);
+			const component_items = this.#parse_component_items(component);
+			report[component_title] = component_items;
+		}
+	}
+
+	#parse_component_title(component) {
+		const regex = /##( )?(?<title>[\w ]+)/;
+		const title = regex.exec(component);
+		return this.#format_component_title(title.groups.title.trim());
+	}
+
+	#parse_component_items(component) {
+		const regex = /(\t| )*-(?<item>(\w| )+)/g;
+		const items = component.match(regex);
+
+		if (items) {
+			return items.map(this.#clean_component_item);
+		} else {
+			return [];
+		}
+	}
+
+	/**
+	 * converts "In progress" to "inProgress"
+	 */
+	#format_component_title(title) {
+		let title_words = title.split(" ");
+		if (title_words.length == 1) {
+			return title.toLowerCase();
+		} else {
+			title_words = title_words.map(
+				word => word[0].toUpperCase() +
+					word.slice(1).toLowerCase()
+			);
+			title_words[0] = title_words[0].toLowerCase();
+			return title_words.join('');
+		}
+	}
+
+	#clean_component_item(item) {
+		// remove whitespace
+		item = item.trim();
+		// remove '-' from beginning
+		item = item.substr(1)
+		// remove additional whitespace and return
+		return item.trim();
+	}
+}
+
+
+
+
 export class ReportService {
 	static #reports = database.collection("reports");
+	static #reportParser = new ReportParser();
 
 	static async get(reportParams) {
 		const rpp = +reportParams["rpp"];
@@ -34,8 +132,19 @@ export class ReportService {
 		await ReportService.#reports.insertOne(report);
 	}
 
-	static async upload() {
-		// TODO
+	static async upload(username, reportFile) {
+		if (!username || !reportFile) {
+			throw { code: 400 };
+		}
+
+		let report;
+		try {
+			report = reportFile.buffer.toString();
+		} catch (_) {
+			throw { code: 400 };
+		}
+
+		return ReportService.#reportParser.parse(report, username);
 	}
 
 	static #parseSortParams(sortParams) {
@@ -89,11 +198,11 @@ export class ReportService {
 				const operator = problems.split(" ")[1];
 				switch (operator) {
 					case "=":
-						query.problems = { $eq: [ ] };
+						query.problems = { $eq: [] };
 						break;
 
 					case "<>":
-						query.problems = { $ne: [ ] };
+						query.problems = { $ne: [] };
 						break;
 
 					default:
@@ -199,3 +308,4 @@ export class ReportService {
 		}
 	}
 }
+
