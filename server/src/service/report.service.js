@@ -6,7 +6,6 @@ class ReportParser {
 	constructor() { }
 
 	parse(raw_report, username) {
-		console.log("Parsing report...");
 		const report = {};
 
 		this.#add_time_stamp(report);
@@ -15,7 +14,8 @@ class ReportParser {
 		raw_report = this.#trim_raw_report(raw_report);
 		this.#parse_title(report, raw_report);
 		this.#parse_components(report, raw_report);
-		console.log("Report parsed!");
+
+		this.#validate_report(report, raw_report);
 		return report;
 	}
 
@@ -32,18 +32,27 @@ class ReportParser {
 	}
 
 	#parse_title(report, raw_report) {
-		// TODO: check that there is only one title
-		const regex = /^#( )?(?<title>[\w ]+)/;
-		const title_match = regex.exec(raw_report);
-		report.title = title_match.groups.title.trim();
+		const regex = /(^|[^#])#( )?(?<title>[\w ]+)/g;
+		const titles = [];
+
+		// find all titles (one `#` in the beggining)
+		let title;
+		while (title = regex.exec(raw_report)) {
+			titles.push(title.groups.title.trim());
+		}
+
+		// make sure there is exactly one
+		if (titles.length != 1) {
+			throw { code: 400 }
+		}
+
+		report.title = titles[0];
 	}
 
 	#parse_components(report, raw_report) {
 		const regex = /##(?<title>[\w ]+)(\n|\r\n)(?<items>(\t| )*(-(\w| )+)(\n|\r\n)?)*/g;
 		const components = raw_report.match(regex);
 
-		// TODO: check that there are only 4 components
-		// (Done, In progress, Scheduled, Problems)
 		for (let component of components) {
 			const component_title = this.#parse_component_title(component);
 			const component_items = this.#parse_component_items(component);
@@ -73,7 +82,7 @@ class ReportParser {
 	 */
 	#format_component_title(title) {
 		let title_words = title.split(" ");
-		if (title_words.length == 1) {
+		if (title_words.length === 1) {
 			return title.toLowerCase();
 		} else {
 			title_words = title_words.map(
@@ -92,6 +101,48 @@ class ReportParser {
 		item = item.substr(1)
 		// remove additional whitespace and return
 		return item.trim();
+	}
+
+	// TODO: add accompanying messages to errors
+	#validate_report(report, raw_report) {
+		// check that "Done", "In progress", "Scheduled" and "Problems"
+		// are in report (and none other)
+		const components = ["done", "inProgress", "scheduled", "problems"];
+
+		// with "date", "username" and "title", there should be exactly 7 keys
+		if (Object.keys(report).length !== 7) {
+			throw { code: 400 }
+		}
+
+		// make sure that those 4 additional components are the desired ones
+		for (let component of components) {
+			if (!Object.keys(report).includes(component)) {
+				throw { code: 400 }
+			}
+		}
+
+		// --------------------------------------------------------------------
+
+		// check that the amount of text in the original report
+		// is the same as in the parsed report
+		// (i.e. there was nothing left over/missed)
+
+		// raw report
+		const raw_report_text_amount = raw_report.match(/\w/g).length;
+
+		// parsed report
+		let parsed_report_text = report.title;
+		for (let key of components) {
+			parsed_report_text += report[key].join()
+		}
+		parsed_report_text += components.join();
+		parsed_report_text = parsed_report_text.replace(/[\s,]/g, '');;
+		const parsed_report_text_amount = parsed_report_text.length;
+
+		// compare
+		if (raw_report_text_amount !== parsed_report_text_amount) {
+			throw { code: 400 }
+		}
 	}
 }
 
