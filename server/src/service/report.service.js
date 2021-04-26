@@ -1,43 +1,42 @@
 import mongodb from "mongodb";
 import { database } from "../common/db.js";
 
-// TODO: error checking
 class ReportParser {
 	constructor() { }
 
-	parse(raw_report, username) {
+	parse(rawReport, username) {
 		const report = {};
 
-		this.#add_time_stamp(report);
-		this.#add_author(report, username);
+		this.#addTimeStamp(report);
+		this.#addAuthor(report, username);
 
-		raw_report = this.#trim_raw_report(raw_report);
-		this.#parse_title(report, raw_report);
-		this.#parse_components(report, raw_report);
+		rawReport = this.#trimRawReport(rawReport);
+		this.#parseTitle(report, rawReport);
+		this.#parseComponents(report, rawReport);
 
-		this.#validate_report(report, raw_report);
+		this.#validateReport(report, rawReport);
 		return report;
 	}
 
-	#add_time_stamp(report) {
+	#addTimeStamp(report) {
 		report.date = new Date();
 	}
 
-	#add_author(report, username) {
+	#addAuthor(report, username) {
 		report.username = username;
 	}
 
-	#trim_raw_report(raw_report) {
-		return raw_report.trim();
+	#trimRawReport(rawReport) {
+		return rawReport.trim();
 	}
 
-	#parse_title(report, raw_report) {
+	#parseTitle(report, rawReport) {
 		const regex = /(^|[^#])#( )?(?<title>[\w ]+)/g;
 		const titles = [];
 
 		// find all titles (one `#` in the beggining)
 		let title;
-		while (title = regex.exec(raw_report)) {
+		while (title = regex.exec(rawReport)) {
 			titles.push(title.groups.title.trim());
 		}
 
@@ -49,29 +48,29 @@ class ReportParser {
 		report.title = titles[0];
 	}
 
-	#parse_components(report, raw_report) {
+	#parseComponents(report, rawReport) {
 		const regex = /##(?<title>[\w ]+)(\n|\r\n)(?<items>(\t| )*(-(\w| )+)(\n|\r\n)?)*/g;
-		const components = raw_report.match(regex);
+		const components = rawReport.match(regex);
 
 		for (let component of components) {
-			const component_title = this.#parse_component_title(component);
-			const component_items = this.#parse_component_items(component);
-			report[component_title] = component_items;
+			const componentTitle = this.#parseComponentTitle(component);
+			const componentItems = this.#parseComponentItems(component);
+			report[componentTitle] = componentItems;
 		}
 	}
 
-	#parse_component_title(component) {
+	#parseComponentTitle(component) {
 		const regex = /##( )?(?<title>[\w ]+)/;
 		const title = regex.exec(component);
-		return this.#format_component_title(title.groups.title.trim());
+		return this.#formatComponentTitle(title.groups.title.trim());
 	}
 
-	#parse_component_items(component) {
+	#parseComponentItems(component) {
 		const regex = /(\t| )*-(?<item>(\w| )+)/g;
 		const items = component.match(regex);
 
 		if (items) {
-			return items.map(this.#clean_component_item);
+			return items.map(this.#cleanComponentItem);
 		} else {
 			return [];
 		}
@@ -80,21 +79,21 @@ class ReportParser {
 	/**
 	 * converts "In progress" to "inProgress"
 	 */
-	#format_component_title(title) {
-		let title_words = title.split(" ");
-		if (title_words.length === 1) {
+	#formatComponentTitle(title) {
+		let titleWords = title.split(" ");
+		if (titleWords.length === 1) {
 			return title.toLowerCase();
 		} else {
-			title_words = title_words.map(
+			titleWords = titleWords.map(
 				word => word[0].toUpperCase() +
 					word.slice(1).toLowerCase()
 			);
-			title_words[0] = title_words[0].toLowerCase();
-			return title_words.join('');
+			titleWords[0] = titleWords[0].toLowerCase();
+			return titleWords.join('');
 		}
 	}
 
-	#clean_component_item(item) {
+	#cleanComponentItem(item) {
 		// remove whitespace
 		item = item.trim();
 		// remove '-' from beginning
@@ -104,7 +103,7 @@ class ReportParser {
 	}
 
 	// TODO: add accompanying messages to errors
-	#validate_report(report, raw_report) {
+	#validateReport(report, rawReport) {
 		// check that "Done", "In progress", "Scheduled" and "Problems"
 		// are in report (and none other)
 		const components = ["done", "inProgress", "scheduled", "problems"];
@@ -128,19 +127,19 @@ class ReportParser {
 		// (i.e. there was nothing left over/missed)
 
 		// raw report
-		const raw_report_text_amount = raw_report.match(/\w/g).length;
+		const rawReportTextAmount = rawReport.match(/\w/g).length;
 
 		// parsed report
-		let parsed_report_text = report.title;
+		let parsedReportText = report.title;
 		for (let key of components) {
-			parsed_report_text += report[key].join()
+			parsedReportText += report[key].join()
 		}
-		parsed_report_text += components.join();
-		parsed_report_text = parsed_report_text.replace(/[\s,]/g, '');;
-		const parsed_report_text_amount = parsed_report_text.length;
+		parsedReportText += components.join();
+		parsedReportText = parsedReportText.replace(/[\s,]/g, '');;
+		const parsedReportTextAmount = parsedReportText.length;
 
 		// compare
-		if (raw_report_text_amount !== parsed_report_text_amount) {
+		if (rawReportTextAmount !== parsedReportTextAmount) {
 			throw { code: 400 }
 		}
 	}
