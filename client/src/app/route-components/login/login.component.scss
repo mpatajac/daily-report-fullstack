@@ -26,6 +26,20 @@ $login-width: 100% - $img-width;
 		border-bottom-left-radius: 1em;
 		margin-right: .1em;
 		box-shadow: .5em 0 .5em white;
+		overflow: hidden;
+		position: relative;
+
+		.animation-icon {
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			width: 50%;
+			transform: translate(150%, -50%);
+		}
+
+		#done1 {
+			transform: translate(-50%, -50%);
+		}
 	}
 
 	.login-wrapper {
