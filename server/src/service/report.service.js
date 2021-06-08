@@ -334,6 +334,10 @@ export class ReportService {
 			throw { code: 400 }
 		}
 
+		// make patterns case-insensitive
+		titlePattern = new RegExp(titlePattern, "i");
+		usernamePattern = new RegExp(usernamePattern, "i");
+
 		switch (joinWith) {
 			case "and":
 				query.title = { $regex: titlePattern };
