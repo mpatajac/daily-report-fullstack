@@ -1,1 +1,109 @@
 @import "src/styles";
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu+Mono&display=swap');
+// TODO: remove (after font is changed in the rest of the app)
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap');
+
+$margin-top: 5em;
+
+.rpf-mobile {
+	display: none;
+}
+
+header {
+	width: 100%;
+
+	span {
+		display: inline-block;
+	}
+}
+
+h3, h5 {
+	margin: 0 2em;
+	text-align: center;
+	font-family: 'Noto Sans JP', sans-serif;
+}
+
+h3 {
+	margin-top: 3em;
+}
+
+h5 {
+	margin-top: 2em;
+}
+
+.wrapper {
+	margin-top: $margin-top;
+	height: calc(84vh - $margin-top);
+	overflow: hidden;
+}
+
+.rpf-text {
+	opacity: 0;
+}
+
+#rpf-captions {
+	z-index: 5;
+	position: relative;
+	float: right;
+	width: 40%;
+	margin-right: 2em;
+}
+
+.rpf-caption {
+	opacity: 0;
+	font-family: 'Noto Sans JP', sans-serif;
+	width: 100%;
+	font-size: 1.75em;
+	position: absolute;
+	margin-top: 35%;
+	text-align: center;
+
+	border-radius: 10px;
+	padding: 2em 0;
+}
+
+
+#rpf-editor-body {
+	fill: var(--table-bg);
+}
+
+.rpf-text {
+	fill: var(--text);
+}
+
+.rpf-caption {
+	background-color: var(--body-bg);
+}
+
+h3, h5, .rpf-caption {
+	color: var(--text);
+}
+
+
+
+// display animation only on laptops/desktops
+@media (max-width: 1200px) {
+	#rpf-svg, main, h5.rpf-desktop {
+		display: none;
+	}
+
+	.rpf-mobile {
+		display: inline;
+	}
+
+	header {
+		display: flex;
+		flex-direction: column;
+	}
+
+	h3 {
+		margin-top: 7em !important;
+	}	
+}
+
+// wrap text nicely when on small screens
+@media (max-width: 576px) {
+	header span {
+		display: inline;
+	}
+}
