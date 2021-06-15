@@ -1,7 +1,5 @@
 @import "src/styles";
 @import url('https://fonts.googleapis.com/css2?family=Ubuntu+Mono&display=swap');
-// TODO: remove (after font is changed in the rest of the app)
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap');
 
 $margin-top: 5em;
 
@@ -20,7 +18,6 @@ header {
 h3, h5 {
 	margin: 0 2em;
 	text-align: center;
-	font-family: 'Noto Sans JP', sans-serif;
 }
 
 h3 {
@@ -51,7 +48,6 @@ h5 {
 
 .rpf-caption {
 	opacity: 0;
-	font-family: 'Noto Sans JP', sans-serif;
 	width: 100%;
 	font-size: 1.75em;
 	position: absolute;

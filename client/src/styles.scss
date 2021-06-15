@@ -21,7 +21,7 @@
 
 
 // font
-@import url('https://fonts.googleapis.com/css?family=Aleo:400,700&display=swap&subset=latin-ext');
+@import url('https://fonts.googleapis.com/css2?family=Epilogue:wght@400;700&display=swap');
 
 // mixins
 @mixin button_hover($s: 1.1) {
@@ -52,7 +52,7 @@
 
 // style
 body {
-	font-family: 'Aleo', serif;
+	font-family: 'Epilogue', sans-serif;
 	background-color: var(--body-bg);
 	color: var(--text);
 
@@ -64,7 +64,7 @@ a {
 }
 
 button {
-	font-family: 'Aleo', serif;
+	font-family: 'Epilogue', sans-serif;
 	cursor: pointer;
 	outline: none;
 
