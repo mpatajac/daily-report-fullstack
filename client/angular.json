@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/daily-report",
+            "outputPath": "../server/public",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -67,8 +67,7 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "daily-report:build",
-						"proxyConfig": "src/proxy.conf.json"
+            "browserTarget": "daily-report:build"
           },
           "configurations": {
             "production": {

@@ -9,7 +9,7 @@
     },
 
 	"database": {
-		"connectionString": "mongodb://127.0.0.1:27017",
+		"connectionString": "mongodb+srv://admin:admin@cluster0.kreh7.mongodb.net/daily-report?retryWrites=true&w=majority",
 		"name": "daily-report"
 	}
 }
