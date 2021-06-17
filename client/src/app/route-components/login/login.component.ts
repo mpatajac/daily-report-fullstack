@@ -33,8 +33,10 @@ export class LoginComponent implements OnInit {
     this.usernameFound = true;
     this.passwordMatches = true;
 
-		// initialize animation
-		this.initAnimation();
+		// don't initialize animation is it isn't displayed
+		if (window.innerWidth > 1024) {
+			this.initAnimation();
+		}
   }
 
   /**
