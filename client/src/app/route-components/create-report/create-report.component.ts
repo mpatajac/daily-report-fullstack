@@ -57,11 +57,11 @@ export class CreateReportComponent implements OnInit {
 	submitReport() {
 		let report = new Report(
 			this.user.name,
-			this.reportTitle,
-			this.done,
-			this.inProgress,
-			this.scheduled,
-			this.problems
+			this.reportTitle.trim(),
+			this.cleanReportComponent(this.done),
+			this.cleanReportComponent(this.inProgress),
+			this.cleanReportComponent(this.scheduled),
+			this.cleanReportComponent(this.problems),
 		);
 
 		this.reportService.addReport(report);
@@ -82,4 +82,14 @@ export class CreateReportComponent implements OnInit {
 		);
 	}
 
+
+	cleanReportComponent(reportComponent: Array<string>): Array<string> {
+		return reportComponent
+			// remove `&nbsp;` and `<br>` from string (from extra spaces/empty lines)
+			.map(item => item.replace(/(&nbsp;|<br>)/g, ''))
+			// remove surrounding whitespace
+			.map(item => item.trim())
+			// filter out empty items
+			.filter(item => item.length);
+	}
 }

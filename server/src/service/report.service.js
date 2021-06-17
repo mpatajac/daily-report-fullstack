@@ -70,7 +70,8 @@ class ReportParser {
 		const items = component.match(regex);
 
 		if (items) {
-			return items.map(this.#cleanComponentItem);
+			// extract text from item, filter empty items
+			return items.map(this.#cleanComponentItem).filter(item => item.length);
 		} else {
 			return [];
 		}
