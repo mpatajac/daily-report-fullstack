@@ -167,6 +167,12 @@ export class ReportService {
   }
 
   async uploadReport(file: File) {
+		// don't upload files larger than 25 kB
+		const fileSizeInKB = file.size / 1024;
+		if (fileSizeInKB > 25) {
+			throw new Error("Allowed file size exceeded (> 25 kB).");
+		}
+
     const header = this.userService.createHeader();
     const formData = new FormData();
     formData.append('report', file, file.name);
