@@ -49,7 +49,7 @@ class ReportParser {
 	}
 
 	#parseComponents(report, rawReport) {
-		const regex = /##(?<title>[\w ]+)(\n|\r\n)(?<items>(\t| )*(-(\w| )+)(\n|\r\n)?)*/g;
+		const regex = /##(?<title>[\w ]+)(\n|\r\n)(?<items>(\t| )*(-(\w| |,|.)+)(\n|\r\n)?)*/g;
 		const components = rawReport.match(regex);
 
 		for (let component of components) {
@@ -66,7 +66,7 @@ class ReportParser {
 	}
 
 	#parseComponentItems(component) {
-		const regex = /(\t| )*-(?<item>(\w| )+)/g;
+		const regex = /(\t| )*-(?<item>(\w| |,|.)+)/g;
 		const items = component.match(regex);
 
 		if (items) {
@@ -136,7 +136,7 @@ class ReportParser {
 			parsedReportText += report[key].join()
 		}
 		parsedReportText += components.join();
-		parsedReportText = parsedReportText.replace(/[\s,]/g, '');;
+		parsedReportText = parsedReportText.replace(/[\s,.]/g, '');
 		const parsedReportTextAmount = parsedReportText.length;
 
 		// compare
