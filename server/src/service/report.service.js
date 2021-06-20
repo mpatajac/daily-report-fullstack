@@ -178,6 +178,10 @@ export class ReportService {
 		return ReportService.#reports.findOne({ _id });
 	}
 
+	static async exists() {
+		return await ReportService.#reports.count();
+	}
+
 	static async create(report) {
 		report.date = new Date(Date.parse(report.date));
 		await ReportService.#reports.insertOne(report);

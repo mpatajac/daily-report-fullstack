@@ -1,5 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { catchError, map } from "rxjs/operators";
+import { of } from 'rxjs';
 
 import { Report } from '@app/common/models/report';
 import { UserService } from '@app/common/services/user.service';
@@ -178,4 +180,19 @@ export class ReportService {
 
     return response;
   }
+
+	async reportsExist(): Promise<boolean> {
+		const header = this.userService.createHeader();
+
+		return this.http.get(
+			`${this.baseUrl}/exists`,
+			{ 
+				headers: header,
+				observe: 'response'
+			}
+		).pipe(
+			map(response => response.ok),
+			catchError(_ => of(false))
+		).toPromise()
+	}
 }

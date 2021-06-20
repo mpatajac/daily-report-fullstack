@@ -13,6 +13,12 @@ export class ReportController {
 		}
 	}
 
+	static async exists(req, res) {
+		const found = await ReportService.exists();
+		const status = found ? 204 : 404;
+		res.sendStatus(status);
+	}
+
 	static async getById(req, res) {
 		const id = req.params.id;
 		const report = await ReportService.getById(id);

@@ -9,6 +9,7 @@ export const reportRouter = Router();
 // const baseRoute = '/';
 
 reportRouter.get(`/`, jwtMiddleware, ReportController.get);
+reportRouter.get(`/exists`, jwtMiddleware, ReportController.exists);
 reportRouter.get(`/:id`, jwtMiddleware, ReportController.getById);
 
 reportRouter.post(`/`, jwtMiddleware, ReportController.create);

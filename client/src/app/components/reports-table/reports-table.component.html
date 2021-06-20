@@ -3,7 +3,7 @@
 
 <div [className]="'dashboard-table'">
 	<!-- Search and filter -->
-	<div [className]="'dashboard-saf'" *ngIf="this.reports?.length > 0 ||isFilterUsed()">
+	<div [className]="'dashboard-saf'" *ngIf="reportsExist">
 		<div [className]="'dashboard-saf-top'">
 			<input type="text" placeholder="Search ..."
 				[(ngModel)]="filterConfiguration.generalSearch"
@@ -107,7 +107,7 @@
 
 <!-- No reports to show -->
 <div [className]="'dashboard-no-reports container jumbotron'" [hidden]="this.reports?.length > 0"
-	[class.plus-saf]="isFilterUsed()">
+	[class.plus-saf]="reportsExist">
 	<h2>There are no reports to display.</h2>
 	<h4>Try adjusting your filters or create a new report by pressing the '+' button in the top-right corner.</h4>
 </div>

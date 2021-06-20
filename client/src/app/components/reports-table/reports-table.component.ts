@@ -20,6 +20,10 @@ export class ReportsTableComponent implements OnInit {
   endDate: Date;
 
   filterConfiguration: any;
+	
+	// flag used to determine should SAF be shown;
+	// don't show it only when there aren't ANY reports
+	reportsExist: boolean;
 
   constructor(
     private reportService: ReportService,
@@ -52,6 +56,8 @@ export class ReportsTableComponent implements OnInit {
 				
 			}
 		, 0);
+
+		this.reportsExist = await this.doReportsExist();
   }
 
   toggleSAFVisibility() {
@@ -200,30 +206,9 @@ export class ReportsTableComponent implements OnInit {
 		}, 0);
   }
 
-  /**
-   * Determine if some of the filter parameters is altered.
-   * Used to decide if search-and-filter header should be displayed.
-   */
-  isFilterUsed(): boolean {
-    return [
-      this.filterConfiguration.generalSearch,
-      this.filterConfiguration.searchByTitle,
-      this.filterConfiguration.searchByUser,
-      this.filterConfiguration.startDate,
-      this.filterConfiguration.endDate
-    ].some(this.isAltered) ||
-      this.filterConfiguration.problems !== "all";
-  }
-
-  isAltered(element: string | Date): boolean {
-    return !(
-      element === undefined || (
-        typeof element === "string" ?
-          element.length === 0 :
-          false
-      )
-    );
-  }
+	async doReportsExist(): Promise<boolean> {
+		return await this.reportService.reportsExist();
+	}
 
   openReport(report: Report) {
     // save SAF settings
