@@ -179,7 +179,7 @@ export class ReportService {
 	}
 
 	static async exists() {
-		return await ReportService.#reports.count();
+		return await ReportService.#reports.countDocuments();
 	}
 
 	static async create(report) {
