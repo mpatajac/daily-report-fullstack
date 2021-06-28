@@ -59,6 +59,10 @@ h5 {
 }
 
 
+#rpf-header-bg {
+	fill: var(--body-bg);
+}
+
 #rpf-editor-body {
 	fill: var(--table-bg);
 }
@@ -76,9 +80,34 @@ h3, h5, .rpf-caption {
 }
 
 
+// adapt on laptops
+@media (max-height: 850px) {
+	h3 {
+		font-size: 1.5rem !important;
+	}
+
+	h5 {
+		font-size: 1rem !important;
+
+		&.rpf-desktop {
+			margin-top: 1em;
+		}
+	}
+
+	.wrapper {
+		margin-top: 2rem;
+		height: calc(90vh - 2rem);
+	}
+
+	.rpf-caption {
+		font-size: 1.5em;
+	}
+}
+
+
 
 // display animation only on laptops/desktops
-@media (max-width: 1200px) {
+@media (max-width: 1200px), (max-height: 765px) {
 	#rpf-svg, main, h5.rpf-desktop {
 		display: none;
 	}
