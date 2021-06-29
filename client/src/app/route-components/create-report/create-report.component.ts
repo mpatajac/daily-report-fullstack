@@ -87,6 +87,8 @@ export class CreateReportComponent implements OnInit {
 		return reportComponent
 			// remove `&nbsp;` and `<br>` from string (from extra spaces/empty lines)
 			.map(item => item.replace(/(&nbsp;|<br>)/g, ''))
+			// remove html tags (anything inside angle brackets)
+			.map(item => item.replace(/<.*?>/g, ''))
 			// remove surrounding whitespace
 			.map(item => item.trim())
 			// filter out empty items
